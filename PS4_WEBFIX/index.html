@@ -12,7 +12,7 @@
         /* === CSS VARIABLE & THEMING === */
         :root {
             --bg-overlay: linear-gradient(180deg, rgba(7, 3, 14, 0.88) 0%, rgba(15, 7, 30, 0.92) 50%, rgba(7, 3, 14, 0.95) 100%);
-            --bg-card: rgba(21, 10, 38, 0.75);
+            --bg-card: rgba(21, 10, 38, 0.78);
             --bg-card-solid: #150a26;
             --accent-purple: #8b5cf6;
             --accent-glow: #a855f7;
@@ -27,7 +27,7 @@
 
         [data-theme="light"] {
             --bg-overlay: linear-gradient(180deg, rgba(240, 234, 252, 0.90) 0%, rgba(245, 240, 255, 0.94) 50%, rgba(240, 234, 252, 0.92) 100%);
-            --bg-card: rgba(255, 255, 255, 0.88);
+            --bg-card: rgba(255, 255, 255, 0.90);
             --bg-card-solid: #ffffff;
             --accent-purple: #7c3aed;
             --accent-glow: #9333ea;
@@ -47,6 +47,10 @@
             font-family: 'Rajdhani', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             color: var(--text-primary);
             transition: background 0.4s ease, color 0.4s ease;
@@ -64,7 +68,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Background Gambar Karakter Gaming PS (Kratos God of War / PlayStation Universe) */
             background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -75,7 +78,6 @@
             transform: scale(1.02);
         }
 
-        /* Overlay Gradasi Tema (Gelap/Terang) agar teks tetap sangat jelas dibaca */
         body::after {
             content: '';
             position: fixed;
@@ -105,13 +107,13 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(7, 3, 14, 0.85);
+            background: rgba(7, 3, 14, 0.88);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-color);
             transition: var(--transition);
         }
         [data-theme="light"] header {
-            background: rgba(240, 234, 252, 0.85);
+            background: rgba(240, 234, 252, 0.90);
         }
 
         .nav-container {
@@ -119,13 +121,15 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 900;
             color: var(--text-primary);
             text-decoration: none;
@@ -143,19 +147,54 @@
             100% { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--accent-magenta)); }
         }
 
+        /* NAV LINKS (HARGA SEWA & FORM PEMESANAN) */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-magenta);
+            background: rgba(217, 70, 239, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(217, 70, 239, 0.3);
+        }
+
+        .nav-btn.highlight {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #fff;
+            border: none;
+        }
+
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .digital-clock {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 30px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--accent-glow);
             box-shadow: var(--shadow-glow);
             display: flex;
@@ -168,14 +207,14 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             transition: var(--transition);
             box-shadow: var(--shadow-glow);
             backdrop-filter: blur(10px);
@@ -189,7 +228,7 @@
 
         /* === HERO SECTION === */
         .hero {
-            padding: 90px 0 60px;
+            padding: 80px 0 50px;
             text-align: center;
             position: relative;
         }
@@ -219,8 +258,46 @@
             font-size: 1.25rem;
             color: var(--text-secondary);
             max-width: 700px;
-            margin: 0 auto 35px;
+            margin: 0 auto 30px;
             font-weight: 600;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .hero-cta {
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .hero-cta.primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(217, 70, 239, 0.45);
+        }
+
+        .hero-cta.secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-4px) scale(1.03);
         }
 
         .hero-badges {
@@ -228,7 +305,6 @@
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
         }
 
         .badge-item {
@@ -251,6 +327,10 @@
         }
 
         /* === SECTION COMMON === */
+        section {
+            scroll-margin-top: 90px;
+        }
+
         .section-title {
             text-align: center;
             font-size: 2.3rem;
@@ -548,6 +628,36 @@
             box-shadow: 0 0 15px rgba(217, 70, 239, 0.4);
         }
 
+        /* TOTAL PRICE DISPLAY BOX */
+        .total-price-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.2));
+            border: 2px solid var(--accent-magenta);
+            border-radius: 16px;
+            padding: 18px 24px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(217, 70, 239, 0.25);
+        }
+
+        .total-price-label {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .total-price-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--accent-magenta);
+            text-shadow: 0 0 15px rgba(217, 70, 239, 0.4);
+        }
+
         .admin-select-title {
             font-weight: 700;
             margin-bottom: 12px;
@@ -687,6 +797,8 @@
             padding: 14px 18px;
             border-radius: 14px;
             border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 8px;
         }
         [data-theme="light"] .contact-list li {
             background: rgba(255, 255, 255, 0.9);
@@ -711,11 +823,15 @@
         }
 
         /* RESPONSIVE DESIGN */
+        @media (max-width: 900px) {
+            .nav-container { justify-content: center; }
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.3rem; }
-            .nav-container { flex-direction: column; gap: 15px; }
             .booking-container { padding: 25px; }
             .admin-options { flex-direction: column; }
+            .total-price-box { flex-direction: column; gap: 10px; text-align: center; }
         }
     </style>
 </head>
@@ -728,6 +844,17 @@
                 <i class="fa-solid fa-gamepad"></i>
                 <span>HUNTER PLAYSTATION</span>
             </a>
+
+            <!-- NAVIGATION LINKS KE HARGA SEWA & FORM PEMESANAN -->
+            <nav class="nav-links">
+                <a href="#harga-sewa" class="nav-btn">
+                    <i class="fa-solid fa-tags"></i> Harga Sewa
+                </a>
+                <a href="#form-pemesanan" class="nav-btn highlight">
+                    <i class="fa-solid fa-cart-plus"></i> Form Pemesanan
+                </a>
+            </nav>
+
             <div class="nav-right">
                 <!-- DIGITAL CLOCK -->
                 <div class="digital-clock" id="digitalClock">
@@ -748,6 +875,16 @@
             <h1>HUNTER PLAYSTATION</h1>
             <p>Sewa PS4 & PS3 Termurah dengan Unit Terbaik dan Koleksi Game Terlengkap. Pengalaman Main Gaming Maksimal!</p>
             
+            <!-- QUICK JUMP BUTTONS -->
+            <div class="hero-cta-group">
+                <a href="#form-pemesanan" class="hero-cta primary">
+                    <i class="fa-solid fa-gamepad"></i> Pesan Sekarang
+                </a>
+                <a href="#harga-sewa" class="hero-cta secondary">
+                    <i class="fa-solid fa-list-ul"></i> Cek Daftar Harga
+                </a>
+            </div>
+
             <div class="hero-badges">
                 <div class="badge-item"><i class="fa-solid fa-gamepad"></i> Stik PS Original DualShock</div>
                 <div class="badge-item"><i class="fa-solid fa-tv"></i> TV LED HD / 4K Quality</div>
@@ -781,7 +918,7 @@
     </section>
 
     <!-- PRICING SECTION -->
-    <section class="pricing-section container">
+    <section id="harga-sewa" class="pricing-section container">
         <h2 class="section-title">💰 Daftar Harga Sewa</h2>
         
         <div class="pricing-grid">
@@ -898,7 +1035,7 @@
     </section>
 
     <!-- BOOKING FORM SECTION -->
-    <section class="booking-section container">
+    <section id="form-pemesanan" class="booking-section container">
         <h2 class="section-title">📝 Form Pemesanan Sewa</h2>
         <div class="booking-container">
             <form id="bookingForm">
@@ -950,19 +1087,28 @@
                     <textarea id="gameNotes" rows="3" placeholder="Contoh: Request install eFootball 2026 dan Tekken 7..."></textarea>
                 </div>
 
-                <!-- ADMIN SELECTION -->
+                <!-- LIVE TOTAL PRICE DISPLAY -->
+                <div class="total-price-box">
+                    <div class="total-price-label">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                        <span>Total Harga Sewa:</span>
+                    </div>
+                    <div class="total-price-value" id="totalPriceDisplay">Rp 0</div>
+                </div>
+
+                <!-- ADMIN SELECTION WITH NAMES -->
                 <div class="admin-select-title"><i class="fa-solid fa-paper-plane"></i> Kirim Pesanan Ke Admin:</div>
                 <div class="admin-options">
                     <label class="admin-radio">
-                        <input type="radio" name="targetAdmin" value="083823742523" checked>
+                        <input type="radio" name="targetAdmin" value="083823742523" data-admin-name="FIAN AM" checked>
                         <div class="admin-box">
-                            <i class="fa-brands fa-whatsapp"></i> Admin 1 (083823742523)
+                            <i class="fa-brands fa-whatsapp"></i> Admin 1: FIAN AM (083823742523)
                         </div>
                     </label>
                     <label class="admin-radio">
-                        <input type="radio" name="targetAdmin" value="082129318975">
+                        <input type="radio" name="targetAdmin" value="082129318975" data-admin-name="FIKI">
                         <div class="admin-box">
-                            <i class="fa-brands fa-whatsapp"></i> Admin 2 (082129318975)
+                            <i class="fa-brands fa-whatsapp"></i> Admin 2: FIKI (082129318975)
                         </div>
                     </label>
                 </div>
@@ -994,11 +1140,11 @@
                 <h3><i class="fa-solid fa-headset"></i> Kontak & Komunitas</h3>
                 <ul class="contact-list">
                     <li>
-                        <span><i class="fa-brands fa-whatsapp"></i> Admin 1</span>
+                        <span><i class="fa-brands fa-whatsapp"></i> Admin 1 (<strong>FIAN AM</strong>)</span>
                         <a href="https://wa.me/6283823742523" target="_blank">083823742523</a>
                     </li>
                     <li>
-                        <span><i class="fa-brands fa-whatsapp"></i> Admin 2</span>
+                        <span><i class="fa-brands fa-whatsapp"></i> Admin 2 (<strong>FIKI</strong>)</span>
                         <a href="https://wa.me/6282129318975" target="_blank">082129318975</a>
                     </li>
                 </ul>
@@ -1047,7 +1193,6 @@
             
             htmlElement.setAttribute('data-theme', newTheme);
             
-            // Toggle Icon
             const icon = themeToggleBtn.querySelector('i');
             if (newTheme === 'light') {
                 icon.className = 'fa-solid fa-sun';
@@ -1056,23 +1201,99 @@
             }
         });
 
-        /* === 3. WHATSAPP BOOKING FORM HANDLER === */
+        /* === 3. DYNAMIC PRICE CALCULATION === */
+        const priceMatrix = {
+            "PS4 Only": {
+                "1 Jam": 6000,
+                "12 Jam": 60000,
+                "24 Jam": 85000
+            },
+            "PS4 + TV": {
+                "1 Jam": null,
+                "12 Jam": 65000,
+                "24 Jam": 90000
+            },
+            "PS3 Only": {
+                "1 Jam": 5000,
+                "12 Jam": 50000,
+                "24 Jam": 75000
+            },
+            "PS3 + TV": {
+                "1 Jam": null,
+                "12 Jam": 55000,
+                "24 Jam": 80000
+            }
+        };
+
+        const packageSelect = document.getElementById('packageSelect');
+        const durationSelect = document.getElementById('durationSelect');
+        const totalPriceDisplay = document.getElementById('totalPriceDisplay');
+
+        function formatRupiah(angka) {
+            return 'Rp ' + angka.toLocaleString('id-ID');
+        }
+
+        function calculateTotalPrice() {
+            const selectedPkg = packageSelect.value;
+            const selectedDur = durationSelect.value;
+
+            // Nonaktifkan opsi "1 Jam" jika paket adalah "+ TV"
+            const oneHourOption = durationSelect.querySelector('option[value="1 Jam"]');
+            if (selectedPkg === "PS4 + TV" || selectedPkg === "PS3 + TV") {
+                oneHourOption.disabled = true;
+                if (selectedDur === "1 Jam") {
+                    durationSelect.value = "";
+                    totalPriceDisplay.textContent = "Pilih Durasi (Min. 12 Jam)";
+                    return null;
+                }
+            } else {
+                oneHourOption.disabled = false;
+            }
+
+            if (selectedPkg && selectedDur) {
+                const price = priceMatrix[selectedPkg][selectedDur];
+                if (price !== null) {
+                    const formatted = formatRupiah(price);
+                    totalPriceDisplay.textContent = formatted;
+                    return formatted;
+                } else {
+                    totalPriceDisplay.textContent = "Tidak Tersedia (Min. 12 Jam)";
+                    return null;
+                }
+            } else {
+                totalPriceDisplay.textContent = "Rp 0";
+                return null;
+            }
+        }
+
+        packageSelect.addEventListener('change', calculateTotalPrice);
+        durationSelect.addEventListener('change', calculateTotalPrice);
+
+        /* === 4. WHATSAPP BOOKING FORM HANDLER === */
         const bookingForm = document.getElementById('bookingForm');
 
         bookingForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            const calculatedPrice = calculateTotalPrice();
+            if (!calculatedPrice) {
+                alert("Silakan pilih kombinasi Paket dan Durasi Sewa yang tersedia!");
+                return;
+            }
+
             // Get Input Values
             const fullName = document.getElementById('fullName').value.trim();
             const addressRegion = document.getElementById('addressRegion').value.trim();
             const whatsappNo = document.getElementById('whatsappNo').value.trim();
-            const packageSelect = document.getElementById('packageSelect').value;
-            const durationSelect = document.getElementById('durationSelect').value;
+            const pkgVal = packageSelect.value;
+            const durVal = durationSelect.value;
             const rentDate = document.getElementById('rentDate').value;
             const gameNotes = document.getElementById('gameNotes').value.trim() || '-';
             
-            // Get Selected Admin Number
-            const targetAdmin = document.querySelector('input[name="targetAdmin"]:checked').value;
+            // Get Selected Admin Number & Name
+            const selectedAdminRadio = document.querySelector('input[name="targetAdmin"]:checked');
+            const targetAdmin = selectedAdminRadio.value;
+            const targetAdminName = selectedAdminRadio.getAttribute('data-admin-name');
 
             // Format Date (DD/MM/YYYY)
             const formattedDate = rentDate.split('-').reverse().join('/');
@@ -1084,12 +1305,13 @@
 👤 *Nama Lengkap:* ${fullName}
 📍 *Daerah / Alamat:* ${addressRegion}
 📞 *No. WhatsApp:* ${whatsappNo}
-🕹️ *Paket:* ${packageSelect}
-⏱️ *Durasi Sewa:* ${durationSelect}
+🕹️ *Paket:* ${pkgVal}
+⏱️ *Durasi Sewa:* ${durVal}
 📅 *Tanggal Sewa:* ${formattedDate}
+💰 *Total Harga:* *${calculatedPrice}*
 📝 *Request Game / Catatan:* ${gameNotes}
 --------------------------------------------------
-Halo Admin, saya ingin memesan sewa PlayStation dengan detail di atas. Mohon diproses ya, terima kasih!`;
+Halo Admin *${targetAdminName}*, saya ingin memesan sewa PlayStation dengan detail di atas. Mohon diproses ya, terima kasih!`;
 
             // Encode text for URL
             const encodedMessage = encodeURIComponent(message);
