@@ -50,7 +50,7 @@
         html, body {
             width: 100%;
             height: 100vh;
-            overflow: hidden; /* KUNCI UTAMA: Mencegah scroll sama sekali */
+            overflow: hidden;
             color: var(--text-primary);
             position: relative;
         }
@@ -109,7 +109,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             box-shadow: var(--shadow-glow);
         }
         [data-theme="light"] header {
@@ -225,7 +225,7 @@
             opacity: 0;
             transform: scale(0.97);
             transition: opacity 0.3s ease, transform 0.3s ease;
-            padding: 10px 0;
+            padding: 5px 0;
         }
 
         .screen.active {
@@ -236,15 +236,15 @@
 
         .section-title {
             text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.7rem;
+            margin-bottom: 18px;
             position: relative;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -6px;
             left: 20%;
             width: 60%;
             height: 3px;
@@ -442,24 +442,24 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 22px;
-            padding: 25px 30px;
+            padding: 20px 28px;
             box-shadow: var(--shadow-glow);
             width: 100%;
-            max-width: 850px;
+            max-width: 880px;
             backdrop-filter: blur(15px);
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+            gap: 12px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            margin-bottom: 10px;
+            gap: 3px;
+            margin-bottom: 8px;
         }
 
         .form-group.full-width { grid-column: 1 / -1; }
@@ -478,10 +478,10 @@
         .form-group textarea {
             background: rgba(7, 3, 14, 0.65);
             border: 1px solid var(--border-color);
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 10px;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             outline: none;
             transition: var(--transition);
         }
@@ -495,25 +495,25 @@
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.2));
             border: 2px solid var(--accent-magenta);
             border-radius: 12px;
-            padding: 10px 18px;
-            margin-bottom: 14px;
+            padding: 8px 16px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .total-price-label { font-size: 0.95rem; font-weight: 700; color: var(--text-secondary); }
-        .total-price-value { font-family: 'Orbitron', sans-serif; font-size: 1.35rem; font-weight: 900; color: var(--accent-magenta); }
+        .total-price-value { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 900; color: var(--accent-magenta); }
 
-        .admin-select-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; color: var(--text-secondary); }
-        .admin-options { display: flex; gap: 10px; margin-bottom: 14px; }
+        .admin-select-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: var(--text-secondary); }
+        .admin-options { display: flex; gap: 10px; margin-bottom: 12px; }
         .admin-radio { flex: 1; cursor: pointer; }
         .admin-radio input { display: none; }
 
         .admin-box {
             background: rgba(7, 3, 14, 0.65);
             border: 1px solid var(--border-color);
-            padding: 10px;
+            padding: 8px 10px;
             border-radius: 10px;
             text-align: center;
             font-weight: 700;
@@ -522,6 +522,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            transition: var(--transition);
         }
         [data-theme="light"] .admin-box { background: rgba(255, 255, 255, 0.95); }
 
@@ -531,21 +532,41 @@
             color: var(--accent-magenta);
         }
 
+        /* DUA TOMBOL KIRIM: WA & EMAIL */
+        .submit-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
         .btn-submit {
             width: 100%;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             border: none;
-            padding: 12px;
+            padding: 11px 14px;
             border-radius: 10px;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             font-family: 'Orbitron', sans-serif;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             transition: var(--transition);
         }
-        .btn-submit:hover { transform: translateY(-2px); }
+
+        .btn-wa {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-email {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            box-shadow: 0 4px 15px rgba(217, 70, 239, 0.4);
+        }
+
+        .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         /* === SCREEN 5: LOKASI & KONTAK === */
         .info-grid {
@@ -613,8 +634,8 @@
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
-            html, body { overflow-y: auto; } /* Untuk HP memperbolehkan scroll ringan jika layar sangat kecil */
-            .hardware-grid, .pricing-grid, .info-grid, .form-grid { grid-template-columns: 1fr; }
+            html, body { overflow-y: auto; }
+            .hardware-grid, .pricing-grid, .info-grid, .form-grid, .submit-actions { grid-template-columns: 1fr; }
             .games-grid { grid-template-columns: repeat(2, 1fr); }
             header { flex-direction: column; gap: 10px; }
         }
@@ -767,17 +788,17 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="fullName"><i class="fa-solid fa-user"></i> Nama Lengkap</label>
-                                <input type="text" id="fullName" placeholder="Nama..." required>
+                                <input type="text" id="fullName" placeholder="Nama lengkap..." required>
                             </div>
 
                             <div class="form-group">
                                 <label for="addressRegion"><i class="fa-solid fa-location-dot"></i> Daerah / Alamat</label>
-                                <input type="text" id="addressRegion" placeholder="Cipanas..." required>
+                                <input type="text" id="addressRegion" placeholder="Cipanas, Dukupuntang..." required>
                             </div>
 
                             <div class="form-group">
                                 <label for="whatsappNo"><i class="fa-brands fa-whatsapp"></i> No. WhatsApp</label>
-                                <input type="tel" id="whatsappNo" placeholder="08..." required>
+                                <input type="tel" id="whatsappNo" placeholder="08xxxxxxxxxx" required>
                             </div>
 
                             <div class="form-group">
@@ -802,36 +823,42 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="rentDate"><i class="fa-solid fa-calendar-days"></i> Tanggal</label>
+                                <label for="rentDate"><i class="fa-solid fa-calendar-days"></i> Tanggal Sewa</label>
                                 <input type="date" id="rentDate" required>
                             </div>
                         </div>
 
-                        <div class="form-group full-width" style="margin-top: 8px;">
-                            <label for="gameNotes"><i class="fa-solid fa-comment-dots"></i> Request Game</label>
-                            <textarea id="gameNotes" rows="1" placeholder="Contoh: Request eFootball 2026..."></textarea>
+                        <div class="form-group full-width" style="margin-top: 4px;">
+                            <label for="gameNotes"><i class="fa-solid fa-comment-dots"></i> Catatan / Request Game</label>
+                            <textarea id="gameNotes" rows="1" placeholder="Contoh: Request eFootball 2026, Tekken 7..."></textarea>
                         </div>
 
                         <div class="total-price-box">
-                            <div class="total-price-label"><i class="fa-solid fa-money-bill-wave"></i> Total Harga:</div>
+                            <div class="total-price-label"><i class="fa-solid fa-money-bill-wave"></i> Total Harga Sewa:</div>
                             <div class="total-price-value" id="totalPriceDisplay">Rp 0</div>
                         </div>
 
-                        <div class="admin-select-title"><i class="fa-solid fa-paper-plane"></i> Kirim Ke Admin:</div>
+                        <div class="admin-select-title"><i class="fa-solid fa-user-shield"></i> Pilih Admin Tujuan (Untuk Kirim WA):</div>
                         <div class="admin-options">
                             <label class="admin-radio">
                                 <input type="radio" name="targetAdmin" value="083823742523" data-admin-name="FIAN AM" checked>
-                                <div class="admin-box"><i class="fa-brands fa-whatsapp"></i> FIAN AM (083823742523)</div>
+                                <div class="admin-box"><i class="fa-brands fa-whatsapp"></i> Admin 1: FIAN AM (083823742523)</div>
                             </label>
                             <label class="admin-radio">
                                 <input type="radio" name="targetAdmin" value="082129318975" data-admin-name="FIKI">
-                                <div class="admin-box"><i class="fa-brands fa-whatsapp"></i> FIKI (082129318975)</div>
+                                <div class="admin-box"><i class="fa-brands fa-whatsapp"></i> Admin 2: FIKI (082129318975)</div>
                             </label>
                         </div>
 
-                        <button type="submit" class="btn-submit">
-                            <i class="fa-brands fa-whatsapp"></i> Kirim Pesanan via WhatsApp
-                        </button>
+                        <!-- DUA OPSI PENGIRIMAN: VIA WHATSAPP & VIA EMAIL -->
+                        <div class="submit-actions">
+                            <button type="button" id="sendWaBtn" class="btn-submit btn-wa">
+                                <i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp
+                            </button>
+                            <button type="button" id="sendEmailBtn" class="btn-submit btn-email">
+                                <i class="fa-solid fa-envelope"></i> Kirim via Email
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -844,7 +871,7 @@
                         <h3><i class="fa-solid fa-map-location-dot"></i> Alamat Rental</h3>
                         <div class="address-box">
                             <p><strong>Majalengka – Cirebon</strong></p>
-                            <p>Blok Pagar Gunung, Desa Cipanas, Kecamatan Dukupuntang, Kabupaten Cirebon, Jawa Barat.</p>
+                            <p>Blok Pagar Gunung, Desa Cipanas, Kecamatan Dukupuntang, Kabupaten Cirebon, Provinsi Jawa Barat.</p>
                             <a href="https://maps.google.com/?q=Blok+Pagar+Gunung,+Desa+Cipanas,+Kecamatan+Dukupuntang,+Kabupaten+Cirebon" target="_blank" class="btn-action btn-gmap">
                                 <i class="fa-solid fa-arrow-pointer"></i> Buka Google Maps
                             </a>
@@ -856,6 +883,7 @@
                         <ul class="contact-list">
                             <li><span>Admin 1: <strong>FIAN AM</strong></span><a href="https://wa.me/6283823742523" target="_blank">083823742523</a></li>
                             <li><span>Admin 2: <strong>FIKI</strong></span><a href="https://wa.me/6282129318975" target="_blank">082129318975</a></li>
+                            <li><span>Email Rental:</span><a href="mailto:huntersewaps@gmail.com">huntersewaps@gmail.com</a></li>
                         </ul>
                         <div style="margin-top: 10px;">
                             <a href="https://www.instagram.com/admin_sewa__hunter_playstation?obrf=MTM2dHRta3B3YzNzNA==" target="_blank" class="btn-action btn-ig"><i class="fa-brands fa-instagram"></i> Instagram</a>
@@ -874,7 +902,7 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        /* === INSTANT SCREEN SWITCH (NO SCROLL / NO SHIFT) === */
+        /* === INSTANT SCREEN SWITCH === */
         function switchScreen(screenId) {
             document.querySelectorAll('.screen').forEach(scr => scr.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -945,42 +973,82 @@
         packageSelect.addEventListener('change', calculateTotalPrice);
         durationSelect.addEventListener('change', calculateTotalPrice);
 
-        /* === WHATSAPP SUBMIT === */
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const calcPrice = calculateTotalPrice();
-            if (!calcPrice) {
-                alert("Pilih paket dan durasi sewa yang valid!");
-                return;
+        /* === HELPER VALIDATION & DATA COLLECTOR === */
+        const bookingForm = document.getElementById('bookingForm');
+
+        function getBookingData() {
+            if (!bookingForm.checkValidity()) {
+                bookingForm.reportValidity();
+                return null;
             }
 
-            const name = document.getElementById('fullName').value.trim();
-            const address = document.getElementById('addressRegion').value.trim();
-            const wa = document.getElementById('whatsappNo').value.trim();
-            const pkg = packageSelect.value;
-            const dur = durationSelect.value;
-            const date = document.getElementById('rentDate').value.split('-').reverse().join('/');
-            const notes = document.getElementById('gameNotes').value.trim() || '-';
-            
+            const calcPrice = calculateTotalPrice();
+            if (!calcPrice) {
+                alert("Silakan pilih kombinasi Paket dan Durasi Sewa yang valid!");
+                return null;
+            }
+
             const adminRadio = document.querySelector('input[name="targetAdmin"]:checked');
-            const adminPhone = adminRadio.value;
-            const adminName = adminRadio.getAttribute('data-admin-name');
+
+            return {
+                name: document.getElementById('fullName').value.trim(),
+                address: document.getElementById('addressRegion').value.trim(),
+                wa: document.getElementById('whatsappNo').value.trim(),
+                pkg: packageSelect.value,
+                dur: durationSelect.value,
+                date: document.getElementById('rentDate').value.split('-').reverse().join('/'),
+                notes: document.getElementById('gameNotes').value.trim() || '-',
+                price: calcPrice,
+                adminPhone: adminRadio.value,
+                adminName: adminRadio.getAttribute('data-admin-name')
+            };
+        }
+
+        /* === 1. KIRIM VIA WHATSAPP === */
+        document.getElementById('sendWaBtn').addEventListener('click', function() {
+            const data = getBookingData();
+            if (!data) return;
 
             const text = 
 `🎮 *FORM PEMESANAN - HUNTER PLAYSTATION* 🎮
 --------------------------------------------------
-👤 *Nama:* ${name}
-📍 *Alamat:* ${address}
-📞 *No. WA:* ${wa}
-🕹️ *Paket:* ${pkg}
-⏱️ *Durasi:* ${dur}
-📅 *Tanggal:* ${date}
-💰 *Total Harga:* *${calcPrice}*
-📝 *Request:* ${notes}
+👤 *Nama Lengkap:* ${data.name}
+📍 *Daerah / Alamat:* ${data.address}
+📞 *No. WhatsApp:* ${data.wa}
+🕹️ *Paket:* ${data.pkg}
+⏱️ *Durasi Sewa:* ${data.dur}
+📅 *Tanggal Sewa:* ${data.date}
+💰 *Total Harga:* *${data.price}*
+📝 *Request Game / Catatan:* ${data.notes}
 --------------------------------------------------
-Halo Admin *${adminName}*, saya ingin memesan sewa PlayStation. Mohon diproses, terima kasih!`;
+Halo Admin *${data.adminName}*, saya ingin memesan sewa PlayStation dengan detail di atas. Mohon diproses, terima kasih!`;
 
-            window.open(`https://wa.me/62${adminPhone.substring(1)}?text=${encodeURIComponent(text)}`, '_blank');
+            window.open(`https://wa.me/62${data.adminPhone.substring(1)}?text=${encodeURIComponent(text)}`, '_blank');
+        });
+
+        /* === 2. KIRIM VIA EMAIL (huntersewaps@gmail.com) === */
+        document.getElementById('sendEmailBtn').addEventListener('click', function() {
+            const data = getBookingData();
+            if (!data) return;
+
+            const recipient = "huntersewaps@gmail.com";
+            const subject = `Pemesanan Sewa PS - ${data.name} (${data.pkg} - ${data.dur})`;
+            const body = 
+`FORM PEMESANAN - HUNTER PLAYSTATION
+==================================================
+Nama Lengkap        : ${data.name}
+Daerah / Alamat     : ${data.address}
+No. WhatsApp        : ${data.wa}
+Paket Pilihan       : ${data.pkg}
+Durasi Sewa         : ${data.dur}
+Tanggal Sewa        : ${data.date}
+Total Harga         : ${data.price}
+Request Game/Catatan: ${data.notes}
+Admin Tujuan        : ${data.adminName}
+==================================================
+Halo Admin Hunter PlayStation, saya ingin melakukan pemesanan sewa PlayStation dengan detail di atas. Mohon konfirmasinya, terima kasih!`;
+
+            window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         });
     </script>
 </body>
