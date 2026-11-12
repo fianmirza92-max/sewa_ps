@@ -11,8 +11,8 @@
     <style>
         /* === CSS VARIABLE & THEMING === */
         :root {
-            --bg-overlay: linear-gradient(180deg, rgba(7, 3, 14, 0.88) 0%, rgba(15, 7, 30, 0.92) 50%, rgba(7, 3, 14, 0.95) 100%);
-            --bg-card: rgba(21, 10, 38, 0.82);
+            --bg-overlay: linear-gradient(180deg, rgba(7, 3, 14, 0.90) 0%, rgba(15, 7, 30, 0.94) 50%, rgba(7, 3, 14, 0.96) 100%);
+            --bg-card: rgba(21, 10, 38, 0.85);
             --bg-card-solid: #150a26;
             --accent-purple: #8b5cf6;
             --accent-glow: #a855f7;
@@ -22,11 +22,11 @@
             --text-secondary: #c4b5fd;
             --border-color: rgba(139, 92, 246, 0.35);
             --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.35);
-            --transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition: all 0.3s ease;
         }
 
         [data-theme="light"] {
-            --bg-overlay: linear-gradient(180deg, rgba(240, 234, 252, 0.90) 0%, rgba(245, 240, 255, 0.94) 50%, rgba(240, 234, 252, 0.92) 100%);
+            --bg-overlay: linear-gradient(180deg, rgba(240, 234, 252, 0.92) 0%, rgba(245, 240, 255, 0.96) 50%, rgba(240, 234, 252, 0.94) 100%);
             --bg-card: rgba(255, 255, 255, 0.92);
             --bg-card-solid: #ffffff;
             --accent-purple: #7c3aed;
@@ -39,7 +39,7 @@
             --shadow-glow: 0 8px 30px rgba(124, 58, 237, 0.2);
         }
 
-        /* === RESET & BASE STYLES === */
+        /* === RESET & FULL SCREEN APP LOCK === */
         * {
             margin: 0;
             padding: 0;
@@ -47,21 +47,18 @@
             font-family: 'Rajdhani', sans-serif;
         }
 
-        body {
+        html, body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden; /* KUNCI UTAMA: Mencegah scroll sama sekali */
             color: var(--text-primary);
-            transition: background 0.4s ease, color 0.4s ease;
-            overflow-x: hidden;
-            line-height: 1.6;
             position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* GAMING CHARACTER BACKGROUND WITH OVERLAY */
+        /* GAMING CHARACTER BACKGROUND */
         body::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -70,22 +67,19 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
             z-index: -2;
             filter: blur(2px) contrast(1.1);
-            transform: scale(1.02);
         }
 
         body::after {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: var(--bg-overlay);
             z-index: -1;
-            transition: background 0.4s ease;
         }
 
         h1, h2, h3, .brand-font {
@@ -94,201 +88,182 @@
             letter-spacing: 1.5px;
         }
 
-        .container {
+        .app-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            width: 100%;
+            padding: 10px 20px;
         }
 
-        /* === NAVBAR === */
+        /* === NAVBAR ATAS === */
         header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(7, 3, 14, 0.9);
+            flex-shrink: 0;
+            background: rgba(7, 3, 14, 0.85);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-        [data-theme="light"] header {
-            background: rgba(240, 234, 252, 0.92);
-        }
-
-        .nav-container {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 20px;
-            flex-wrap: wrap;
-            gap: 12px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-glow);
+        }
+        [data-theme="light"] header {
+            background: rgba(240, 234, 252, 0.88);
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 900;
             color: var(--text-primary);
-            text-decoration: none;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .logo i {
             color: var(--accent-magenta);
-            font-size: 1.7rem;
-            filter: drop-shadow(0 0 10px var(--accent-magenta));
-            animation: pulse-glow 2s infinite alternate;
-        }
-
-        @keyframes pulse-glow {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px var(--accent-magenta)); }
-            100% { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--accent-magenta)); }
+            font-size: 1.6rem;
+            filter: drop-shadow(0 0 8px var(--accent-magenta));
         }
 
         /* TAB NAVIGATION BUTTONS */
         .nav-tabs {
             display: flex;
             align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: center;
+            gap: 6px;
         }
 
         .tab-btn {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 25px;
+            padding: 7px 14px;
+            border-radius: 20px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: var(--transition);
         }
 
         .tab-btn:hover {
             border-color: var(--accent-magenta);
-            transform: translateY(-2px);
         }
 
         .tab-btn.active {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             border-color: transparent;
-            box-shadow: 0 4px 15px rgba(217, 70, 239, 0.45);
+            box-shadow: 0 3px 12px rgba(217, 70, 239, 0.4);
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .digital-clock {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 7px 14px;
-            border-radius: 30px;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--accent-glow);
-            box-shadow: var(--shadow-glow);
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .theme-toggle {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: var(--transition);
-            box-shadow: var(--shadow-glow);
         }
 
         .theme-toggle:hover {
-            transform: rotate(45deg) scale(1.1);
             border-color: var(--accent-magenta);
             color: var(--accent-magenta);
         }
 
-        /* === TAB CONTENT VIEWS (NO LONG SCROLLING) === */
-        main {
+        /* === CONTENT AREA (SINGLE SCREEN VIEWS) === */
+        .content-screens {
             flex: 1;
+            position: relative;
+            overflow: hidden;
             display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
             flex-direction: column;
             justify-content: center;
-            padding: 30px 0;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0.97);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            padding: 10px 0;
         }
 
-        .tab-view {
-            display: none;
-            animation: fadeInScale 0.35s ease forwards;
+        .screen.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
         }
 
-        .tab-view.active {
-            display: block;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: translateY(15px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* === SECTION TITLE === */
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            left: 15%;
-            width: 70%;
-            height: 4px;
+            bottom: -8px;
+            left: 20%;
+            width: 60%;
+            height: 3px;
             background: linear-gradient(90deg, transparent, var(--accent-magenta), var(--accent-cyan), transparent);
             border-radius: 2px;
         }
 
-        /* === TAB 1: BERANDA & UNIT PS === */
+        /* === SCREEN 1: BERANDA === */
         .hero-compact {
             text-align: center;
-            margin-bottom: 35px;
+            max-width: 800px;
         }
 
         .hero-compact h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
             background: linear-gradient(135deg, #fff 20%, var(--accent-magenta) 70%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(217, 70, 239, 0.4);
         }
 
         [data-theme="light"] .hero-compact h1 {
@@ -298,17 +273,16 @@
         }
 
         .hero-compact p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 680px;
-            margin: 0 auto 20px;
+            margin-bottom: 20px;
             font-weight: 600;
         }
 
         .hero-badges {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 25px;
         }
@@ -316,90 +290,68 @@
         .badge-item {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 8px 18px;
-            border-radius: 30px;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
-            backdrop-filter: blur(10px);
         }
-
         .badge-item i { color: var(--accent-magenta); }
 
         .hardware-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 25px;
         }
 
         .hardware-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 18px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: var(--transition);
+            backdrop-filter: blur(10px);
             box-shadow: var(--shadow-glow);
-            backdrop-filter: blur(12px);
-        }
-
-        .hardware-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--accent-magenta);
         }
 
         .img-container {
             width: 100%;
-            height: 180px;
-            border-radius: 14px;
+            height: 130px;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .hardware-card h3 { font-size: 1.2rem; color: var(--accent-glow); margin-bottom: 4px; }
+        .hardware-card p { text-align: center; color: var(--text-secondary); font-size: 0.85rem; }
 
-        .hardware-card h3 {
-            font-size: 1.4rem;
-            color: var(--accent-glow);
-            margin-bottom: 6px;
-        }
-
-        .hardware-card p {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .quick-actions-bar {
+        .quick-actions {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .btn-jump {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             border: none;
-            padding: 13px 26px;
-            border-radius: 30px;
+            padding: 12px 22px;
+            border-radius: 25px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 20px rgba(217, 70, 239, 0.4);
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(217, 70, 239, 0.4);
             transition: var(--transition);
         }
 
@@ -410,139 +362,115 @@
             box-shadow: none;
         }
 
-        .btn-jump:hover {
-            transform: translateY(-3px) scale(1.03);
-        }
+        .btn-jump:hover { transform: translateY(-2px); }
 
-        /* === TAB 2: HARGA SEWA === */
+        /* === SCREEN 2: HARGA SEWA === */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 25px;
+            width: 100%;
+            max-width: 900px;
         }
 
         .price-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 22px;
-            padding: 25px;
+            border-radius: 20px;
+            padding: 22px;
             box-shadow: var(--shadow-glow);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
         }
 
         .price-card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
 
-        .price-card-header h3 { font-size: 1.6rem; color: var(--accent-glow); }
-        .price-card-header i { font-size: 2.2rem; color: var(--accent-magenta); }
+        .price-card-header h3 { font-size: 1.5rem; color: var(--accent-glow); }
+        .price-card-header i { font-size: 2rem; color: var(--accent-magenta); }
 
-        .price-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .price-table th, .price-table td {
-            padding: 12px 10px;
-            text-align: left;
-        }
-
-        .price-table th {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .price-table td {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
+        .price-table { width: 100%; border-collapse: collapse; }
+        .price-table th, .price-table td { padding: 10px; text-align: left; }
+        .price-table th { color: var(--text-secondary); font-size: 0.85rem; border-bottom: 1px solid var(--border-color); }
+        .price-table td { font-size: 1.05rem; font-weight: 700; }
         .price-highlight { color: var(--accent-magenta); }
 
-        /* === TAB 3: KOLEKSI GAME === */
+        /* === SCREEN 3: KOLEKSI GAME === */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 18px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 950px;
+            margin-bottom: 20px;
         }
 
         .game-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 20px;
+            padding: 18px 10px;
             text-align: center;
+            backdrop-filter: blur(10px);
             transition: var(--transition);
-            backdrop-filter: blur(12px);
         }
 
-        .game-card:hover {
-            transform: translateY(-4px) scale(1.03);
-            border-color: var(--accent-glow);
-            background: var(--bg-card-solid);
-        }
-
-        .game-card i {
-            font-size: 2rem;
-            color: var(--accent-magenta);
-            margin-bottom: 10px;
-        }
-
-        .game-card h4 { font-size: 1.1rem; font-weight: 700; }
+        .game-card:hover { border-color: var(--accent-glow); transform: translateY(-3px); }
+        .game-card i { font-size: 1.8rem; color: var(--accent-magenta); margin-bottom: 8px; }
+        .game-card h4 { font-size: 1rem; font-weight: 700; }
 
         .more-games-box {
             background: var(--bg-card);
             border: 2px dashed var(--accent-magenta);
-            border-radius: 16px;
-            padding: 18px;
+            border-radius: 14px;
+            padding: 15px 25px;
             text-align: center;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-secondary);
+            max-width: 950px;
+            width: 100%;
         }
 
-        /* === TAB 4: FORM PEMESANAN === */
+        /* === SCREEN 4: FORM PEMESANAN === */
         .booking-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 30px 35px;
+            border-radius: 22px;
+            padding: 25px 30px;
             box-shadow: var(--shadow-glow);
-            max-width: 820px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 850px;
             backdrop-filter: blur(15px);
         }
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            margin-bottom: 14px;
+            gap: 4px;
+            margin-bottom: 10px;
         }
 
         .form-group.full-width { grid-column: 1 / -1; }
 
         .form-group label {
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .form-group input, 
@@ -550,10 +478,10 @@
         .form-group textarea {
             background: rgba(7, 3, 14, 0.65);
             border: 1px solid var(--border-color);
-            padding: 12px 15px;
-            border-radius: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
             color: var(--text-primary);
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             outline: none;
             transition: var(--transition);
         }
@@ -563,67 +491,37 @@
             background: rgba(255, 255, 255, 0.95);
         }
 
-        .form-group input:focus, 
-        .form-group select:focus, 
-        .form-group textarea:focus {
-            border-color: var(--accent-magenta);
-            box-shadow: 0 0 12px rgba(217, 70, 239, 0.4);
-        }
-
         .total-price-box {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.2));
             border: 2px solid var(--accent-magenta);
-            border-radius: 14px;
-            padding: 14px 20px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 10px 18px;
+            margin-bottom: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .total-price-label {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .total-price-label { font-size: 0.95rem; font-weight: 700; color: var(--text-secondary); }
+        .total-price-value { font-family: 'Orbitron', sans-serif; font-size: 1.35rem; font-weight: 900; color: var(--accent-magenta); }
 
-        .total-price-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.55rem;
-            font-weight: 900;
-            color: var(--accent-magenta);
-        }
-
-        .admin-select-title {
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-secondary);
-        }
-
-        .admin-options {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 22px;
-        }
-
+        .admin-select-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; color: var(--text-secondary); }
+        .admin-options { display: flex; gap: 10px; margin-bottom: 14px; }
         .admin-radio { flex: 1; cursor: pointer; }
         .admin-radio input { display: none; }
 
         .admin-box {
             background: rgba(7, 3, 14, 0.65);
             border: 1px solid var(--border-color);
-            padding: 12px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 10px;
             text-align: center;
             font-weight: 700;
-            transition: var(--transition);
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
         [data-theme="light"] .admin-box { background: rgba(255, 255, 255, 0.95); }
 
@@ -638,517 +536,379 @@
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 1.15rem;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 1.1rem;
             font-weight: 800;
             font-family: 'Orbitron', sans-serif;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.5);
         }
+        .btn-submit:hover { transform: translateY(-2px); }
 
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(217, 70, 239, 0.7);
-        }
-
-        /* === TAB 5: LOKASI & KONTAK === */
+        /* === SCREEN 5: LOKASI & KONTAK === */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 25px;
+            width: 100%;
+            max-width: 900px;
         }
 
         .info-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 22px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 25px;
             box-shadow: var(--shadow-glow);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
         }
 
-        .info-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 18px;
-            color: var(--accent-glow);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .address-box p { margin-bottom: 12px; font-size: 1.05rem; }
+        .info-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--accent-glow); display: flex; align-items: center; gap: 8px; }
+        .address-box p { margin-bottom: 10px; font-size: 0.95rem; }
 
         .btn-action {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 18px;
-            border-radius: 10px;
+            gap: 6px;
+            padding: 10px 16px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
+            font-size: 0.9rem;
             color: #fff;
+            margin-top: 6px;
+            margin-right: 6px;
             transition: var(--transition);
-            margin-top: 8px;
-            margin-right: 8px;
         }
-
         .btn-gmap { background: #ea4335; }
         .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         .btn-wa-channel { background: #25d366; }
-        .btn-action:hover { transform: translateY(-3px); }
+        .btn-action:hover { transform: translateY(-2px); }
 
         .contact-list { list-style: none; }
         .contact-list li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: rgba(7, 3, 14, 0.65);
-            padding: 12px 16px;
-            border-radius: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
             border: 1px solid var(--border-color);
-            flex-wrap: wrap;
-            gap: 8px;
+            font-size: 0.95rem;
         }
         [data-theme="light"] .contact-list li { background: rgba(255, 255, 255, 0.95); }
         .contact-list a { color: var(--accent-magenta); text-decoration: none; font-weight: 700; }
 
-        /* === FOOTER === */
+        /* FOOTER KECIL DI BAWAH */
         footer {
-            border-top: 1px solid var(--border-color);
-            padding: 18px 0;
+            flex-shrink: 0;
             text-align: center;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            background: rgba(7, 3, 14, 0.92);
-            backdrop-filter: blur(10px);
+            font-size: 0.8rem;
+            padding: 5px 0;
         }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
-            .nav-container { justify-content: center; }
-        }
-        @media (max-width: 768px) {
-            .hero-compact h1 { font-size: 2rem; }
-            .booking-container { padding: 20px; }
-            .admin-options { flex-direction: column; }
-            .total-price-box { flex-direction: column; gap: 6px; text-align: center; }
+            html, body { overflow-y: auto; } /* Untuk HP memperbolehkan scroll ringan jika layar sangat kecil */
+            .hardware-grid, .pricing-grid, .info-grid, .form-grid { grid-template-columns: 1fr; }
+            .games-grid { grid-template-columns: repeat(2, 1fr); }
+            header { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR DENGAN MENU TAB INSTAN -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo" onclick="switchTab('beranda')">
+    <div class="app-container">
+        <!-- NAVBAR -->
+        <header>
+            <div class="logo" onclick="switchScreen('beranda')">
                 <i class="fa-solid fa-gamepad"></i>
                 <span>HUNTER PLAYSTATION</span>
             </div>
 
-            <!-- MENU TAB NAVIGASI (PINDAH HALAMAN TANPA SCROLL) -->
             <nav class="nav-tabs">
-                <button class="tab-btn active" data-target="beranda" onclick="switchTab('beranda')">
+                <button class="tab-btn active" data-target="beranda" onclick="switchScreen('beranda')">
                     <i class="fa-solid fa-house"></i> Beranda
                 </button>
-                <button class="tab-btn" data-target="harga" onclick="switchTab('harga')">
-                    <i class="fa-solid fa-tags"></i> Harga Sewa
+                <button class="tab-btn" data-target="harga" onclick="switchScreen('harga')">
+                    <i class="fa-solid fa-tags"></i> Harga
                 </button>
-                <button class="tab-btn" data-target="game" onclick="switchTab('game')">
-                    <i class="fa-solid fa-compact-disc"></i> Koleksi Game
+                <button class="tab-btn" data-target="game" onclick="switchScreen('game')">
+                    <i class="fa-solid fa-compact-disc"></i> Game
                 </button>
-                <button class="tab-btn" data-target="pemesanan" onclick="switchTab('pemesanan')">
-                    <i class="fa-solid fa-cart-plus"></i> Form Pemesanan
+                <button class="tab-btn" data-target="pemesanan" onclick="switchScreen('pemesanan')">
+                    <i class="fa-solid fa-cart-plus"></i> Pesan
                 </button>
-                <button class="tab-btn" data-target="kontak" onclick="switchTab('kontak')">
-                    <i class="fa-solid fa-location-dot"></i> Lokasi & Kontak
+                <button class="tab-btn" data-target="kontak" onclick="switchScreen('kontak')">
+                    <i class="fa-solid fa-location-dot"></i> Kontak
                 </button>
             </nav>
 
             <div class="nav-right">
-                <div class="digital-clock" id="digitalClock">
-                    <i class="fa-regular fa-clock"></i>
-                    <span id="clockText">00:00:00 WIB</span>
-                </div>
-                <button class="theme-toggle" id="themeToggle" title="Ganti Tema Gelap / Terang">
+                <div class="digital-clock" id="digitalClock">00:00:00 WIB</div>
+                <button class="theme-toggle" id="themeToggle" title="Ganti Tema">
                     <i class="fa-solid fa-moon"></i>
                 </button>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="container">
+        <!-- KONTEN LAYAR (SINGLE SCREEN VIEW) -->
+        <div class="content-screens">
 
-        <!-- 1. VIEW BERANDA & UNIT PS -->
-        <section id="view-beranda" class="tab-view active">
-            <div class="hero-compact">
-                <h1>HUNTER PLAYSTATION</h1>
-                <p>Sewa PS4 & PS3 Termurah dengan Unit Terbaik dan Koleksi Game Terlengkap di Majalengka – Cirebon.</p>
-                
-                <div class="hero-badges">
-                    <div class="badge-item"><i class="fa-solid fa-gamepad"></i> Stik PS Original</div>
-                    <div class="badge-item"><i class="fa-solid fa-tv"></i> TV LED Berkualitas</div>
-                    <div class="badge-item"><i class="fa-solid fa-snowflake"></i> Ruangan Sejuk</div>
-                </div>
-            </div>
-
-            <div class="hardware-grid">
-                <div class="hardware-card">
-                    <div class="img-container">
-                        <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=800&q=80" alt="PlayStation 4 & Stik DualShock 4">
+            <!-- 1. BERANDA -->
+            <div id="screen-beranda" class="screen active">
+                <div class="hero-compact">
+                    <h1>HUNTER PLAYSTATION</h1>
+                    <p>Sewa PS4 & PS3 Termurah dengan Unit Terbaik di Majalengka – Cirebon.</p>
+                    
+                    <div class="hero-badges">
+                        <div class="badge-item"><i class="fa-solid fa-gamepad"></i> Stik Original</div>
+                        <div class="badge-item"><i class="fa-solid fa-tv"></i> TV LED HD</div>
+                        <div class="badge-item"><i class="fa-solid fa-snowflake"></i> AC Sejuk</div>
                     </div>
-                    <h3>PlayStation 4 + DualShock 4</h3>
-                    <p>Grafis tajam memukau, stik original responsif, siap untuk eFootball 2026 & game AAA lainnya.</p>
                 </div>
 
-                <div class="hardware-card">
-                    <div class="img-container">
-                        <img src="https://images.unsplash.com/photo-1526509867162-5b0c0d1b4b33?auto=format&fit=crop&w=800&q=80" alt="PlayStation 3 & Stik DualShock 3">
-                    </div>
-                    <h3>PlayStation 3 + DualShock 3</h3>
-                    <p>Pilihan favorit mabar seru dan nostalgia game legendaris dengan tarif paling hemat.</p>
-                </div>
-            </div>
-
-            <div class="quick-actions-bar">
-                <button class="btn-jump" onclick="switchTab('pemesanan')">
-                    <i class="fa-solid fa-gamepad"></i> Langsung Pesan Sekarang
-                </button>
-                <button class="btn-jump outline" onclick="switchTab('harga')">
-                    <i class="fa-solid fa-tags"></i> Lihat Harga Sewa
-                </button>
-                <button class="btn-jump outline" onclick="switchTab('game')">
-                    <i class="fa-solid fa-compact-disc"></i> Cek Koleksi Game
-                </button>
-            </div>
-        </section>
-
-        <!-- 2. VIEW HARGA SEWA -->
-        <section id="view-harga" class="tab-view">
-            <h2 class="section-title">💰 Daftar Harga Sewa</h2>
-            <div class="pricing-grid">
-                <!-- PS4 Card -->
-                <div class="price-card">
-                    <div class="price-card-header">
-                        <h3>🎮 PS4</h3>
-                        <i class="fa-brands fa-playstation"></i>
-                    </div>
-                    <table class="price-table">
-                        <thead>
-                            <tr>
-                                <th>Durasi</th>
-                                <th>PS Only</th>
-                                <th>PS + TV</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1 Jam</td>
-                                <td class="price-highlight">Rp 6.000</td>
-                                <td>—</td>
-                            </tr>
-                            <tr>
-                                <td>12 Jam</td>
-                                <td class="price-highlight">Rp 60.000</td>
-                                <td class="price-highlight">Rp 65.000</td>
-                            </tr>
-                            <tr>
-                                <td>24 Jam</td>
-                                <td class="price-highlight">Rp 85.000</td>
-                                <td class="price-highlight">Rp 90.000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- PS3 Card -->
-                <div class="price-card">
-                    <div class="price-card-header">
-                        <h3>🎮 PS3</h3>
-                        <i class="fa-brands fa-playstation"></i>
-                    </div>
-                    <table class="price-table">
-                        <thead>
-                            <tr>
-                                <th>Durasi</th>
-                                <th>PS Only</th>
-                                <th>PS + TV</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1 Jam</td>
-                                <td class="price-highlight">Rp 5.000</td>
-                                <td>—</td>
-                            </tr>
-                            <tr>
-                                <td>12 Jam</td>
-                                <td class="price-highlight">Rp 50.000</td>
-                                <td class="price-highlight">Rp 55.000</td>
-                            </tr>
-                            <tr>
-                                <td>24 Jam</td>
-                                <td class="price-highlight">Rp 75.000</td>
-                                <td class="price-highlight">Rp 80.000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 25px;">
-                <button class="btn-jump" onclick="switchTab('pemesanan')">
-                    <i class="fa-solid fa-cart-plus"></i> Lanjut Isi Form Pemesanan
-                </button>
-            </div>
-        </section>
-
-        <!-- 3. VIEW KOLEKSI GAME -->
-        <section id="view-game" class="tab-view">
-            <h2 class="section-title">🎯 Koleksi Game Terlengkap</h2>
-            <div class="games-grid">
-                <div class="game-card">
-                    <i class="fa-solid fa-futbol"></i>
-                    <h4>eFootball 2026</h4>
-                </div>
-                <div class="game-card">
-                    <i class="fa-solid fa-hand-fist"></i>
-                    <h4>God of War</h4>
-                </div>
-                <div class="game-card">
-                    <i class="fa-solid fa-crosshairs"></i>
-                    <h4>Call of Duty: Black Ops 6</h4>
-                </div>
-                <div class="game-card">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h4>Tekken 7</h4>
-                </div>
-                <div class="game-card">
-                    <i class="fa-solid fa-bolt"></i>
-                    <h4>Naruto UNS 4</h4>
-                </div>
-                <div class="game-card">
-                    <i class="fa-solid fa-car"></i>
-                    <h4>GTA V</h4>
-                </div>
-                <div class="game-card">
-                    <i class="fa-solid fa-biohazard"></i>
-                    <h4>Resident Evil 6</h4>
-                </div>
-                <div class="game-card">
-                    <i class="fa-solid fa-skull"></i>
-                    <h4>Mortal Kombat 11</h4>
-                </div>
-            </div>
-            <div class="more-games-box">
-                ✨ ...Dan masih banyak lagi koleksi game seru lainnya! Bisa request game di Form Pemesanan.
-            </div>
-            <div style="text-align: center; margin-top: 22px;">
-                <button class="btn-jump" onclick="switchTab('pemesanan')">
-                    <i class="fa-solid fa-gamepad"></i> Request Game & Pesan Sekarang
-                </button>
-            </div>
-        </section>
-
-        <!-- 4. VIEW FORM PEMESANAN -->
-        <section id="view-pemesanan" class="tab-view">
-            <h2 class="section-title">📝 Form Pemesanan Sewa</h2>
-            <div class="booking-container">
-                <form id="bookingForm">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="fullName"><i class="fa-solid fa-user"></i> Nama Lengkap</label>
-                            <input type="text" id="fullName" placeholder="Masukkan nama lengkap..." required>
+                <div class="hardware-grid">
+                    <div class="hardware-card">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=800&q=80" alt="PS4">
                         </div>
-
-                        <div class="form-group">
-                            <label for="addressRegion"><i class="fa-solid fa-location-dot"></i> Daerah / Alamat</label>
-                            <input type="text" id="addressRegion" placeholder="Contoh: Cipanas, Dukupuntang" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="whatsappNo"><i class="fa-brands fa-whatsapp"></i> No. WhatsApp</label>
-                            <input type="tel" id="whatsappNo" placeholder="08xxxxxxxxxx" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="packageSelect"><i class="fa-solid fa-gamepad"></i> Pilih Paket</label>
-                            <select id="packageSelect" required>
-                                <option value="" disabled selected>-- Pilih Console & Setup --</option>
-                                <option value="PS4 Only">PS4 Only</option>
-                                <option value="PS4 + TV">PS4 + TV</option>
-                                <option value="PS3 Only">PS3 Only</option>
-                                <option value="PS3 + TV">PS3 + TV</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="durationSelect"><i class="fa-solid fa-hourglass-half"></i> Durasi Sewa</label>
-                            <select id="durationSelect" required>
-                                <option value="" disabled selected>-- Pilih Durasi --</option>
-                                <option value="1 Jam">1 Jam</option>
-                                <option value="12 Jam">12 Jam</option>
-                                <option value="24 Jam">24 Jam</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="rentDate"><i class="fa-solid fa-calendar-days"></i> Tanggal Sewa</label>
-                            <input type="date" id="rentDate" required>
-                        </div>
+                        <h3>PlayStation 4</h3>
+                        <p>Grafis memukau, stik DualShock 4 original.</p>
                     </div>
 
-                    <div class="form-group full-width">
-                        <label for="gameNotes"><i class="fa-solid fa-comment-dots"></i> Catatan Tambahan / Request Game</label>
-                        <textarea id="gameNotes" rows="2" placeholder="Contoh: Request game eFootball 2026, GTA V, Tekken 7..."></textarea>
-                    </div>
-
-                    <!-- TOTAL HARGA OTOMATIS -->
-                    <div class="total-price-box">
-                        <div class="total-price-label">
-                            <i class="fa-solid fa-money-bill-wave"></i>
-                            <span>Total Harga Sewa:</span>
+                    <div class="hardware-card">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1526509867162-5b0c0d1b4b33?auto=format&fit=crop&w=800&q=80" alt="PS3">
                         </div>
-                        <div class="total-price-value" id="totalPriceDisplay">Rp 0</div>
+                        <h3>PlayStation 3</h3>
+                        <p>Nostalgia game seru harga super hemat.</p>
                     </div>
+                </div>
 
-                    <!-- PILIH ADMIN -->
-                    <div class="admin-select-title"><i class="fa-solid fa-paper-plane"></i> Kirim Pesanan Ke Admin:</div>
-                    <div class="admin-options">
-                        <label class="admin-radio">
-                            <input type="radio" name="targetAdmin" value="083823742523" data-admin-name="FIAN AM" checked>
-                            <div class="admin-box">
-                                <i class="fa-brands fa-whatsapp"></i> Admin 1: FIAN AM (083823742523)
-                            </div>
-                        </label>
-                        <label class="admin-radio">
-                            <input type="radio" name="targetAdmin" value="082129318975" data-admin-name="FIKI">
-                            <div class="admin-box">
-                                <i class="fa-brands fa-whatsapp"></i> Admin 2: FIKI (082129318975)
-                            </div>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn-submit">
-                        <i class="fa-brands fa-whatsapp"></i> Kirim Pemesanan via WhatsApp
+                <div class="quick-actions">
+                    <button class="btn-jump" onclick="switchScreen('pemesanan')">
+                        <i class="fa-solid fa-gamepad"></i> Pesan Sekarang
                     </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- 5. VIEW LOKASI & KONTAK -->
-        <section id="view-kontak" class="tab-view">
-            <h2 class="section-title">📍 Lokasi & Kontak Admin</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3><i class="fa-solid fa-map-location-dot"></i> Alamat Rental PS</h3>
-                    <div class="address-box">
-                        <p><strong>Area:</strong> Majalengka – Cirebon</p>
-                        <p>Blok Pagar Gunung, Desa Cipanas, Kecamatan Dukupuntang, Kabupaten Cirebon, Provinsi Jawa Barat.</p>
-                        <a href="https://maps.google.com/?q=Blok+Pagar+Gunung,+Desa+Cipanas,+Kecamatan+Dukupuntang,+Kabupaten+Cirebon" target="_blank" class="btn-action btn-gmap">
-                            <i class="fa-solid fa-arrow-pointer"></i> Buka Google Maps
-                        </a>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <h3><i class="fa-solid fa-headset"></i> Kontak & Sosial Media</h3>
-                    <ul class="contact-list">
-                        <li>
-                            <span><i class="fa-brands fa-whatsapp"></i> Admin 1 (<strong>FIAN AM</strong>)</span>
-                            <a href="https://wa.me/6283823742523" target="_blank">083823742523</a>
-                        </li>
-                        <li>
-                            <span><i class="fa-brands fa-whatsapp"></i> Admin 2 (<strong>FIKI</strong>)</span>
-                            <a href="https://wa.me/6282129318975" target="_blank">082129318975</a>
-                        </li>
-                    </ul>
-                    <div style="margin-top: 15px;">
-                        <a href="https://www.instagram.com/admin_sewa__hunter_playstation?obrf=MTM2dHRta3B3YzNzNA==" target="_blank" class="btn-action btn-ig">
-                            <i class="fa-brands fa-instagram"></i> Instagram
-                        </a>
-                        <a href="https://whatsapp.com/channel/0029VbDYyg34Y9lunMBEAS0z" target="_blank" class="btn-action btn-wa-channel">
-                            <i class="fa-solid fa-bullhorn"></i> Saluran WA
-                        </a>
-                    </div>
+                    <button class="btn-jump outline" onclick="switchScreen('harga')">
+                        <i class="fa-solid fa-tags"></i> Cek Harga
+                    </button>
                 </div>
             </div>
-        </section>
 
-    </main>
+            <!-- 2. HARGA SEWA -->
+            <div id="screen-harga" class="screen">
+                <h2 class="section-title">💰 Daftar Harga Sewa</h2>
+                <div class="pricing-grid">
+                    <!-- PS4 -->
+                    <div class="price-card">
+                        <div class="price-card-header">
+                            <h3>🎮 PS4</h3>
+                            <i class="fa-brands fa-playstation"></i>
+                        </div>
+                        <table class="price-table">
+                            <thead>
+                                <tr><th>Durasi</th><th>PS Only</th><th>PS + TV</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1 Jam</td><td class="price-highlight">Rp 6.000</td><td>—</td></tr>
+                                <tr><td>12 Jam</td><td class="price-highlight">Rp 60.000</td><td class="price-highlight">Rp 65.000</td></tr>
+                                <tr><td>24 Jam</td><td class="price-highlight">Rp 85.000</td><td class="price-highlight">Rp 90.000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- PS3 -->
+                    <div class="price-card">
+                        <div class="price-card-header">
+                            <h3>🎮 PS3</h3>
+                            <i class="fa-brands fa-playstation"></i>
+                        </div>
+                        <table class="price-table">
+                            <thead>
+                                <tr><th>Durasi</th><th>PS Only</th><th>PS + TV</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1 Jam</td><td class="price-highlight">Rp 5.000</td><td>—</td></tr>
+                                <tr><td>12 Jam</td><td class="price-highlight">Rp 50.000</td><td class="price-highlight">Rp 55.000</td></tr>
+                                <tr><td>24 Jam</td><td class="price-highlight">Rp 75.000</td><td class="price-highlight">Rp 80.000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 HUNTER PLAYSTATION. All Rights Reserved. Majalengka - Cirebon.</p>
+            <!-- 3. KOLEKSI GAME -->
+            <div id="screen-game" class="screen">
+                <h2 class="section-title">🎯 Koleksi Game Terlengkap</h2>
+                <div class="games-grid">
+                    <div class="game-card"><i class="fa-solid fa-futbol"></i><h4>eFootball 2026</h4></div>
+                    <div class="game-card"><i class="fa-solid fa-hand-fist"></i><h4>God of War</h4></div>
+                    <div class="game-card"><i class="fa-solid fa-crosshairs"></i><h4>COD: BO 6</h4></div>
+                    <div class="game-card"><i class="fa-solid fa-shield-halved"></i><h4>Tekken 7</h4></div>
+                    <div class="game-card"><i class="fa-solid fa-bolt"></i><h4>Naruto UNS 4</h4></div>
+                    <div class="game-card"><i class="fa-solid fa-car"></i><h4>GTA V</h4></div>
+                    <div class="game-card"><i class="fa-solid fa-biohazard"></i><h4>Resident Evil 6</h4></div>
+                    <div class="game-card"><i class="fa-solid fa-skull"></i><h4>Mortal Kombat 11</h4></div>
+                </div>
+                <div class="more-games-box">
+                    ✨ ...Dan masih banyak game seru lainnya! Bisa request game langsung di form pemesanan.
+                </div>
+            </div>
+
+            <!-- 4. FORM PEMESANAN -->
+            <div id="screen-pemesanan" class="screen">
+                <h2 class="section-title">📝 Form Pemesanan Sewa</h2>
+                <div class="booking-container">
+                    <form id="bookingForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="fullName"><i class="fa-solid fa-user"></i> Nama Lengkap</label>
+                                <input type="text" id="fullName" placeholder="Nama..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="addressRegion"><i class="fa-solid fa-location-dot"></i> Daerah / Alamat</label>
+                                <input type="text" id="addressRegion" placeholder="Cipanas..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="whatsappNo"><i class="fa-brands fa-whatsapp"></i> No. WhatsApp</label>
+                                <input type="tel" id="whatsappNo" placeholder="08..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="packageSelect"><i class="fa-solid fa-gamepad"></i> Pilih Paket</label>
+                                <select id="packageSelect" required>
+                                    <option value="" disabled selected>-- Pilih Console --</option>
+                                    <option value="PS4 Only">PS4 Only</option>
+                                    <option value="PS4 + TV">PS4 + TV</option>
+                                    <option value="PS3 Only">PS3 Only</option>
+                                    <option value="PS3 + TV">PS3 + TV</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="durationSelect"><i class="fa-solid fa-hourglass-half"></i> Durasi</label>
+                                <select id="durationSelect" required>
+                                    <option value="" disabled selected>-- Pilih Durasi --</option>
+                                    <option value="1 Jam">1 Jam</option>
+                                    <option value="12 Jam">12 Jam</option>
+                                    <option value="24 Jam">24 Jam</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rentDate"><i class="fa-solid fa-calendar-days"></i> Tanggal</label>
+                                <input type="date" id="rentDate" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-top: 8px;">
+                            <label for="gameNotes"><i class="fa-solid fa-comment-dots"></i> Request Game</label>
+                            <textarea id="gameNotes" rows="1" placeholder="Contoh: Request eFootball 2026..."></textarea>
+                        </div>
+
+                        <div class="total-price-box">
+                            <div class="total-price-label"><i class="fa-solid fa-money-bill-wave"></i> Total Harga:</div>
+                            <div class="total-price-value" id="totalPriceDisplay">Rp 0</div>
+                        </div>
+
+                        <div class="admin-select-title"><i class="fa-solid fa-paper-plane"></i> Kirim Ke Admin:</div>
+                        <div class="admin-options">
+                            <label class="admin-radio">
+                                <input type="radio" name="targetAdmin" value="083823742523" data-admin-name="FIAN AM" checked>
+                                <div class="admin-box"><i class="fa-brands fa-whatsapp"></i> FIAN AM (083823742523)</div>
+                            </label>
+                            <label class="admin-radio">
+                                <input type="radio" name="targetAdmin" value="082129318975" data-admin-name="FIKI">
+                                <div class="admin-box"><i class="fa-brands fa-whatsapp"></i> FIKI (082129318975)</div>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fa-brands fa-whatsapp"></i> Kirim Pesanan via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 5. LOKASI & KONTAK -->
+            <div id="screen-kontak" class="screen">
+                <h2 class="section-title">📍 Lokasi & Kontak Admin</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fa-solid fa-map-location-dot"></i> Alamat Rental</h3>
+                        <div class="address-box">
+                            <p><strong>Majalengka – Cirebon</strong></p>
+                            <p>Blok Pagar Gunung, Desa Cipanas, Kecamatan Dukupuntang, Kabupaten Cirebon, Jawa Barat.</p>
+                            <a href="https://maps.google.com/?q=Blok+Pagar+Gunung,+Desa+Cipanas,+Kecamatan+Dukupuntang,+Kabupaten+Cirebon" target="_blank" class="btn-action btn-gmap">
+                                <i class="fa-solid fa-arrow-pointer"></i> Buka Google Maps
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fa-solid fa-headset"></i> Kontak & Sosial Media</h3>
+                        <ul class="contact-list">
+                            <li><span>Admin 1: <strong>FIAN AM</strong></span><a href="https://wa.me/6283823742523" target="_blank">083823742523</a></li>
+                            <li><span>Admin 2: <strong>FIKI</strong></span><a href="https://wa.me/6282129318975" target="_blank">082129318975</a></li>
+                        </ul>
+                        <div style="margin-top: 10px;">
+                            <a href="https://www.instagram.com/admin_sewa__hunter_playstation?obrf=MTM2dHRta3B3YzNzNA==" target="_blank" class="btn-action btn-ig"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                            <a href="https://whatsapp.com/channel/0029VbDYyg34Y9lunMBEAS0z" target="_blank" class="btn-action btn-wa-channel"><i class="fa-solid fa-bullhorn"></i> Saluran WA</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </footer>
+
+        <footer>
+            <p>&copy; 2026 HUNTER PLAYSTATION. All Rights Reserved.</p>
+        </footer>
+    </div>
 
     <!-- JAVASCRIPT -->
     <script>
-        /* === 1. INSTANT TAB NAVIGATION (NO SCROLLING) === */
-        function switchTab(tabId) {
-            // Sembunyikan semua view
-            document.querySelectorAll('.tab-view').forEach(view => {
-                view.classList.remove('active');
-            });
+        /* === INSTANT SCREEN SWITCH (NO SCROLL / NO SHIFT) === */
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(scr => scr.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
-            // Nonaktifkan semua tombol tab di header
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            const targetScreen = document.getElementById('screen-' + screenId);
+            if (targetScreen) targetScreen.classList.add('active');
 
-            // Tampilkan view yang dipilih
-            const targetView = document.getElementById('view-' + tabId);
-            if (targetView) {
-                targetView.classList.add('active');
-            }
-
-            // Aktifkan tombol tab yang sesuai
-            const targetBtn = document.querySelector(`.tab-btn[data-target="${tabId}"]`);
-            if (targetBtn) {
-                targetBtn.classList.add('active');
-            }
-
-            // Reset scroll posisi ke paling atas secara instan
-            window.scrollTo({ top: 0, behavior: 'instant' });
+            const targetBtn = document.querySelector(`.tab-btn[data-target="${screenId}"]`);
+            if (targetBtn) targetBtn.classList.add('active');
         }
 
-        /* === 2. DIGITAL CLOCK FUNCTION === */
+        /* === DIGITAL CLOCK === */
         function updateClock() {
-            const clockElement = document.getElementById('clockText');
             const now = new Date();
-            
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            
-            clockElement.textContent = `${hours}:${minutes}:${seconds} WIB`;
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('digitalClock').textContent = `${h}:${m}:${s} WIB`;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        /* === 3. DARK / LIGHT THEME TOGGLE === */
+        /* === THEME TOGGLE === */
         const themeToggleBtn = document.getElementById('themeToggle');
         const htmlElement = document.documentElement;
 
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
             htmlElement.setAttribute('data-theme', newTheme);
-            
-            const icon = themeToggleBtn.querySelector('i');
-            icon.className = newTheme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            themeToggleBtn.querySelector('i').className = newTheme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         });
 
-        /* === 4. DYNAMIC PRICE CALCULATION === */
+        /* === PRICE CALCULATION === */
         const priceMatrix = {
             "PS4 Only": { "1 Jam": 6000, "12 Jam": 60000, "24 Jam": 85000 },
             "PS4 + TV": { "1 Jam": null, "12 Jam": 65000, "24 Jam": 90000 },
@@ -1160,88 +920,67 @@
         const durationSelect = document.getElementById('durationSelect');
         const totalPriceDisplay = document.getElementById('totalPriceDisplay');
 
-        function formatRupiah(angka) {
-            return 'Rp ' + angka.toLocaleString('id-ID');
-        }
-
         function calculateTotalPrice() {
-            const selectedPkg = packageSelect.value;
-            const selectedDur = durationSelect.value;
+            const pkg = packageSelect.value;
+            const dur = durationSelect.value;
+            const oneHourOpt = durationSelect.querySelector('option[value="1 Jam"]');
 
-            const oneHourOption = durationSelect.querySelector('option[value="1 Jam"]');
-            if (selectedPkg === "PS4 + TV" || selectedPkg === "PS3 + TV") {
-                oneHourOption.disabled = true;
-                if (selectedDur === "1 Jam") {
-                    durationSelect.value = "";
-                    totalPriceDisplay.textContent = "Pilih Durasi (Min. 12 Jam)";
-                    return null;
-                }
+            if (pkg === "PS4 + TV" || pkg === "PS3 + TV") {
+                oneHourOpt.disabled = true;
+                if (dur === "1 Jam") durationSelect.value = "";
             } else {
-                oneHourOption.disabled = false;
+                oneHourOpt.disabled = false;
             }
 
-            if (selectedPkg && selectedDur) {
-                const price = priceMatrix[selectedPkg][selectedDur];
-                if (price !== null) {
-                    const formatted = formatRupiah(price);
-                    totalPriceDisplay.textContent = formatted;
-                    return formatted;
-                } else {
-                    totalPriceDisplay.textContent = "Tidak Tersedia (Min. 12 Jam)";
-                    return null;
-                }
-            } else {
-                totalPriceDisplay.textContent = "Rp 0";
-                return null;
+            if (pkg && dur && priceMatrix[pkg][dur] !== null) {
+                const price = priceMatrix[pkg][dur];
+                const formatted = 'Rp ' + price.toLocaleString('id-ID');
+                totalPriceDisplay.textContent = formatted;
+                return formatted;
             }
+            totalPriceDisplay.textContent = "Rp 0";
+            return null;
         }
 
         packageSelect.addEventListener('change', calculateTotalPrice);
         durationSelect.addEventListener('change', calculateTotalPrice);
 
-        /* === 5. WHATSAPP BOOKING FORM HANDLER === */
-        const bookingForm = document.getElementById('bookingForm');
-
-        bookingForm.addEventListener('submit', function(e) {
+        /* === WHATSAPP SUBMIT === */
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const calculatedPrice = calculateTotalPrice();
-            if (!calculatedPrice) {
-                alert("Silakan pilih kombinasi Paket dan Durasi Sewa yang tersedia!");
+            const calcPrice = calculateTotalPrice();
+            if (!calcPrice) {
+                alert("Pilih paket dan durasi sewa yang valid!");
                 return;
             }
 
-            const fullName = document.getElementById('fullName').value.trim();
-            const addressRegion = document.getElementById('addressRegion').value.trim();
-            const whatsappNo = document.getElementById('whatsappNo').value.trim();
-            const pkgVal = packageSelect.value;
-            const durVal = durationSelect.value;
-            const rentDate = document.getElementById('rentDate').value;
-            const gameNotes = document.getElementById('gameNotes').value.trim() || '-';
+            const name = document.getElementById('fullName').value.trim();
+            const address = document.getElementById('addressRegion').value.trim();
+            const wa = document.getElementById('whatsappNo').value.trim();
+            const pkg = packageSelect.value;
+            const dur = durationSelect.value;
+            const date = document.getElementById('rentDate').value.split('-').reverse().join('/');
+            const notes = document.getElementById('gameNotes').value.trim() || '-';
             
-            const selectedAdminRadio = document.querySelector('input[name="targetAdmin"]:checked');
-            const targetAdmin = selectedAdminRadio.value;
-            const targetAdminName = selectedAdminRadio.getAttribute('data-admin-name');
+            const adminRadio = document.querySelector('input[name="targetAdmin"]:checked');
+            const adminPhone = adminRadio.value;
+            const adminName = adminRadio.getAttribute('data-admin-name');
 
-            const formattedDate = rentDate.split('-').reverse().join('/');
-
-            const message = 
+            const text = 
 `🎮 *FORM PEMESANAN - HUNTER PLAYSTATION* 🎮
 --------------------------------------------------
-👤 *Nama Lengkap:* ${fullName}
-📍 *Daerah / Alamat:* ${addressRegion}
-📞 *No. WhatsApp:* ${whatsappNo}
-🕹️ *Paket:* ${pkgVal}
-⏱️ *Durasi Sewa:* ${durVal}
-📅 *Tanggal Sewa:* ${formattedDate}
-💰 *Total Harga:* *${calculatedPrice}*
-📝 *Request Game / Catatan:* ${gameNotes}
+👤 *Nama:* ${name}
+📍 *Alamat:* ${address}
+📞 *No. WA:* ${wa}
+🕹️ *Paket:* ${pkg}
+⏱️ *Durasi:* ${dur}
+📅 *Tanggal:* ${date}
+💰 *Total Harga:* *${calcPrice}*
+📝 *Request:* ${notes}
 --------------------------------------------------
-Halo Admin *${targetAdminName}*, saya ingin memesan sewa PlayStation dengan detail di atas. Mohon diproses ya, terima kasih!`;
+Halo Admin *${adminName}*, saya ingin memesan sewa PlayStation. Mohon diproses, terima kasih!`;
 
-            const encodedMessage = encodeURIComponent(message);
-            const waUrl = `https://wa.me/62${targetAdmin.substring(1)}?text=${encodedMessage}`;
-            window.open(waUrl, '_blank');
+            window.open(`https://wa.me/62${adminPhone.substring(1)}?text=${encodeURIComponent(text)}`, '_blank');
         });
     </script>
 </body>
