@@ -376,7 +376,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             width: 100%;
-            max-width: 960px;
+            max-width: 980px;
         }
 
         .price-card {
@@ -397,7 +397,7 @@
             padding-bottom: 8px;
         }
 
-        .price-card-header h3 { font-size: 1.35rem; color: var(--accent-glow); }
+        .price-card-header h3 { font-size: 1.3rem; color: var(--accent-glow); }
         .price-card-header i { font-size: 1.7rem; color: var(--accent-magenta); }
 
         .price-table { width: 100%; border-collapse: collapse; }
@@ -405,7 +405,7 @@
         .price-table th { color: var(--text-secondary); font-size: 0.82rem; border-bottom: 1px solid var(--border-color); text-transform: uppercase; }
         .price-table td { font-size: 0.98rem; font-weight: 700; }
         .price-highlight { color: var(--accent-magenta); }
-        .price-cyan { color: var(--accent-cyan); }
+        .price-cyan { color: var(--accent-cyan); font-weight: 800; }
 
         /* === SCREEN 3: KOLEKSI GAME === */
         .games-grid {
@@ -444,7 +444,7 @@
             width: 100%;
         }
 
-        /* === SCREEN 4: FORM PEMESANAN (COMPACT & FIT DI LAYAR) === */
+        /* === SCREEN 4: FORM PEMESANAN === */
         .booking-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -691,21 +691,21 @@
             <div id="screen-beranda" class="screen active">
                 <div class="hero-compact">
                     <h1>HUNTER PLAYSTATION</h1>
-                    <p>Sewa PS4, PS3 & PlayBox Portable Termurah di Majalengka – Cirebon.</p>
+                    <p>Sewa PS4, PS3 & PlayBox / PSBox Portable Termurah di Majalengka – Cirebon.</p>
                     
                     <div class="hero-badges">
                         <div class="badge-item"><i class="fa-solid fa-gamepad"></i> Stik Original</div>
                         <div class="badge-item"><i class="fa-solid fa-tv"></i> TV LED HD</div>
-                        <div class="badge-item"><i class="fa-solid fa-briefcase"></i> PlayBox Portable Praktis</div>
+                        <div class="badge-item"><i class="fa-solid fa-briefcase"></i> PlayBox Portable</div>
                         <div class="badge-item"><i class="fa-solid fa-snowflake"></i> AC Sejuk</div>
                     </div>
                 </div>
 
-                <!-- 3 UNIT SHOWCASE: PS4, PS3, PLAYBOX -->
+                <!-- 3 UNIT SHOWCASE: PS4, PS3, PLAYBOX (MENGGUNAKAN FILE LOKAL DI GITHUB) -->
                 <div class="hardware-grid">
                     <div class="hardware-card">
                         <div class="img-container">
-                            <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=800&q=80" alt="PS4">
+                            <img src="ps4.jpg" alt="PlayStation 4">
                         </div>
                         <h3>PlayStation 4</h3>
                         <p>Grafis memukau, stik DualShock 4 original.</p>
@@ -713,7 +713,7 @@
 
                     <div class="hardware-card">
                         <div class="img-container">
-                            <img src="https://images.unsplash.com/photo-1526509867162-5b0c0d1b4b33?auto=format&fit=crop&w=800&q=80" alt="PS3">
+                            <img src="ps3.jpg" alt="PlayStation 3">
                         </div>
                         <h3>PlayStation 3</h3>
                         <p>Nostalgia game seru harga super hemat.</p>
@@ -721,7 +721,7 @@
 
                     <div class="hardware-card">
                         <div class="img-container">
-                            <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=80" alt="PlayBox Portable">
+                            <img src="playbox.jpg" alt="PlayBox Portable">
                         </div>
                         <h3>PlayBox / PSBox</h3>
                         <p>Koper gaming portable lengkap dengan layar monitor, siap main di mana saja!</p>
@@ -733,14 +733,14 @@
                         <i class="fa-solid fa-gamepad"></i> Pesan Sekarang
                     </button>
                     <button class="btn-jump outline" onclick="switchScreen('harga')">
-                        <i class="fa-solid fa-tags"></i> Cek Harga
+                        <i class="fa-solid fa-tags"></i> Cek Harga PlayBox & PS
                     </button>
                 </div>
             </div>
 
             <!-- 2. HARGA SEWA -->
             <div id="screen-harga" class="screen">
-                <h2 class="section-title">💰 Daftar Harga Sewa</h2>
+                <h2 class="section-title">💰 Daftar Harga Sewa PS & PlayBox</h2>
                 <div class="pricing-grid">
                     <!-- PS4 & PLAYBOX PS4 -->
                     <div class="price-card">
@@ -860,7 +860,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="packageSelect"><i class="fa-solid fa-gamepad"></i> Pilih Paket</label>
+                                <label for="packageSelect"><i class="fa-solid fa-gamepad"></i> Pilih Paket (PS / PlayBox)</label>
                                 <select id="packageSelect" required>
                                     <option value="" disabled selected>-- Pilih Unit / Paket --</option>
                                     <option value="PS4 Only">PS4 Only</option>
@@ -1015,7 +1015,6 @@
             const dur = durationSelect.value;
             const oneHourOpt = durationSelect.querySelector('option[value="1 Jam"]');
 
-            // Hanya paket PS4 + TV dan PS3 + TV yang minimal 12 Jam; PlayBox bisa 1 Jam
             if (pkg === "PS4 + TV" || pkg === "PS3 + TV") {
                 oneHourOpt.disabled = true;
                 if (dur === "1 Jam") durationSelect.value = "";
