@@ -100,6 +100,36 @@
             padding: 8px 20px;
         }
 
+        /* === KEYFRAMES ANIMASI KONSOLE GAMING === */
+        @keyframes cardPopIn {
+            0% {
+                opacity: 0;
+                transform: translateY(25px) scale(0.92);
+                filter: brightness(1.5);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: brightness(1);
+            }
+        }
+
+        @keyframes titleSlideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-18px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(217, 70, 239, 0.6); }
+            100% { box-shadow: 0 0 30px rgba(217, 70, 239, 1); }
+        }
+
         /* === NAVBAR ATAS === */
         header {
             flex-shrink: 0;
@@ -113,6 +143,7 @@
             align-items: center;
             margin-bottom: 10px;
             box-shadow: var(--shadow-glow);
+            z-index: 10;
         }
         [data-theme="light"] header {
             background: rgba(240, 234, 252, 0.88);
@@ -127,6 +158,11 @@
             color: var(--text-primary);
             cursor: pointer;
             text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
         }
 
         .brand-logo-img {
@@ -157,18 +193,24 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: var(--transition);
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .tab-btn:hover {
             border-color: var(--accent-magenta);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn:active {
+            transform: scale(0.95);
         }
 
         .tab-btn.active {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             border-color: transparent;
-            box-shadow: 0 3px 12px rgba(217, 70, 239, 0.4);
+            box-shadow: 0 3px 15px rgba(217, 70, 239, 0.55);
+            transform: translateY(-1px);
         }
 
         .nav-right {
@@ -205,6 +247,7 @@
         .theme-toggle:hover {
             border-color: var(--accent-magenta);
             color: var(--accent-magenta);
+            transform: rotate(20deg);
         }
 
         /* === CONTENT AREA (SINGLE SCREEN VIEWS) === */
@@ -227,17 +270,54 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transform: scale(0.97);
-            transition: opacity 0.3s ease, transform 0.3s ease;
             padding: 2px 0;
         }
 
         .screen.active {
             display: flex;
-            opacity: 1;
-            transform: scale(1);
         }
+
+        /* ANIMASI OTOMATIS SAAT TAB AKTIF */
+        .screen.active .section-title,
+        .screen.active .hero-compact {
+            animation: titleSlideDown 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* ANIMASI BERURUTAN (STAGGERED) UNTUK SETIAP KOLOM / KARTU */
+        .screen.active .hardware-card,
+        .screen.active .price-card,
+        .screen.active .game-card,
+        .screen.active .info-card,
+        .screen.active .booking-container,
+        .screen.active .more-games-box,
+        .screen.active .quick-actions {
+            opacity: 0;
+            animation: cardPopIn 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Urutan jeda muncul tiap kolom biar berasa efek gelombang gaming */
+        .screen.active .hardware-card:nth-child(1),
+        .screen.active .price-card:nth-child(1),
+        .screen.active .game-card:nth-child(1),
+        .screen.active .info-card:nth-child(1),
+        .screen.active .booking-container { animation-delay: 0.06s; }
+
+        .screen.active .hardware-card:nth-child(2),
+        .screen.active .price-card:nth-child(2),
+        .screen.active .game-card:nth-child(2),
+        .screen.active .info-card:nth-child(2) { animation-delay: 0.13s; }
+
+        .screen.active .hardware-card:nth-child(3),
+        .screen.active .game-card:nth-child(3) { animation-delay: 0.20s; }
+
+        .screen.active .game-card:nth-child(4) { animation-delay: 0.25s; }
+        .screen.active .game-card:nth-child(5) { animation-delay: 0.30s; }
+        .screen.active .game-card:nth-child(6) { animation-delay: 0.35s; }
+        .screen.active .game-card:nth-child(7) { animation-delay: 0.40s; }
+        .screen.active .game-card:nth-child(8) { animation-delay: 0.45s; }
+
+        .screen.active .quick-actions { animation-delay: 0.28s; }
+        .screen.active .more-games-box { animation-delay: 0.50s; }
 
         .section-title {
             text-align: center;
@@ -266,7 +346,6 @@
             align-items: center;
         }
 
-        /* LOGO BESAR DI TENGAH BERANDA */
         .hero-logo-center {
             width: 90px;
             height: 90px;
@@ -276,11 +355,6 @@
             box-shadow: 0 0 25px rgba(217, 70, 239, 0.8);
             margin-bottom: 8px;
             animation: pulseGlow 2s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(217, 70, 239, 0.6); }
-            100% { box-shadow: 0 0 30px rgba(217, 70, 239, 1); }
         }
 
         .hero-compact h1 {
@@ -344,12 +418,13 @@
             align-items: center;
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-glow);
-            transition: var(--transition);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .hardware-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px) scale(1.02);
             border-color: var(--accent-magenta);
+            box-shadow: 0 10px 28px rgba(217, 70, 239, 0.45);
         }
 
         .img-container {
@@ -360,7 +435,8 @@
             margin-bottom: 6px;
         }
 
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
+        .hardware-card:hover .img-container img { transform: scale(1.06); }
         .hardware-card h3 { font-size: 1rem; color: var(--accent-glow); margin-bottom: 2px; text-align: center; }
         .hardware-card p { text-align: center; color: var(--text-secondary); font-size: 0.78rem; line-height: 1.25; }
 
@@ -393,7 +469,7 @@
             box-shadow: none;
         }
 
-        .btn-jump:hover { transform: translateY(-2px); }
+        .btn-jump:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         /* === SCREEN 2: HARGA SEWA === */
         .pricing-grid {
@@ -411,6 +487,12 @@
             padding: 16px 18px;
             box-shadow: var(--shadow-glow);
             backdrop-filter: blur(10px);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-magenta);
         }
 
         .price-card-header {
@@ -449,10 +531,14 @@
             padding: 8px;
             text-align: center;
             backdrop-filter: blur(10px);
-            transition: var(--transition);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .game-card:hover { border-color: var(--accent-glow); transform: translateY(-3px); }
+        .game-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.35);
+        }
         
         .game-img-box {
             width: 100%;
@@ -466,6 +552,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .game-card:hover .game-img-box img {
+            transform: scale(1.08);
         }
 
         .game-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); }
@@ -529,6 +620,11 @@
             font-size: 0.88rem;
             outline: none;
             transition: var(--transition);
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--accent-magenta);
+            box-shadow: 0 0 10px rgba(217, 70, 239, 0.3);
         }
         [data-theme="light"] .form-group input,
         [data-theme="light"] .form-group select {
@@ -628,6 +724,12 @@
             padding: 20px;
             box-shadow: var(--shadow-glow);
             backdrop-filter: blur(10px);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-magenta);
         }
 
         .info-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--accent-glow); display: flex; align-items: center; gap: 8px; }
@@ -650,7 +752,7 @@
         .btn-gmap { background: #ea4335; }
         .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         .btn-wa-channel { background: #25d366; }
-        .btn-action:hover { transform: translateY(-2px); }
+        .btn-action:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         .contact-list { list-style: none; }
         .contact-list li {
@@ -1027,13 +1129,17 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        /* === INSTANT SCREEN SWITCH === */
+        /* === INSTANT SCREEN SWITCH WITH RE-TRIGGER ANIMATION === */
         function switchScreen(screenId) {
             document.querySelectorAll('.screen').forEach(scr => scr.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
             const targetScreen = document.getElementById('screen-' + screenId);
-            if (targetScreen) targetScreen.classList.add('active');
+            if (targetScreen) {
+                // Reset reflow agar animasi selalu berputar mulus setiap kali tab diklik
+                void targetScreen.offsetWidth;
+                targetScreen.classList.add('active');
+            }
 
             const targetBtn = document.querySelector(`.tab-btn[data-target="${screenId}"]`);
             if (targetBtn) targetBtn.classList.add('active');
