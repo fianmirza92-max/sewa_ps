@@ -266,25 +266,26 @@
             align-items: center;
         }
 
-        .hero-header-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            margin-bottom: 4px;
-        }
-
-        .hero-logo-badge {
-            width: 52px;
-            height: 52px;
+        /* LOGO BESAR DI TENGAH BERANDA */
+        .hero-logo-center {
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-magenta);
-            box-shadow: 0 0 18px rgba(217, 70, 239, 0.7);
+            border: 3px solid var(--accent-magenta);
+            box-shadow: 0 0 25px rgba(217, 70, 239, 0.8);
+            margin-bottom: 8px;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(217, 70, 239, 0.6); }
+            100% { box-shadow: 0 0 30px rgba(217, 70, 239, 1); }
         }
 
         .hero-compact h1 {
             font-size: 2.1rem;
+            margin-bottom: 4px;
             background: linear-gradient(135deg, #fff 20%, var(--accent-magenta) 70%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -431,7 +432,7 @@
         .price-highlight { color: var(--accent-magenta); }
         .price-cyan { color: var(--accent-cyan); font-weight: 800; }
 
-        /* === SCREEN 3: KOLEKSI GAME (DENGAN GAMBAR LOKAL) === */
+        /* === SCREEN 3: KOLEKSI GAME === */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -683,7 +684,6 @@
             .hardware-grid, .pricing-grid, .info-grid, .form-grid, .submit-actions { grid-template-columns: 1fr; }
             .games-grid { grid-template-columns: repeat(2, 1fr); }
             header { flex-direction: column; gap: 10px; }
-            .hero-header-brand { flex-direction: column; gap: 6px; }
         }
     </style>
 </head>
@@ -729,10 +729,9 @@
             <!-- 1. BERANDA -->
             <div id="screen-beranda" class="screen active">
                 <div class="hero-compact">
-                    <div class="hero-header-brand">
-                        <img src="logo.png" alt="Hunter PlayStation" class="hero-logo-badge">
-                        <h1>HUNTER PLAYSTATION</h1>
-                    </div>
+                    <!-- LOGO BESAR DI TENGAH BERANDA -->
+                    <img src="logo.png" alt="Hunter PlayStation" class="hero-logo-center">
+                    <h1>HUNTER PLAYSTATION</h1>
                     <p>Sewa PS4, PS3 & PlayBox / PSBox Portable Termurah di Majalengka – Cirebon.</p>
                     
                     <div class="hero-badges">
@@ -862,7 +861,7 @@
                 </div>
             </div>
 
-            <!-- 3. KOLEKSI GAME (MENGGUNAKAN GAMBAR LOKAL) -->
+            <!-- 3. KOLEKSI GAME -->
             <div id="screen-game" class="screen">
                 <h2 class="section-title">🎯 Koleksi Game Terlengkap</h2>
                 <div class="games-grid">
@@ -1149,7 +1148,7 @@
 💰 *Total Harga:* *${data.price}*
 📝 *Request Game / Catatan:* ${data.notes}
 --------------------------------------------------
-Halo Admin *${data.adminName}*, saya ingin memesan sewa PlayStation dengan detail di上の diatas. Mohon diproses, terima kasih!`;
+Halo Admin *${data.adminName}*, saya ingin memesan sewa PlayStation dengan detail di atas. Mohon diproses, terima kasih!`;
 
             window.open(`https://wa.me/62${data.adminPhone.substring(1)}?text=${encodeURIComponent(text)}`, '_blank');
         });
