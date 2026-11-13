@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUNTER PLAYSTATION - Ultimate Gaming Hub Cirebon</title>
+    <!-- Favicon Logo di Tab Browser -->
+    <link rel="icon" type="image/png" href="logo.png">
     <!-- Google Fonts & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -120,17 +122,20 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 900;
             color: var(--text-primary);
             cursor: pointer;
             text-decoration: none;
         }
 
-        .logo i {
-            color: var(--accent-magenta);
-            font-size: 1.5rem;
-            filter: drop-shadow(0 0 8px var(--accent-magenta));
+        .brand-logo-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid var(--accent-magenta);
+            box-shadow: 0 0 10px rgba(217, 70, 239, 0.6);
         }
 
         /* TAB NAVIGATION BUTTONS */
@@ -256,11 +261,30 @@
         .hero-compact {
             text-align: center;
             max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-header-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 4px;
+        }
+
+        .hero-logo-badge {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-magenta);
+            box-shadow: 0 0 18px rgba(217, 70, 239, 0.7);
         }
 
         .hero-compact h1 {
-            font-size: 2.2rem;
-            margin-bottom: 6px;
+            font-size: 2.15rem;
             background: linear-gradient(135deg, #fff 20%, var(--accent-magenta) 70%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -275,7 +299,7 @@
         .hero-compact p {
             font-size: 1rem;
             color: var(--text-secondary);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
@@ -284,7 +308,7 @@
             justify-content: center;
             gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .badge-item {
@@ -306,7 +330,7 @@
             gap: 16px;
             width: 100%;
             max-width: 1000px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .hardware-card {
@@ -329,7 +353,7 @@
 
         .img-container {
             width: 100%;
-            height: 115px;
+            height: 112px;
             border-radius: 12px;
             overflow: hidden;
             margin-bottom: 8px;
@@ -645,6 +669,7 @@
             .hardware-grid, .pricing-grid, .info-grid, .form-grid, .submit-actions { grid-template-columns: 1fr; }
             .games-grid { grid-template-columns: repeat(2, 1fr); }
             header { flex-direction: column; gap: 10px; }
+            .hero-header-brand { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -654,7 +679,7 @@
         <!-- NAVBAR -->
         <header>
             <div class="logo" onclick="switchScreen('beranda')">
-                <i class="fa-solid fa-gamepad"></i>
+                <img src="logo.png" alt="Hunter PlayStation Logo" class="brand-logo-img">
                 <span>HUNTER PLAYSTATION</span>
             </div>
 
@@ -690,7 +715,10 @@
             <!-- 1. BERANDA -->
             <div id="screen-beranda" class="screen active">
                 <div class="hero-compact">
-                    <h1>HUNTER PLAYSTATION</h1>
+                    <div class="hero-header-brand">
+                        <img src="logo.png" alt="Hunter PlayStation" class="hero-logo-badge">
+                        <h1>HUNTER PLAYSTATION</h1>
+                    </div>
                     <p>Sewa PS4, PS3 & PlayBox / PSBox Portable Termurah di Majalengka – Cirebon.</p>
                     
                     <div class="hero-badges">
