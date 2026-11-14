@@ -438,6 +438,86 @@
             filter: brightness(1.08);
         }
 
+        /* === TENTANG KAMI / ABOUT SECTION === */
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(12px);
+            max-width: 920px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-quote {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-magenta);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .about-subbox {
+            background: rgba(7, 3, 14, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px;
+        }
+        [data-theme="light"] .about-subbox { background: rgba(124, 58, 237, 0.04); }
+
+        .about-subbox h4 {
+            font-size: 1rem;
+            color: var(--accent-glow);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .about-subbox ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .about-subbox ul li {
+            font-size: 0.88rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .about-subbox ul li i { color: var(--accent-cyan); font-size: 0.75rem; }
+
+        .about-footer-tag {
+            margin-top: 24px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 0.95rem;
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         /* === 2. PILIHAN UNIT & KEUNGGULAN === */
         .hardware-grid {
             display: grid;
@@ -1043,7 +1123,7 @@
             .navbar-inner { flex-direction: column; gap: 10px; padding: 12px; }
             .nav-links { justify-content: center; }
             .hero-section h1 { font-size: 2rem; }
-            .hardware-grid, .steps-grid, .pricing-grid, .rules-faq-grid, .info-grid, .form-grid, .submit-actions {
+            .hardware-grid, .steps-grid, .pricing-grid, .rules-faq-grid, .info-grid, .form-grid, .submit-actions, .about-grid {
                 grid-template-columns: 1fr;
             }
             .features-grid, .games-grid {
@@ -1067,6 +1147,7 @@
 
             <nav class="nav-links">
                 <a href="#beranda" class="nav-link"><i class="fa-solid fa-house"></i> Beranda</a>
+                <a href="#tentang" class="nav-link"><i class="fa-solid fa-circle-info"></i> Tentang Kami</a>
                 <a href="#unit" class="nav-link"><i class="fa-solid fa-gamepad"></i> Unit</a>
                 <a href="#harga" class="nav-link"><i class="fa-solid fa-tags"></i> Harga</a>
                 <a href="#game" class="nav-link"><i class="fa-solid fa-compact-disc"></i> Game</a>
@@ -1117,6 +1198,46 @@
             <div class="hero-cta-group">
                 <a href="#pemesanan" class="btn-primary"><i class="fa-solid fa-gamepad"></i> Booking Sekarang</a>
                 <a href="#harga" class="btn-outline"><i class="fa-solid fa-tags"></i> Lihat Daftar Harga</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG KAMI -->
+    <section id="tentang" class="reveal">
+        <div class="container">
+            <div class="about-card">
+                <div class="about-quote">🎮 HUNTER PLAYSTATION<br>YOUR ENTERTAINMENT, YOUR CHALLENGE!</div>
+                <p class="about-text">
+                    Hunter PlayStation merupakan tempat hiburan gaming yang hadir untuk memberikan pengalaman bermain game yang seru, nyaman, dan menyenangkan bagi semua kalangan. Kami menyediakan layanan penyewaan PlayStation 3 dan PlayStation 4 dengan berbagai pilihan game menarik, mulai dari sepak bola, pertarungan, petualangan, aksi, hingga game multiplayer yang bisa dimainkan bersama teman maupun keluarga. Bagi kami, bermain game bukan sekadar hiburan, tetapi juga tentang kebersamaan, persaingan, keseruan, dan menciptakan kenangan bersama.
+                </p>
+
+                <div class="about-grid">
+                    <div class="about-subbox">
+                        <h4><i class="fa-solid fa-bullseye"></i> Visi Kami</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Menjadi tempat hiburan gaming yang menyenangkan, terpercaya, dan dapat dinikmati oleh semua kalangan.</p>
+                    </div>
+
+                    <div class="about-subbox">
+                        <h4><i class="fa-solid fa-gamepad"></i> Layanan Kami</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Penyewaan PlayStation 3</li>
+                            <li><i class="fa-solid fa-check"></i> Penyewaan PlayStation 4</li>
+                            <li><i class="fa-solid fa-check"></i> Pilihan game menarik</li>
+                            <li><i class="fa-solid fa-check"></i> Durasi sewa fleksibel</li>
+                            <li><i class="fa-solid fa-check"></i> Menu makanan & minuman</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-subbox">
+                        <h4><i class="fa-solid fa-trophy"></i> Komitmen Kami</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Kami terus berusaha memberikan pelayanan terbaik, menjaga kualitas fasilitas, serta menciptakan lingkungan bermain yang nyaman bagi setiap pelanggan.</p>
+                    </div>
+                </div>
+
+                <div class="about-footer-tag">
+                    "BELUM MENANG JANGAN PULANG, BELUM PUAS LANJUT MORE AND MORE!"<br>
+                    PLAY MORE. ENJOY MORE. BE A CHAMPION! 🎮
+                </div>
             </div>
         </div>
     </section>
@@ -1210,7 +1331,7 @@
                 <div class="step-card">
                     <div class="step-number">3</div>
                     <h3>Unit Diantar / Siap Main</h3>
-                    <p>Siapkan kartu identitas asli sebagai jaminan, unit kami antar ke lokasi atau bisa diambil langsung.</p>
+                    <p>Konfirmasi pemesanan, dan unit kami siap antar ke lokasi atau bisa diambil langsung ke basecamp.</p>
                 </div>
             </div>
         </div>
@@ -1372,8 +1493,7 @@
                 <div class="rules-card">
                     <h3><i class="fa-solid fa-file-contract"></i> Syarat & Ketentuan Sewa</h3>
                     <ul class="rules-list">
-                        <li><i class="fa-solid fa-id-card"></i> <span>Wajib menyerahkan <strong>1 kartu identitas asli</strong> yang masih berlaku (KTP / SIM / Kartu Pelajar / KK) sebagai jaminan selama masa sewa.</span></li>
-                        <li><i class="fa-solid fa-money-check-dollar"></i> <span>Pembayaran dilakukan lunas di awal saat serah terima unit (tunai atau transfer).</span></li>
+                        <li><i class="fa-solid fa-money-check-dollar"></i> <span>Pembayaran dilakukan lunas di awal saat serah terima unit (tunai atau transfer via DANA/Bank).</span></li>
                         <li><i class="fa-solid fa-clock"></i> <span>Keterlambatan pengembalian unit lebih dari 30 menit tanpa konfirmasi akan dikenakan biaya tambahan sesuai tarif per jam.</span></li>
                         <li><i class="fa-solid fa-screwdriver-wrench"></i> <span>Penyewa wajib menjaga unit konsol, stik, dan kabel. Kerusakan akibat kelalaian (jatuh, terkena air, dibanting) menjadi tanggung jawab penyewa.</span></li>
                         <li><i class="fa-solid fa-ban"></i> <span>Dilarang keras membongkar segel unit, memindahtangankan, atau menggadaikan barang sewaan kepada pihak lain.</span></li>
@@ -1527,7 +1647,7 @@
                 <span class="section-subtitle">Hubungi Kami</span>
                 <br>
                 <h2 class="section-title">Lokasi & Kontak Admin</h2>
-                <p class="section-desc">Kunjungi markas kami atau hubungi kontak resmi di bawah ini untuk info ketersediaan unit.</p>
+                <p class="section-desc">Kunjungi basecamp kami atau hubungi kontak resmi di bawah ini untuk info ketersediaan unit.</p>
             </div>
 
             <div class="info-grid">
