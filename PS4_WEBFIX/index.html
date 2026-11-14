@@ -104,20 +104,18 @@
         @keyframes cardPopIn {
             0% {
                 opacity: 0;
-                transform: translateY(25px) scale(0.92);
-                filter: brightness(1.5);
+                transform: translateY(20px) scale(0.94);
             }
             100% {
                 opacity: 1;
                 transform: translateY(0) scale(1);
-                filter: brightness(1);
             }
         }
 
         @keyframes titleSlideDown {
             0% {
                 opacity: 0;
-                transform: translateY(-18px) scale(0.96);
+                transform: translateY(-15px) scale(0.96);
             }
             100% {
                 opacity: 1;
@@ -130,6 +128,12 @@
             100% { box-shadow: 0 0 30px rgba(217, 70, 239, 1); }
         }
 
+        @keyframes liveBlink {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
         /* === NAVBAR ATAS === */
         header {
             flex-shrink: 0;
@@ -137,11 +141,11 @@
             backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 8px 18px;
+            padding: 6px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             box-shadow: var(--shadow-glow);
             z-index: 10;
         }
@@ -153,7 +157,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 900;
             color: var(--text-primary);
             cursor: pointer;
@@ -161,13 +165,11 @@
             transition: transform 0.2s ease;
         }
 
-        .logo:hover {
-            transform: scale(1.03);
-        }
+        .logo:hover { transform: scale(1.03); }
 
         .brand-logo-img {
-            width: 38px;
-            height: 38px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             object-fit: cover;
             border: 1.5px solid var(--accent-magenta);
@@ -185,10 +187,10 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -201,31 +203,26 @@
             transform: translateY(-2px);
         }
 
-        .tab-btn:active {
-            transform: scale(0.95);
-        }
-
         .tab-btn.active {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             border-color: transparent;
-            box-shadow: 0 3px 15px rgba(217, 70, 239, 0.55);
-            transform: translateY(-1px);
+            box-shadow: 0 3px 12px rgba(217, 70, 239, 0.5);
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .digital-clock {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--accent-glow);
         }
 
@@ -233,14 +230,14 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: var(--transition);
         }
 
@@ -250,7 +247,7 @@
             transform: rotate(20deg);
         }
 
-        /* === CONTENT AREA (SINGLE SCREEN VIEWS) === */
+        /* === CONTENT AREA === */
         .content-screens {
             flex: 1;
             position: relative;
@@ -273,63 +270,43 @@
             padding: 2px 0;
         }
 
-        .screen.active {
-            display: flex;
-        }
+        .screen.active { display: flex; }
 
-        /* ANIMASI OTOMATIS SAAT TAB AKTIF */
+        /* ANIMASI STAGGERED */
         .screen.active .section-title,
         .screen.active .hero-compact {
-            animation: titleSlideDown 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: titleSlideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
-        /* ANIMASI BERURUTAN (STAGGERED) UNTUK SETIAP KOLOM / KARTU */
         .screen.active .hardware-card,
         .screen.active .price-card,
         .screen.active .game-card,
         .screen.active .info-card,
         .screen.active .booking-container,
         .screen.active .more-games-box,
-        .screen.active .quick-actions {
+        .screen.active .quick-actions,
+        .screen.active .status-banner-card {
             opacity: 0;
-            animation: cardPopIn 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: cardPopIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
-        /* Urutan jeda muncul tiap kolom biar berasa efek gelombang gaming */
-        .screen.active .hardware-card:nth-child(1),
-        .screen.active .price-card:nth-child(1),
-        .screen.active .game-card:nth-child(1),
-        .screen.active .info-card:nth-child(1),
-        .screen.active .booking-container { animation-delay: 0.06s; }
-
-        .screen.active .hardware-card:nth-child(2),
-        .screen.active .price-card:nth-child(2),
-        .screen.active .game-card:nth-child(2),
-        .screen.active .info-card:nth-child(2) { animation-delay: 0.13s; }
-
-        .screen.active .hardware-card:nth-child(3),
-        .screen.active .game-card:nth-child(3) { animation-delay: 0.20s; }
-
-        .screen.active .game-card:nth-child(4) { animation-delay: 0.25s; }
-        .screen.active .game-card:nth-child(5) { animation-delay: 0.30s; }
-        .screen.active .game-card:nth-child(6) { animation-delay: 0.35s; }
-        .screen.active .game-card:nth-child(7) { animation-delay: 0.40s; }
-        .screen.active .game-card:nth-child(8) { animation-delay: 0.45s; }
-
-        .screen.active .quick-actions { animation-delay: 0.28s; }
-        .screen.active .more-games-box { animation-delay: 0.50s; }
+        .screen.active .status-banner-card { animation-delay: 0.04s; }
+        .screen.active .hardware-card:nth-child(1) { animation-delay: 0.09s; }
+        .screen.active .hardware-card:nth-child(2) { animation-delay: 0.14s; }
+        .screen.active .hardware-card:nth-child(3) { animation-delay: 0.19s; }
+        .screen.active .quick-actions { animation-delay: 0.25s; }
 
         .section-title {
             text-align: center;
-            font-size: 1.50rem;
-            margin-bottom: 10px;
+            font-size: 1.45rem;
+            margin-bottom: 8px;
             position: relative;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -4px;
             left: 20%;
             width: 60%;
             height: 3px;
@@ -347,19 +324,19 @@
         }
 
         .hero-logo-center {
-            width: 90px;
-            height: 90px;
+            width: 78px;
+            height: 78px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--accent-magenta);
-            box-shadow: 0 0 25px rgba(217, 70, 239, 0.8);
-            margin-bottom: 8px;
+            box-shadow: 0 0 20px rgba(217, 70, 239, 0.8);
+            margin-bottom: 6px;
             animation: pulseGlow 2s infinite alternate;
         }
 
         .hero-compact h1 {
-            font-size: 2.1rem;
-            margin-bottom: 4px;
+            font-size: 1.95rem;
+            margin-bottom: 3px;
             background: linear-gradient(135deg, #fff 20%, var(--accent-magenta) 70%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -372,93 +349,116 @@
         }
 
         .hero-compact p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-        }
-
-        .badge-item {
+        /* === FITUR BARU: LIVE STATUS BANNER KETERSEDIAAN UNIT === */
+        .status-banner-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.82rem;
-            font-weight: 700;
+            border-radius: 14px;
+            padding: 8px 16px;
+            width: 100%;
+            max-width: 850px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
-        .badge-item i { color: var(--accent-magenta); }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: liveBlink 1.5s infinite ease-in-out;
+        }
+
+        .status-dot.busy {
+            background-color: #ef4444;
+            box-shadow: 0 0 8px #ef4444;
+            animation: none;
+        }
+
+        .status-text span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.78rem;
+            color: var(--accent-glow);
+        }
 
         .hardware-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+            gap: 12px;
             width: 100%;
-            max-width: 980px;
-            margin-bottom: 12px;
+            max-width: 950px;
+            margin-bottom: 10px;
         }
 
         .hardware-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 10px;
+            border-radius: 14px;
+            padding: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-glow);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
         .hardware-card:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-4px);
             border-color: var(--accent-magenta);
-            box-shadow: 0 10px 28px rgba(217, 70, 239, 0.45);
         }
 
         .img-container {
             width: 100%;
-            height: 105px;
-            border-radius: 10px;
+            height: 95px;
+            border-radius: 8px;
             overflow: hidden;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
-        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
-        .hardware-card:hover .img-container img { transform: scale(1.06); }
-        .hardware-card h3 { font-size: 1rem; color: var(--accent-glow); margin-bottom: 2px; text-align: center; }
-        .hardware-card p { text-align: center; color: var(--text-secondary); font-size: 0.78rem; line-height: 1.25; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .hardware-card:hover .img-container img { transform: scale(1.05); }
+        .hardware-card h3 { font-size: 0.95rem; color: var(--accent-glow); margin-bottom: 2px; text-align: center; }
+        .hardware-card p { text-align: center; color: var(--text-secondary); font-size: 0.75rem; line-height: 1.2; }
 
         .quick-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
         .btn-jump {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             border: none;
-            padding: 8px 18px;
+            padding: 7px 16px;
             border-radius: 25px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(217, 70, 239, 0.4);
+            gap: 7px;
+            box-shadow: 0 4px 12px rgba(217, 70, 239, 0.4);
             transition: var(--transition);
         }
 
@@ -475,42 +475,36 @@
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
+            gap: 16px;
             width: 100%;
-            max-width: 980px;
+            max-width: 950px;
         }
 
         .price-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 16px 18px;
+            border-radius: 16px;
+            padding: 14px 16px;
             box-shadow: var(--shadow-glow);
             backdrop-filter: blur(10px);
-            transition: transform 0.25s ease, border-color 0.25s ease;
-        }
-
-        .price-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-magenta);
         }
 
         .price-card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 6px;
+            padding-bottom: 5px;
         }
 
-        .price-card-header h3 { font-size: 1.2rem; color: var(--accent-glow); }
-        .price-card-header i { font-size: 1.5rem; color: var(--accent-magenta); }
+        .price-card-header h3 { font-size: 1.1rem; color: var(--accent-glow); }
+        .price-card-header i { font-size: 1.4rem; color: var(--accent-magenta); }
 
         .price-table { width: 100%; border-collapse: collapse; }
-        .price-table th, .price-table td { padding: 6px 6px; text-align: left; }
-        .price-table th { color: var(--text-secondary); font-size: 0.8rem; border-bottom: 1px solid var(--border-color); text-transform: uppercase; }
-        .price-table td { font-size: 0.92rem; font-weight: 700; }
+        .price-table th, .price-table td { padding: 5px 6px; text-align: left; }
+        .price-table th { color: var(--text-secondary); font-size: 0.78rem; border-bottom: 1px solid var(--border-color); text-transform: uppercase; }
+        .price-table td { font-size: 0.88rem; font-weight: 700; }
         .price-highlight { color: var(--accent-magenta); }
         .price-cyan { color: var(--accent-cyan); font-weight: 800; }
 
@@ -518,59 +512,46 @@
         .games-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 10px;
             width: 100%;
-            max-width: 950px;
-            margin-bottom: 12px;
+            max-width: 920px;
+            margin-bottom: 10px;
         }
 
         .game-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 8px;
+            border-radius: 12px;
+            padding: 6px;
             text-align: center;
             backdrop-filter: blur(10px);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
-        .game-card:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.35);
-        }
+        .game-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); }
         
         .game-img-box {
             width: 100%;
-            height: 90px;
-            border-radius: 10px;
+            height: 82px;
+            border-radius: 8px;
             overflow: hidden;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
-        .game-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.35s ease;
-        }
-
-        .game-card:hover .game-img-box img {
-            transform: scale(1.08);
-        }
-
-        .game-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); }
+        .game-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .game-card:hover .game-img-box img { transform: scale(1.06); }
+        .game-card h4 { font-size: 0.82rem; font-weight: 700; color: var(--text-primary); }
 
         .more-games-box {
             background: var(--bg-card);
             border: 2px dashed var(--accent-magenta);
             border-radius: 12px;
-            padding: 10px 18px;
+            padding: 8px 16px;
             text-align: center;
-            font-size: 0.92rem;
+            font-size: 0.88rem;
             font-weight: 700;
             color: var(--text-secondary);
-            max-width: 950px;
+            max-width: 920px;
             width: 100%;
         }
 
@@ -578,53 +559,48 @@
         .booking-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 14px 22px;
+            border-radius: 16px;
+            padding: 12px 20px;
             box-shadow: var(--shadow-glow);
             width: 100%;
-            max-width: 900px;
+            max-width: 880px;
             backdrop-filter: blur(15px);
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 2px;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .form-group.full-width { grid-column: 1 / -1; }
 
         .form-group label {
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
         .form-group input, 
         .form-group select {
             background: rgba(7, 3, 14, 0.65);
             border: 1px solid var(--border-color);
-            padding: 6px 10px;
+            padding: 5px 9px;
             border-radius: 8px;
             color: var(--text-primary);
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             outline: none;
             transition: var(--transition);
-        }
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: var(--accent-magenta);
-            box-shadow: 0 0 10px rgba(217, 70, 239, 0.3);
         }
         [data-theme="light"] .form-group input,
         [data-theme="light"] .form-group select {
@@ -634,34 +610,34 @@
         .total-price-box {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.2));
             border: 1.5px solid var(--accent-magenta);
-            border-radius: 10px;
-            padding: 5px 12px;
-            margin-bottom: 8px;
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .total-price-label { font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); }
-        .total-price-value { font-family: 'Orbitron', sans-serif; font-size: 1.15rem; font-weight: 900; color: var(--accent-magenta); }
+        .total-price-label { font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); }
+        .total-price-value { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 900; color: var(--accent-magenta); }
 
-        .admin-select-title { font-weight: 700; font-size: 0.8rem; margin-bottom: 4px; color: var(--text-secondary); }
-        .admin-options { display: flex; gap: 10px; margin-bottom: 8px; }
+        .admin-select-title { font-weight: 700; font-size: 0.78rem; margin-bottom: 3px; color: var(--text-secondary); }
+        .admin-options { display: flex; gap: 8px; margin-bottom: 6px; }
         .admin-radio { flex: 1; cursor: pointer; }
         .admin-radio input { display: none; }
 
         .admin-box {
             background: rgba(7, 3, 14, 0.65);
             border: 1px solid var(--border-color);
-            padding: 6px 10px;
+            padding: 5px 8px;
             border-radius: 8px;
             text-align: center;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             transition: var(--transition);
         }
         [data-theme="light"] .admin-box { background: rgba(255, 255, 255, 0.95); }
@@ -672,38 +648,37 @@
             color: var(--accent-magenta);
         }
 
-        /* DUA TOMBOL PENGIRIMAN BERDAMPINGAN */
         .submit-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .btn-submit {
             width: 100%;
             color: #fff;
             border: none;
-            padding: 9px 12px;
-            border-radius: 10px;
-            font-size: 0.88rem;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
             font-weight: 800;
             font-family: 'Orbitron', sans-serif;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 7px;
             transition: var(--transition);
         }
 
         .btn-wa {
             background: linear-gradient(135deg, #16a34a, #22c55e);
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.4);
         }
 
         .btn-email {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            box-shadow: 0 4px 12px rgba(217, 70, 239, 0.4);
+            box-shadow: 0 4px 10px rgba(217, 70, 239, 0.4);
         }
 
         .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); }
@@ -712,80 +687,73 @@
         .info-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 18px;
             width: 100%;
-            max-width: 900px;
+            max-width: 880px;
         }
 
         .info-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 18px;
             box-shadow: var(--shadow-glow);
             backdrop-filter: blur(10px);
-            transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
-        .info-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-magenta);
-        }
-
-        .info-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--accent-glow); display: flex; align-items: center; gap: 8px; }
-        .address-box p { margin-bottom: 8px; font-size: 0.9rem; }
+        .info-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--accent-glow); display: flex; align-items: center; gap: 7px; }
+        .address-box p { margin-bottom: 6px; font-size: 0.88rem; }
 
         .btn-action {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 8px 12px;
+            padding: 7px 10px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: #fff;
-            margin-top: 5px;
-            margin-right: 5px;
+            margin-top: 4px;
+            margin-right: 4px;
             transition: var(--transition);
         }
         .btn-gmap { background: #ea4335; }
         .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         .btn-wa-channel { background: #25d366; }
-        .btn-action:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-action:hover { transform: translateY(-2px); }
 
         .contact-list { list-style: none; }
         .contact-list li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: rgba(7, 3, 14, 0.65);
-            padding: 8px 12px;
-            border-radius: 10px;
+            padding: 7px 10px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
-            font-size: 0.88rem;
+            font-size: 0.85rem;
         }
         [data-theme="light"] .contact-list li { background: rgba(255, 255, 255, 0.95); }
         .contact-list a { color: var(--accent-magenta); text-decoration: none; font-weight: 700; }
 
-        /* FOOTER KECIL DI BAWAH */
         footer {
             flex-shrink: 0;
             text-align: center;
             color: var(--text-secondary);
-            font-size: 0.75rem;
-            padding: 4px 0;
+            font-size: 0.72rem;
+            padding: 3px 0;
         }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
             html, body { overflow-y: auto; height: auto; min-height: 100vh; }
             .content-screens { position: static; overflow: visible; }
-            .screen { position: static; height: auto; padding: 15px 0; }
-            .hardware-grid, .pricing-grid, .info-grid, .form-grid, .submit-actions { grid-template-columns: 1fr; }
+            .screen { position: static; height: auto; padding: 12px 0; }
+            .hardware-grid, .pricing-grid, .info-grid, .form-grid, .submit-actions, .status-banner-card { grid-template-columns: 1fr; gap: 8px; }
             .games-grid { grid-template-columns: repeat(2, 1fr); }
-            header { flex-direction: column; gap: 10px; }
+            header { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -825,13 +793,12 @@
             </div>
         </header>
 
-        <!-- KONTEN LAYAR (SINGLE SCREEN VIEW) -->
+        <!-- KONTEN LAYAR -->
         <div class="content-screens">
 
             <!-- 1. BERANDA -->
             <div id="screen-beranda" class="screen active">
                 <div class="hero-compact">
-                    <!-- LOGO BESAR DI TENGAH BERANDA -->
                     <img src="logo.png" alt="Hunter PlayStation" class="hero-logo-center">
                     <h1>HUNTER PLAYSTATION</h1>
                     <p>Sewa PS4, PS3 & PlayBox / PSBox Portable Termurah di Majalengka – Cirebon.</p>
@@ -844,7 +811,23 @@
                     </div>
                 </div>
 
-                <!-- 3 UNIT SHOWCASE: PS4, PS3, PSBOX -->
+                <!-- LIVE STATUS BANNER KETERSEDIAAN UNIT -->
+                <div class="status-banner-card">
+                    <div class="status-item">
+                        <div class="status-dot"></div>
+                        <div class="status-text">PS4: <span>READY (AMBIL / ANTAR)</span></div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot"></div>
+                        <div class="status-text">PS3: <span>READY (READY STOK)</span></div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot"></div>
+                        <div class="status-text">PlayBox: <span>READY (PORTABLE)</span></div>
+                    </div>
+                </div>
+
+                <!-- 3 UNIT SHOWCASE -->
                 <div class="hardware-grid">
                     <div class="hardware-card">
                         <div class="img-container">
@@ -867,7 +850,7 @@
                             <img src="psbox.jpg" alt="PlayBox Portable">
                         </div>
                         <h3>PlayBox / PSBox</h3>
-                        <p>Koper gaming portable lengkap dengan layar monitor, siap main di mana saja!</p>
+                        <p>Koper gaming portable lengkap layar monitor, siap main!</p>
                     </div>
                 </div>
 
@@ -885,7 +868,6 @@
             <div id="screen-harga" class="screen">
                 <h2 class="section-title">💰 Daftar Harga Sewa PS & PlayBox</h2>
                 <div class="pricing-grid">
-                    <!-- PS4 & PLAYBOX PS4 -->
                     <div class="price-card">
                         <div class="price-card-header">
                             <h3>🎮 PS4 & PlayBox PS4</h3>
@@ -923,7 +905,6 @@
                         </table>
                     </div>
 
-                    <!-- PS3 & PLAYBOX PS3 -->
                     <div class="price-card">
                         <div class="price-card-header">
                             <h3>🎮 PS3 & PlayBox PS3</h3>
@@ -1077,7 +1058,6 @@
                             </label>
                         </div>
 
-                        <!-- DUA OPSI PENGIRIMAN: VIA WHATSAPP & VIA EMAIL -->
                         <div class="submit-actions">
                             <button type="button" id="sendWaBtn" class="btn-submit btn-wa">
                                 <i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp
@@ -1129,14 +1109,12 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        /* === INSTANT SCREEN SWITCH WITH RE-TRIGGER ANIMATION === */
         function switchScreen(screenId) {
             document.querySelectorAll('.screen').forEach(scr => scr.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
             const targetScreen = document.getElementById('screen-' + screenId);
             if (targetScreen) {
-                // Reset reflow agar animasi selalu berputar mulus setiap kali tab diklik
                 void targetScreen.offsetWidth;
                 targetScreen.classList.add('active');
             }
@@ -1145,7 +1123,6 @@
             if (targetBtn) targetBtn.classList.add('active');
         }
 
-        /* === DIGITAL CLOCK === */
         function updateClock() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
@@ -1156,7 +1133,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        /* === THEME TOGGLE === */
         const themeToggleBtn = document.getElementById('themeToggle');
         const htmlElement = document.documentElement;
 
@@ -1167,7 +1143,6 @@
             themeToggleBtn.querySelector('i').className = newTheme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         });
 
-        /* === PRICE CALCULATION (TERMASUK PLAYBOX PS4 & PLAYBOX PS3) === */
         const priceMatrix = {
             "PS4 Only": { "1 Jam": 6000, "12 Jam": 60000, "24 Jam": 85000 },
             "PS4 + TV": { "1 Jam": null, "12 Jam": 65000, "24 Jam": 90000 },
@@ -1206,7 +1181,6 @@
         packageSelect.addEventListener('change', calculateTotalPrice);
         durationSelect.addEventListener('change', calculateTotalPrice);
 
-        /* === HELPER VALIDATION & DATA COLLECTOR === */
         const bookingForm = document.getElementById('bookingForm');
 
         function getBookingData() {
@@ -1237,7 +1211,6 @@
             };
         }
 
-        /* === 1. KIRIM VIA WHATSAPP === */
         document.getElementById('sendWaBtn').addEventListener('click', function() {
             const data = getBookingData();
             if (!data) return;
@@ -1259,7 +1232,6 @@ Halo Admin *${data.adminName}*, saya ingin memesan sewa PlayStation dengan detai
             window.open(`https://wa.me/62${data.adminPhone.substring(1)}?text=${encodeURIComponent(text)}`, '_blank');
         });
 
-        /* === 2. KIRIM VIA EMAIL (huntersewaps@gmail.com) === */
         document.getElementById('sendEmailBtn').addEventListener('click', function() {
             const data = getBookingData();
             if (!data) return;
