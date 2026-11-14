@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* === CSS VARIABLE & THEMING === */
+        /* === CSS VARIABLE & THEMING (DARK NEON & PURPLE-WHITE) === */
         :root {
-            --bg-overlay: linear-gradient(180deg, rgba(7, 3, 14, 0.88) 0%, rgba(15, 7, 30, 0.93) 50%, rgba(7, 3, 14, 0.96) 100%);
-            --bg-card: rgba(21, 10, 38, 0.86);
+            --bg-overlay: linear-gradient(180deg, rgba(7, 3, 14, 0.86) 0%, rgba(15, 7, 30, 0.92) 50%, rgba(7, 3, 14, 0.96) 100%);
+            --bg-card: rgba(21, 10, 38, 0.85);
             --bg-card-solid: #150a26;
+            --bg-subbox: rgba(7, 3, 14, 0.55);
             --accent-purple: #8b5cf6;
             --accent-glow: #a855f7;
             --accent-magenta: #d946ef;
@@ -24,21 +25,27 @@
             --text-secondary: #c4b5fd;
             --border-color: rgba(139, 92, 246, 0.35);
             --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.32);
-            --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            --nav-bg: rgba(7, 3, 14, 0.88);
+            --input-bg: rgba(7, 3, 14, 0.72);
+            --transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+        /* TEMA UNGU PUTIH (CLEAN PURPLE & WHITE GAMING EDITION) */
         [data-theme="light"] {
-            --bg-overlay: linear-gradient(180deg, rgba(240, 234, 252, 0.91) 0%, rgba(245, 240, 255, 0.95) 50%, rgba(240, 234, 252, 0.93) 100%);
-            --bg-card: rgba(255, 255, 255, 0.94);
+            --bg-overlay: linear-gradient(180deg, rgba(248, 245, 255, 0.92) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(243, 232, 255, 0.94) 100%);
+            --bg-card: rgba(255, 255, 255, 0.96);
             --bg-card-solid: #ffffff;
-            --accent-purple: #7c3aed;
-            --accent-glow: #9333ea;
-            --accent-magenta: #c026d3;
-            --accent-cyan: #0891b2;
+            --bg-subbox: #f5f3ff;
+            --accent-purple: #6d28d9;
+            --accent-glow: #7c3aed;
+            --accent-magenta: #9333ea;
+            --accent-cyan: #0284c7;
             --text-primary: #1e1b4b;
-            --text-secondary: #4c1d95;
-            --border-color: rgba(124, 58, 237, 0.35);
-            --shadow-glow: 0 8px 30px rgba(124, 58, 237, 0.18);
+            --text-secondary: #5b21b6;
+            --border-color: rgba(124, 58, 237, 0.28);
+            --shadow-glow: 0 10px 30px rgba(109, 40, 217, 0.14);
+            --nav-bg: rgba(255, 255, 255, 0.94);
+            --input-bg: #faf5ff;
         }
 
         /* === RESET & SMOOTH SCROLL === */
@@ -51,7 +58,7 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 85px;
+            scroll-padding-top: 90px;
         }
 
         body {
@@ -60,6 +67,7 @@
             color: var(--text-primary);
             position: relative;
             overflow-x: hidden;
+            transition: color 0.4s ease;
         }
 
         /* FIXED CUSTOM BACKGROUND LOKAL (bg.png) */
@@ -74,7 +82,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: -2;
+            z-index: -3;
             filter: blur(1px) contrast(1.05);
         }
 
@@ -86,7 +94,89 @@
             width: 100%;
             height: 100%;
             background: var(--bg-overlay);
+            z-index: -2;
+            transition: background 0.4s ease;
+        }
+
+        /* === FLOATING GAMING SYMBOLS BACKGROUND (PLAYSTATION SHAPES) === */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
             z-index: -1;
+            overflow: hidden;
+        }
+
+        .ps-shape {
+            position: absolute;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: var(--accent-purple);
+            opacity: 0.12;
+            user-select: none;
+            animation: floatUp linear infinite;
+        }
+
+        [data-theme="light"] .ps-shape {
+            opacity: 0.14;
+            color: #7c3aed;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.14;
+            }
+            85% {
+                opacity: 0.14;
+            }
+            100% {
+                transform: translateY(-15vh) rotate(360deg) scale(1.15);
+                opacity: 0;
+            }
+        }
+
+        /* === SCROLL PROGRESS BAR ATAS === */
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-magenta), var(--accent-cyan));
+            z-index: 2000;
+            box-shadow: 0 0 12px var(--accent-magenta);
+            transition: width 0.1s ease-out;
+        }
+
+        /* === CLICK RIPPLE / GAMING SPARK EFFECT === */
+        .click-spark {
+            position: fixed;
+            pointer-events: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2.5px solid var(--accent-magenta);
+            transform: translate(-50%, -50%) scale(0.2);
+            animation: sparkExpand 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            z-index: 9999;
+        }
+
+        @keyframes sparkExpand {
+            0% {
+                transform: translate(-50%, -50%) scale(0.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2.8);
+                opacity: 0;
+            }
         }
 
         h1, h2, h3, .brand-font {
@@ -104,8 +194,8 @@
 
         /* === KEYFRAMES === */
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(217, 70, 239, 0.6); }
-            100% { box-shadow: 0 0 32px rgba(217, 70, 239, 1); }
+            0% { box-shadow: 0 0 15px rgba(217, 70, 239, 0.55); transform: translateY(0px); }
+            100% { box-shadow: 0 0 34px rgba(139, 92, 246, 0.95); transform: translateY(-4px); }
         }
 
         @keyframes liveBlink {
@@ -120,16 +210,34 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* === SCROLL REVEAL ANIMATION === */
+        /* === STAGGERED SCROLL REVEAL ANIMATION === */
         .reveal {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(35px) scale(0.97);
+            transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .reveal.visible {
             opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible .stagger-item {
+            opacity: 1;
             transform: translateY(0);
         }
+        .reveal.visible .stagger-item:nth-child(1) { transition-delay: 0.06s; }
+        .reveal.visible .stagger-item:nth-child(2) { transition-delay: 0.14s; }
+        .reveal.visible .stagger-item:nth-child(3) { transition-delay: 0.22s; }
+        .reveal.visible .stagger-item:nth-child(4) { transition-delay: 0.30s; }
+        .reveal.visible .stagger-item:nth-child(5) { transition-delay: 0.36s; }
+        .reveal.visible .stagger-item:nth-child(6) { transition-delay: 0.42s; }
+        .reveal.visible .stagger-item:nth-child(7) { transition-delay: 0.48s; }
+        .reveal.visible .stagger-item:nth-child(8) { transition-delay: 0.54s; }
 
         /* === STICKY NAVBAR === */
         header {
@@ -142,30 +250,27 @@
         }
 
         .navbar-inner {
-            background: rgba(7, 3, 14, 0.88);
-            backdrop-filter: blur(16px);
+            background: var(--nav-bg);
+            backdrop-filter: blur(18px);
             border: 1px solid var(--border-color);
             border-radius: 18px;
-            padding: 10px 20px;
+            padding: 10px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow-glow);
-        }
-
-        [data-theme="light"] .navbar-inner {
-            background: rgba(240, 234, 252, 0.92);
+            transition: var(--transition);
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.15rem;
+            font-size: 1.12rem;
             font-weight: 900;
             color: var(--text-primary);
             text-decoration: none;
-            transition: transform 0.2s ease;
+            transition: transform 0.25s ease;
         }
         .logo:hover { transform: scale(1.03); }
 
@@ -174,14 +279,14 @@
             height: 38px;
             border-radius: 50%;
             object-fit: cover;
-            border: 1.5px solid var(--accent-magenta);
-            box-shadow: 0 0 10px rgba(217, 70, 239, 0.6);
+            border: 2px solid var(--accent-magenta);
+            box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             flex-wrap: wrap;
         }
 
@@ -189,57 +294,60 @@
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-primary);
-            padding: 6px 12px;
+            padding: 6px 11px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             transition: var(--transition);
         }
 
         .nav-link:hover, .nav-link.active {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            color: #fff;
-            box-shadow: 0 3px 12px rgba(217, 70, 239, 0.45);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
+            transform: translateY(-1px);
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .digital-clock {
-            background: var(--bg-card);
+            background: var(--bg-subbox);
             border: 1px solid var(--border-color);
-            padding: 5px 12px;
+            padding: 5px 11px;
             border-radius: 20px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
+            font-weight: 700;
             color: var(--accent-glow);
         }
 
+        /* TOMBOL GANTI TEMA (UNGU GELAP <-> UNGU PUTIH) */
         .theme-toggle {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            border: none;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(139, 92, 246, 0.4);
             transition: var(--transition);
         }
         .theme-toggle:hover {
-            border-color: var(--accent-magenta);
-            color: var(--accent-magenta);
-            transform: rotate(20deg);
+            transform: translateY(-2px) scale(1.03);
+            filter: brightness(1.1);
         }
 
         /* === SECTION SPACING & HEADINGS === */
@@ -254,10 +362,10 @@
 
         .section-subtitle {
             display: inline-block;
-            background: rgba(217, 70, 239, 0.16);
-            border: 1px solid var(--accent-magenta);
-            color: var(--accent-magenta);
-            padding: 4px 14px;
+            background: rgba(139, 92, 246, 0.14);
+            border: 1px solid var(--accent-purple);
+            color: var(--accent-purple);
+            padding: 4px 15px;
             border-radius: 20px;
             font-size: 0.82rem;
             font-weight: 700;
@@ -271,15 +379,16 @@
             margin-bottom: 8px;
             position: relative;
             display: inline-block;
+            color: var(--text-primary);
         }
 
         .section-title::after {
             content: '';
             display: block;
             width: 65%;
-            height: 3px;
+            height: 3.5px;
             margin: 8px auto 0;
-            background: linear-gradient(90deg, transparent, var(--accent-magenta), var(--accent-cyan), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-purple), var(--accent-magenta), transparent);
             border-radius: 2px;
         }
 
@@ -293,31 +402,30 @@
 
         /* === 1. HERO SECTION === */
         .hero-section {
-            padding: 40px 0 35px;
+            padding: 42px 0 35px;
             text-align: center;
         }
 
         .hero-logo-center {
-            width: 112px;
-            height: 112px;
+            width: 115px;
+            height: 115px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--accent-magenta);
-            box-shadow: 0 0 28px rgba(217, 70, 239, 0.85);
+            border: 3.5px solid var(--accent-magenta);
             margin-bottom: 14px;
-            animation: pulseGlow 2s infinite alternate;
+            animation: pulseGlow 2.2s infinite alternate ease-in-out;
         }
 
         .hero-section h1 {
-            font-size: 2.65rem;
+            font-size: 2.7rem;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, #fff 20%, var(--accent-magenta) 70%, var(--accent-cyan) 100%);
+            background: linear-gradient(135deg, #ffffff 15%, var(--accent-magenta) 65%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         [data-theme="light"] .hero-section h1 {
-            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-purple) 100%);
+            background: linear-gradient(135deg, #3b0764 15%, #7c3aed 65%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -349,13 +457,18 @@
             align-items: center;
             gap: 7px;
             box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+        }
+        .badge-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-purple);
         }
         .badge-item i { color: var(--accent-magenta); }
 
         /* LIVE STATUS BANNER */
         .status-banner-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 16px;
             padding: 12px 20px;
             max-width: 880px;
@@ -412,14 +525,14 @@
             display: inline-flex;
             align-items: center;
             gap: 9px;
-            box-shadow: 0 5px 18px rgba(217, 70, 239, 0.45);
+            box-shadow: 0 5px 18px rgba(147, 51, 234, 0.45);
             transition: var(--transition);
         }
 
         .btn-outline {
             background: var(--bg-card);
             color: var(--text-primary);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             text-decoration: none;
             padding: 12px 26px;
             border-radius: 30px;
@@ -433,7 +546,7 @@
         }
 
         .btn-primary:hover, .btn-outline:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.02);
             border-color: var(--accent-magenta);
             filter: brightness(1.08);
         }
@@ -441,12 +554,12 @@
         /* === TENTANG KAMI / ABOUT SECTION === */
         .about-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 30px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 22px;
+            padding: 32px;
             box-shadow: var(--shadow-glow);
             backdrop-filter: blur(12px);
-            max-width: 920px;
+            max-width: 940px;
             margin: 0 auto;
             text-align: center;
         }
@@ -454,16 +567,16 @@
         .about-quote {
             font-family: 'Orbitron', sans-serif;
             color: var(--accent-magenta);
-            font-size: 1.15rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 800;
             margin-bottom: 16px;
             letter-spacing: 1px;
         }
 
         .about-text {
             color: var(--text-secondary);
-            font-size: 1.02rem;
-            line-height: 1.6;
+            font-size: 1.03rem;
+            line-height: 1.65;
             margin-bottom: 24px;
         }
 
@@ -476,12 +589,16 @@
         }
 
         .about-subbox {
-            background: rgba(7, 3, 14, 0.5);
+            background: var(--bg-subbox);
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 16px;
+            border-radius: 16px;
+            padding: 18px;
+            transition: var(--transition);
         }
-        [data-theme="light"] .about-subbox { background: rgba(124, 58, 237, 0.04); }
+        .about-subbox:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-purple);
+        }
 
         .about-subbox h4 {
             font-size: 1rem;
@@ -496,39 +613,41 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 7px;
         }
 
         .about-subbox ul li {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
+            font-weight: 600;
         }
-        .about-subbox ul li i { color: var(--accent-cyan); font-size: 0.75rem; }
+        .about-subbox ul li i { color: var(--accent-purple); font-size: 0.8rem; }
 
         .about-footer-tag {
             margin-top: 24px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 0.95rem;
-            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-cyan));
+            font-size: 0.96rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* === 2. PILIHAN UNIT & KEUNGGULAN === */
+        /* === 2. PILIHAN UNIT & KEUNGGULAN (3D TILT CARDS) === */
         .hardware-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 22px;
             margin-bottom: 32px;
+            perspective: 1000px;
         }
 
         .hardware-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 18px;
             padding: 16px;
             display: flex;
@@ -537,13 +656,13 @@
             text-align: center;
             backdrop-filter: blur(12px);
             box-shadow: var(--shadow-glow);
-            transition: var(--transition);
+            transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transform-style: preserve-3d;
         }
 
         .hardware-card:hover {
-            transform: translateY(-6px);
             border-color: var(--accent-magenta);
-            box-shadow: 0 12px 30px rgba(217, 70, 239, 0.45);
+            box-shadow: 0 14px 32px rgba(139, 92, 246, 0.38);
         }
 
         .img-container {
@@ -552,16 +671,16 @@
             border-radius: 12px;
             overflow: hidden;
             margin-bottom: 14px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid var(--border-color);
         }
 
         .img-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.45s ease;
         }
-        .hardware-card:hover .img-container img { transform: scale(1.07); }
+        .hardware-card:hover .img-container img { transform: scale(1.08); }
 
         .hardware-card h3 {
             font-size: 1.2rem;
@@ -578,20 +697,21 @@
         }
 
         .card-mini-btn {
-            background: rgba(139, 92, 246, 0.2);
-            border: 1px solid var(--accent-purple);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(217, 70, 239, 0.18));
+            border: 1.5px solid var(--accent-purple);
             color: var(--text-primary);
-            padding: 7px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.86rem;
             transition: var(--transition);
         }
         .card-mini-btn:hover {
-            background: var(--accent-magenta);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             border-color: transparent;
+            transform: scale(1.05);
         }
 
         /* KEUNGGULAN GRID (4 KOLOM) */
@@ -612,8 +732,9 @@
         }
 
         .feature-box:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-4px);
+            border-color: var(--accent-magenta);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
         }
 
         .feature-icon {
@@ -621,13 +742,19 @@
             height: 48px;
             margin: 0 auto 10px;
             border-radius: 14px;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(6, 182, 212, 0.25));
-            border: 1px solid var(--accent-cyan);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.2));
+            border: 1px solid var(--accent-purple);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.35rem;
-            color: var(--accent-cyan);
+            color: var(--accent-purple);
+            transition: transform 0.3s ease;
+        }
+        .feature-box:hover .feature-icon {
+            transform: rotate(10deg) scale(1.1);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #ffffff;
         }
 
         .feature-box h4 {
@@ -652,7 +779,7 @@
 
         .step-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 18px;
             padding: 24px 20px;
             position: relative;
@@ -663,13 +790,13 @@
         }
 
         .step-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             border-color: var(--accent-magenta);
         }
 
         .step-number {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
             color: #fff;
             font-family: 'Orbitron', sans-serif;
@@ -680,7 +807,7 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 14px;
-            box-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.55);
         }
 
         .step-card h3 {
@@ -704,7 +831,7 @@
 
         .price-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 20px;
             padding: 22px;
             box-shadow: var(--shadow-glow);
@@ -713,7 +840,7 @@
         }
 
         .price-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             border-color: var(--accent-magenta);
         }
 
@@ -732,7 +859,9 @@
         .price-table { width: 100%; border-collapse: collapse; }
         .price-table th, .price-table td { padding: 10px 8px; text-align: left; }
         .price-table th { color: var(--text-secondary); font-size: 0.85rem; border-bottom: 1px solid var(--border-color); text-transform: uppercase; }
-        .price-table td { font-size: 1rem; font-weight: 700; border-bottom: 1px solid rgba(139, 92, 246, 0.12); }
+        .price-table td { font-size: 1rem; font-weight: 700; border-bottom: 1px solid rgba(139, 92, 246, 0.14); }
+        .price-table tbody tr { transition: background 0.2s ease; }
+        .price-table tbody tr:hover { background: rgba(139, 92, 246, 0.08); }
         .price-highlight { color: var(--accent-magenta); }
         .price-cyan { color: var(--accent-cyan); font-weight: 800; }
 
@@ -746,18 +875,19 @@
 
         .game-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 16px;
             padding: 10px;
             text-align: center;
             backdrop-filter: blur(10px);
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .game-card:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 22px rgba(6, 182, 212, 0.35);
+            border-color: var(--accent-magenta);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 10px 24px rgba(139, 92, 246, 0.35);
         }
         
         .game-img-box {
@@ -772,15 +902,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.35s ease;
+            transition: transform 0.4s ease;
         }
-        .game-card:hover .game-img-box img { transform: scale(1.08); }
+        .game-card:hover .game-img-box img { transform: scale(1.1); }
 
         .game-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--text-primary); }
 
         .more-games-box {
             background: var(--bg-card);
-            border: 2px dashed var(--accent-magenta);
+            border: 2px dashed var(--accent-purple);
             border-radius: 14px;
             padding: 14px 20px;
             text-align: center;
@@ -799,7 +929,7 @@
 
         .rules-card, .faq-wrapper {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 20px;
             padding: 24px;
             box-shadow: var(--shadow-glow);
@@ -829,15 +959,16 @@
             font-size: 0.96rem;
             line-height: 1.45;
             color: var(--text-primary);
-            background: rgba(7, 3, 14, 0.45);
-            padding: 10px 12px;
+            background: var(--bg-subbox);
+            padding: 11px 13px;
             border-radius: 10px;
-            border-left: 3px solid var(--accent-magenta);
+            border-left: 3.5px solid var(--accent-purple);
+            transition: transform 0.2s ease;
         }
-        [data-theme="light"] .rules-list li { background: rgba(124, 58, 237, 0.06); }
+        .rules-list li:hover { transform: translateX(4px); }
 
         .rules-list li i {
-            color: var(--accent-cyan);
+            color: var(--accent-magenta);
             margin-top: 3px;
             flex-shrink: 0;
         }
@@ -866,7 +997,7 @@
             gap: 10px;
             transition: color 0.2s ease;
         }
-        .faq-question:hover { color: var(--accent-magenta); }
+        .faq-question:hover { color: var(--accent-purple); }
 
         .faq-question i {
             color: var(--accent-magenta);
@@ -891,7 +1022,7 @@
         /* === 7. FORM PEMESANAN === */
         .booking-container {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 22px;
             padding: 26px 28px;
             box-shadow: var(--shadow-glow);
@@ -926,8 +1057,8 @@
 
         .form-group input, 
         .form-group select {
-            background: rgba(7, 3, 14, 0.7);
-            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border: 1.5px solid var(--border-color);
             padding: 10px 13px;
             border-radius: 10px;
             color: var(--text-primary);
@@ -938,16 +1069,12 @@
         .form-group input:focus,
         .form-group select:focus {
             border-color: var(--accent-magenta);
-            box-shadow: 0 0 12px rgba(217, 70, 239, 0.35);
-        }
-        [data-theme="light"] .form-group input,
-        [data-theme="light"] .form-group select {
-            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.35);
         }
 
         .total-price-box {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.22), rgba(217, 70, 239, 0.22));
-            border: 1.5px solid var(--accent-magenta);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(217, 70, 239, 0.15));
+            border: 1.5px solid var(--accent-purple);
             border-radius: 12px;
             padding: 10px 16px;
             margin-bottom: 14px;
@@ -965,8 +1092,8 @@
         .admin-radio input { display: none; }
 
         .admin-box {
-            background: rgba(7, 3, 14, 0.7);
-            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border: 1.5px solid var(--border-color);
             padding: 10px 12px;
             border-radius: 10px;
             text-align: center;
@@ -978,13 +1105,12 @@
             gap: 7px;
             transition: var(--transition);
         }
-        [data-theme="light"] .admin-box { background: rgba(255, 255, 255, 0.96); }
 
         .admin-radio input:checked + .admin-box {
-            border-color: var(--accent-magenta);
-            background: rgba(217, 70, 239, 0.25);
-            color: var(--accent-magenta);
-            box-shadow: 0 0 14px rgba(217, 70, 239, 0.35);
+            border-color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.22);
+            color: var(--accent-purple);
+            box-shadow: 0 0 14px rgba(139, 92, 246, 0.25);
         }
 
         .submit-actions {
@@ -1017,7 +1143,7 @@
 
         .btn-email {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            box-shadow: 0 4px 14px rgba(217, 70, 239, 0.45);
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.45);
         }
 
         .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); }
@@ -1031,7 +1157,7 @@
 
         .info-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 20px;
             padding: 24px;
             box-shadow: var(--shadow-glow);
@@ -1066,13 +1192,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(7, 3, 14, 0.65);
+            background: var(--bg-subbox);
             padding: 10px 14px;
             border-radius: 10px;
             border: 1px solid var(--border-color);
             font-size: 0.95rem;
         }
-        [data-theme="light"] .contact-list li { background: rgba(255, 255, 255, 0.96); }
         .contact-list a { color: var(--accent-magenta); text-decoration: none; font-weight: 700; }
 
         /* === TOMBOL FLOATING WHATSAPP MELAYANG === */
@@ -1106,16 +1231,13 @@
 
         /* === FOOTER === */
         footer {
-            background: rgba(7, 3, 14, 0.9);
+            background: var(--nav-bg);
             border-top: 1px solid var(--border-color);
             text-align: center;
             color: var(--text-secondary);
             font-size: 0.88rem;
             padding: 20px 15px;
             margin-top: 20px;
-        }
-        [data-theme="light"] footer {
-            background: rgba(240, 234, 252, 0.95);
         }
 
         /* === RESPONSIVE MOBILE === */
@@ -1136,6 +1258,12 @@
     </style>
 </head>
 <body>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+    <!-- BACKGROUND FLOATING PLAYSTATION SHAPES -->
+    <div class="floating-shapes" id="floatingShapes"></div>
 
     <!-- STICKY NAVBAR -->
     <header>
@@ -1158,8 +1286,9 @@
 
             <div class="nav-right">
                 <div class="digital-clock" id="digitalClock">00:00:00 WIB</div>
-                <button class="theme-toggle" id="themeToggle" title="Ganti Tema Gelap/Terang">
-                    <i class="fa-solid fa-moon"></i>
+                <button class="theme-toggle" id="themeToggle" title="Ganti Tema Ungu Gelap / Ungu Putih">
+                    <i class="fa-solid fa-sun"></i>
+                    <span id="themeLabel">Ungu Putih</span>
                 </button>
             </div>
         </div>
@@ -1212,12 +1341,12 @@
                 </p>
 
                 <div class="about-grid">
-                    <div class="about-subbox">
+                    <div class="about-subbox stagger-item">
                         <h4><i class="fa-solid fa-bullseye"></i> Visi Kami</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Menjadi tempat hiburan gaming yang menyenangkan, terpercaya, dan dapat dinikmati oleh semua kalangan.</p>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.45;">Menjadi tempat hiburan gaming yang menyenangkan, terpercaya, dan dapat dinikmati oleh semua kalangan.</p>
                     </div>
 
-                    <div class="about-subbox">
+                    <div class="about-subbox stagger-item">
                         <h4><i class="fa-solid fa-gamepad"></i> Layanan Kami</h4>
                         <ul>
                             <li><i class="fa-solid fa-check"></i> Penyewaan PlayStation 3</li>
@@ -1228,9 +1357,9 @@
                         </ul>
                     </div>
 
-                    <div class="about-subbox">
+                    <div class="about-subbox stagger-item">
                         <h4><i class="fa-solid fa-trophy"></i> Komitmen Kami</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Kami terus berusaha memberikan pelayanan terbaik, menjaga kualitas fasilitas, serta menciptakan lingkungan bermain yang nyaman bagi setiap pelanggan.</p>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.45;">Kami terus berusaha memberikan pelayanan terbaik, menjaga kualitas fasilitas, serta menciptakan lingkungan bermain yang nyaman bagi setiap pelanggan.</p>
                     </div>
                 </div>
 
@@ -1253,7 +1382,7 @@
             </div>
 
             <div class="hardware-grid">
-                <div class="hardware-card">
+                <div class="hardware-card tilt-card stagger-item">
                     <div class="img-container">
                         <img src="ps4.jpg" alt="PlayStation 4">
                     </div>
@@ -1262,7 +1391,7 @@
                     <a href="#pemesanan" class="card-mini-btn" onclick="presetPackage('PS4 Only')">Sewa PS4</a>
                 </div>
 
-                <div class="hardware-card">
+                <div class="hardware-card tilt-card stagger-item">
                     <div class="img-container">
                         <img src="ps3.jpg" alt="PlayStation 3">
                     </div>
@@ -1271,7 +1400,7 @@
                     <a href="#pemesanan" class="card-mini-btn" onclick="presetPackage('PS3 Only')">Sewa PS3</a>
                 </div>
 
-                <div class="hardware-card">
+                <div class="hardware-card tilt-card stagger-item">
                     <div class="img-container">
                         <img src="psbox.jpg" alt="PlayBox Portable">
                     </div>
@@ -1283,22 +1412,22 @@
 
             <!-- 4 KEUNGGULAN -->
             <div class="features-grid">
-                <div class="feature-box">
+                <div class="feature-box stagger-item">
                     <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
                     <h4>Unit Terawat</h4>
                     <p>Konsol dan stik selalu dibersihkan serta dites tombolnya sebelum disewakan.</p>
                 </div>
-                <div class="feature-box">
+                <div class="feature-box stagger-item">
                     <div class="feature-icon"><i class="fa-solid fa-wallet"></i></div>
                     <h4>Harga Hemat</h4>
                     <p>Tersedia paket per jam, 12 jam, hingga 24 jam dengan tarif ramah di kantong.</p>
                 </div>
-                <div class="feature-box">
+                <div class="feature-box stagger-item">
                     <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
                     <h4>Antar Jemput</h4>
                     <p>Layanan pengantaran langsung ke rumah untuk area Cipanas, Dukupuntang & sekitarnya.</p>
                 </div>
-                <div class="feature-box">
+                <div class="feature-box stagger-item">
                     <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
                     <h4>Fast Respon</h4>
                     <p>Dua admin siap melayani pemesanan dan bantuan teknis dengan ramah dan cepat.</p>
@@ -1318,17 +1447,17 @@
             </div>
 
             <div class="steps-grid">
-                <div class="step-card">
+                <div class="step-card stagger-item">
                     <div class="step-number">1</div>
                     <h3>Pilih Paket & Tanggal</h3>
                     <p>Tentukan unit (PS4, PS3, atau PlayBox), pilih durasi sewa, serta request judul game favoritmu.</p>
                 </div>
-                <div class="step-card">
+                <div class="step-card stagger-item">
                     <div class="step-number">2</div>
                     <h3>Isi Form / Chat Admin</h3>
                     <p>Isi form pemesanan di bawah ini untuk menghitung total biaya otomatis lalu kirim ke WhatsApp Admin.</p>
                 </div>
-                <div class="step-card">
+                <div class="step-card stagger-item">
                     <div class="step-number">3</div>
                     <h3>Unit Diantar / Siap Main</h3>
                     <p>Konfirmasi pemesanan, dan unit kami siap antar ke lokasi atau bisa diambil langsung ke basecamp.</p>
@@ -1349,7 +1478,7 @@
 
             <div class="pricing-grid">
                 <!-- PS4 & PLAYBOX PS4 -->
-                <div class="price-card">
+                <div class="price-card stagger-item">
                     <div class="price-card-header">
                         <h3>🎮 PS4 & PlayBox PS4</h3>
                         <i class="fa-brands fa-playstation"></i>
@@ -1387,7 +1516,7 @@
                 </div>
 
                 <!-- PS3 & PLAYBOX PS3 -->
-                <div class="price-card">
+                <div class="price-card stagger-item">
                     <div class="price-card-header">
                         <h3>🎮 PS3 & PlayBox PS3</h3>
                         <i class="fa-brands fa-playstation"></i>
@@ -1434,46 +1563,46 @@
                 <span class="section-subtitle">Library Game Populer</span>
                 <br>
                 <h2 class="section-title">Koleksi Game Terlengkap</h2>
-                <p class="section-desc">Game bola update terbaru, petualangan, hingga game fighting multiplayer siap dimainkan.</p>
+                <p class="section-desc">Klik salah satu game untuk langsung menambahkannya ke request catatan pemesanan!</p>
             </div>
 
             <div class="games-grid">
-                <div class="game-card">
+                <div class="game-card stagger-item" onclick="quickRequestGame('eFootball 2026')">
                     <div class="game-img-box"><img src="efootball.jpg" alt="eFootball 2026"></div>
                     <h4>eFootball 2026</h4>
                 </div>
-                <div class="game-card">
+                <div class="game-card stagger-item" onclick="quickRequestGame('God of War')">
                     <div class="game-img-box"><img src="gow.jpg" alt="God of War"></div>
                     <h4>God of War</h4>
                 </div>
-                <div class="game-card">
+                <div class="game-card stagger-item" onclick="quickRequestGame('COD: BO 6')">
                     <div class="game-img-box"><img src="cod.jpg" alt="COD: BO 6"></div>
                     <h4>COD: BO 6</h4>
                 </div>
-                <div class="game-card">
+                <div class="game-card stagger-item" onclick="quickRequestGame('Tekken 7')">
                     <div class="game-img-box"><img src="tekken.jpg" alt="Tekken 7"></div>
                     <h4>Tekken 7</h4>
                 </div>
-                <div class="game-card">
+                <div class="game-card stagger-item" onclick="quickRequestGame('Naruto UNS 4')">
                     <div class="game-img-box"><img src="naruto.jpg" alt="Naruto UNS 4"></div>
                     <h4>Naruto UNS 4</h4>
                 </div>
-                <div class="game-card">
+                <div class="game-card stagger-item" onclick="quickRequestGame('GTA V')">
                     <div class="game-img-box"><img src="gta5.jpg" alt="GTA V"></div>
                     <h4>GTA V</h4>
                 </div>
-                <div class="game-card">
+                <div class="game-card stagger-item" onclick="quickRequestGame('Resident Evil 6')">
                     <div class="game-img-box"><img src="re6.jpg" alt="Resident Evil 6"></div>
                     <h4>Resident Evil 6</h4>
                 </div>
-                <div class="game-card">
+                <div class="game-card stagger-item" onclick="quickRequestGame('Mortal Kombat 11')">
                     <div class="game-img-box"><img src="mortal.jpg" alt="Mortal Kombat 11"></div>
                     <h4>Mortal Kombat 11</h4>
                 </div>
             </div>
 
             <div class="more-games-box">
-                ✨ ...Dan masih banyak puluhan judul game seru lainnya! Tulis judul game yang kamu inginkan di kolom catatan form pemesanan.
+                ✨ ...Dan masih banyak puluhan judul game seru lainnya! Klik gambar game di atas untuk auto-request ke form pemesanan.
             </div>
         </div>
     </section>
@@ -1490,7 +1619,7 @@
 
             <div class="rules-faq-grid">
                 <!-- SYARAT & KETENTUAN -->
-                <div class="rules-card">
+                <div class="rules-card stagger-item">
                     <h3><i class="fa-solid fa-file-contract"></i> Syarat & Ketentuan Sewa</h3>
                     <ul class="rules-list">
                         <li><i class="fa-solid fa-money-check-dollar"></i> <span>Pembayaran dilakukan lunas di awal saat serah terima unit (tunai atau transfer via DANA/Bank).</span></li>
@@ -1501,7 +1630,7 @@
                 </div>
 
                 <!-- FAQ ACCORDION -->
-                <div class="faq-wrapper">
+                <div class="faq-wrapper stagger-item">
                     <h3><i class="fa-solid fa-circle-question"></i> Pertanyaan Sering Diajukan (FAQ)</h3>
 
                     <div class="faq-item open">
@@ -1651,7 +1780,7 @@
             </div>
 
             <div class="info-grid">
-                <div class="info-card">
+                <div class="info-card stagger-item">
                     <h3><i class="fa-solid fa-map-location-dot"></i> Alamat Basecamp Rental</h3>
                     <div class="address-box">
                         <p><strong>Area Layanan: Majalengka – Cirebon</strong></p>
@@ -1662,7 +1791,7 @@
                     </div>
                 </div>
 
-                <div class="info-card">
+                <div class="info-card stagger-item">
                     <h3><i class="fa-solid fa-headset"></i> Kontak Resmi & Sosial Media</h3>
                     <ul class="contact-list">
                         <li><span>Admin 1: <strong>FIAN AM</strong></span><a href="https://wa.me/6283823742523" target="_blank">083823742523</a></li>
@@ -1691,7 +1820,49 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        /* === DIGITAL CLOCK === */
+        /* === 1. CLICK RIPPLE / GAMING SPARK EFFECT === */
+        document.addEventListener('click', function(e) {
+            const spark = document.createElement('div');
+            spark.className = 'click-spark';
+            spark.style.left = e.clientX + 'px';
+            spark.style.top = e.clientY + 'px';
+            document.body.appendChild(spark);
+            setTimeout(() => spark.remove(), 550);
+        });
+
+        /* === 2. FLOATING PLAYSTATION SYMBOLS BACKGROUND === */
+        const shapesContainer = document.getElementById('floatingShapes');
+        const psIcons = ['△', '○', '✕', '□'];
+        for (let i = 0; i < 18; i++) {
+            const span = document.createElement('span');
+            span.className = 'ps-shape';
+            span.textContent = psIcons[i % psIcons.length];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.fontSize = (Math.random() * 18 + 16) + 'px';
+            span.style.animationDuration = (Math.random() * 12 + 12) + 's';
+            span.style.animationDelay = (Math.random() * 10) + 's';
+            shapesContainer.appendChild(span);
+        }
+
+        /* === 3. 3D TILT CARD EFFECT ON HOVER === */
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -7;
+                const rotateY = ((x - centerX) / centerX) * 7;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        /* === 4. DIGITAL CLOCK === */
         function updateClock() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
@@ -1702,36 +1873,62 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        /* === THEME TOGGLE === */
+        /* === 5. THEME TOGGLE (UNGU GELAP <-> UNGU PUTIH) === */
         const themeToggleBtn = document.getElementById('themeToggle');
+        const themeLabel = document.getElementById('themeLabel');
         const htmlElement = document.documentElement;
 
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             htmlElement.setAttribute('data-theme', newTheme);
-            themeToggleBtn.querySelector('i').className = newTheme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            if (newTheme === 'light') {
+                themeToggleBtn.querySelector('i').className = 'fa-solid fa-moon';
+                themeLabel.textContent = 'Ungu Gelap';
+            } else {
+                themeToggleBtn.querySelector('i').className = 'fa-solid fa-sun';
+                themeLabel.textContent = 'Ungu Putih';
+            }
         });
 
-        /* === FAQ ACCORDION === */
+        /* === 6. FAQ ACCORDION === */
         function toggleFaq(button) {
             const item = button.parentElement;
             item.classList.toggle('open');
         }
 
-        /* === PRESET PACKAGE DARI KARTU UNIT === */
+        /* === 7. PRESET PACKAGE & QUICK REQUEST GAME === */
         function presetPackage(pkgName) {
             const pkgSelect = document.getElementById('packageSelect');
             pkgSelect.value = pkgName;
             calculateTotalPrice();
         }
 
-        /* === SCROLL REVEAL & ACTIVE NAVBAR HIGHLIGHT === */
+        function quickRequestGame(gameTitle) {
+            const notesInput = document.getElementById('gameNotes');
+            const currentVal = notesInput.value.trim();
+            if (!currentVal) {
+                notesInput.value = `Request game: ${gameTitle}`;
+            } else if (!currentVal.includes(gameTitle)) {
+                notesInput.value = `${currentVal}, ${gameTitle}`;
+            }
+            document.getElementById('pemesanan').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* === 8. SCROLL PROGRESS BAR, REVEAL & ACTIVE NAVBAR === */
         const revealElements = document.querySelectorAll('.reveal');
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
+        const progressBar = document.getElementById('scrollProgressBar');
 
         function handleScroll() {
+            // Progress Bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+
+            // Scroll Reveal
             const triggerBottom = window.innerHeight * 0.88;
             revealElements.forEach(el => {
                 const top = el.getBoundingClientRect().top;
@@ -1740,9 +1937,10 @@
                 }
             });
 
+            // Active Navbar Link
             let current = '';
             sections.forEach(sec => {
-                const secTop = sec.offsetTop - 130;
+                const secTop = sec.offsetTop - 135;
                 if (window.scrollY >= secTop) {
                     current = sec.getAttribute('id');
                 }
@@ -1759,7 +1957,7 @@
         window.addEventListener('scroll', handleScroll);
         handleScroll();
 
-        /* === PRICE CALCULATION === */
+        /* === 9. PRICE CALCULATION === */
         const priceMatrix = {
             "PS4 Only": { "1 Jam": 6000, "12 Jam": 60000, "24 Jam": 85000 },
             "PS4 + TV": { "1 Jam": null, "12 Jam": 65000, "24 Jam": 90000 },
@@ -1798,7 +1996,7 @@
         packageSelect.addEventListener('change', calculateTotalPrice);
         durationSelect.addEventListener('change', calculateTotalPrice);
 
-        /* === FORM DATA COLLECTOR === */
+        /* === 10. FORM DATA COLLECTOR & SUBMIT === */
         const bookingForm = document.getElementById('bookingForm');
 
         function getBookingData() {
@@ -1829,7 +2027,6 @@
             };
         }
 
-        /* === KIRIM VIA WHATSAPP === */
         document.getElementById('sendWaBtn').addEventListener('click', function() {
             const data = getBookingData();
             if (!data) return;
@@ -1851,7 +2048,2081 @@ Halo Admin *${data.adminName}*, saya ingin memesan sewa PlayStation dengan detai
             window.open(`https://wa.me/62${data.adminPhone.substring(1)}?text=${encodeURIComponent(text)}`, '_blank');
         });
 
-        /* === KIRIM VIA EMAIL === */
+        document.getElementById('sendEmailBtn').addEventListener('click', function() {
+            const data = getBookingData();
+            if (!data) return;
+
+            const recipient = "huntersewaps@gmail.com";
+            const subject = `Pemesanan Sewa PS - ${data.name} (${data.pkg} - ${data.dur})`;
+            const body = 
+`FORM PEMESANAN - HUNTER PLAYSTATION
+==================================================
+Nama Lengkap        : ${data.name}
+Daerah / Alamat     : ${data.address}
+No. WhatsApp        : ${data.wa}
+Paket Pilihan       : ${data.pkg}
+Durasi Sewa         : ${data.dur}
+Tanggal Sewa        : ${data.date}
+Total Harga         : ${data.price}
+Request Game/Catatan: ${data.notes}
+Admin Tujuan        : ${data.adminName}
+==================================================
+Halo Admin Hunter PlayStation, saya ingin melakukan pemesanan sewa PlayStation dengan detail di atas. Mohon konfirmasinya, terima kasih!`;
+
+            window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUNTER PLAYSTATION - Sewa PS4, PS3 & PlayBox Majalengka - Cirebon</title>
+    <!-- Favicon Logo di Tab Browser -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === CSS VARIABLE & THEMING (DARK NEON & PURPLE-WHITE) === */
+        :root {
+            --bg-overlay: linear-gradient(180deg, rgba(7, 3, 14, 0.86) 0%, rgba(15, 7, 30, 0.92) 50%, rgba(7, 3, 14, 0.96) 100%);
+            --bg-card: rgba(21, 10, 38, 0.85);
+            --bg-card-solid: #150a26;
+            --bg-subbox: rgba(7, 3, 14, 0.55);
+            --accent-purple: #8b5cf6;
+            --accent-glow: #a855f7;
+            --accent-magenta: #d946ef;
+            --accent-cyan: #06b6d4;
+            --text-primary: #ffffff;
+            --text-secondary: #c4b5fd;
+            --border-color: rgba(139, 92, 246, 0.35);
+            --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.32);
+            --nav-bg: rgba(7, 3, 14, 0.88);
+            --input-bg: rgba(7, 3, 14, 0.72);
+            --transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* TEMA UNGU PUTIH (CLEAN PURPLE & WHITE GAMING EDITION) */
+        [data-theme="light"] {
+            --bg-overlay: linear-gradient(180deg, rgba(248, 245, 255, 0.92) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(243, 232, 255, 0.94) 100%);
+            --bg-card: rgba(255, 255, 255, 0.96);
+            --bg-card-solid: #ffffff;
+            --bg-subbox: #f5f3ff;
+            --accent-purple: #6d28d9;
+            --accent-glow: #7c3aed;
+            --accent-magenta: #9333ea;
+            --accent-cyan: #0284c7;
+            --text-primary: #1e1b4b;
+            --text-secondary: #5b21b6;
+            --border-color: rgba(124, 58, 237, 0.28);
+            --shadow-glow: 0 10px 30px rgba(109, 40, 217, 0.14);
+            --nav-bg: rgba(255, 255, 255, 0.94);
+            --input-bg: #faf5ff;
+        }
+
+        /* === RESET & SMOOTH SCROLL === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            color: var(--text-primary);
+            position: relative;
+            overflow-x: hidden;
+            transition: color 0.4s ease;
+        }
+
+        /* FIXED CUSTOM BACKGROUND LOKAL (bg.png) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -3;
+            filter: blur(1px) contrast(1.05);
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay);
+            z-index: -2;
+            transition: background 0.4s ease;
+        }
+
+        /* === FLOATING GAMING SYMBOLS BACKGROUND (PLAYSTATION SHAPES) === */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .ps-shape {
+            position: absolute;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: var(--accent-purple);
+            opacity: 0.12;
+            user-select: none;
+            animation: floatUp linear infinite;
+        }
+
+        [data-theme="light"] .ps-shape {
+            opacity: 0.14;
+            color: #7c3aed;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.14;
+            }
+            85% {
+                opacity: 0.14;
+            }
+            100% {
+                transform: translateY(-15vh) rotate(360deg) scale(1.15);
+                opacity: 0;
+            }
+        }
+
+        /* === SCROLL PROGRESS BAR ATAS === */
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-magenta), var(--accent-cyan));
+            z-index: 2000;
+            box-shadow: 0 0 12px var(--accent-magenta);
+            transition: width 0.1s ease-out;
+        }
+
+        /* === CLICK RIPPLE / GAMING SPARK EFFECT === */
+        .click-spark {
+            position: fixed;
+            pointer-events: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2.5px solid var(--accent-magenta);
+            transform: translate(-50%, -50%) scale(0.2);
+            animation: sparkExpand 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            z-index: 9999;
+        }
+
+        @keyframes sparkExpand {
+            0% {
+                transform: translate(-50%, -50%) scale(0.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2.8);
+                opacity: 0;
+            }
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* === KEYFRAMES === */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(217, 70, 239, 0.55); transform: translateY(0px); }
+            100% { box-shadow: 0 0 34px rgba(139, 92, 246, 0.95); transform: translateY(-4px); }
+        }
+
+        @keyframes liveBlink {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes waPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* === STAGGERED SCROLL REVEAL ANIMATION === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px) scale(0.97);
+            transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal.visible .stagger-item:nth-child(1) { transition-delay: 0.06s; }
+        .reveal.visible .stagger-item:nth-child(2) { transition-delay: 0.14s; }
+        .reveal.visible .stagger-item:nth-child(3) { transition-delay: 0.22s; }
+        .reveal.visible .stagger-item:nth-child(4) { transition-delay: 0.30s; }
+        .reveal.visible .stagger-item:nth-child(5) { transition-delay: 0.36s; }
+        .reveal.visible .stagger-item:nth-child(6) { transition-delay: 0.42s; }
+        .reveal.visible .stagger-item:nth-child(7) { transition-delay: 0.48s; }
+        .reveal.visible .stagger-item:nth-child(8) { transition-delay: 0.54s; }
+
+        /* === STICKY NAVBAR === */
+        header {
+            position: sticky;
+            top: 12px;
+            z-index: 1000;
+            max-width: 1180px;
+            margin: 12px auto 0;
+            padding: 0 20px;
+        }
+
+        .navbar-inner {
+            background: var(--nav-bg);
+            backdrop-filter: blur(18px);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.12rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: transform 0.25s ease;
+        }
+        .logo:hover { transform: scale(1.03); }
+
+        .brand-logo-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-magenta);
+            box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-primary);
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .digital-clock {
+            background: var(--bg-subbox);
+            border: 1px solid var(--border-color);
+            padding: 5px 11px;
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--accent-glow);
+        }
+
+        /* TOMBOL GANTI TEMA (UNGU GELAP <-> UNGU PUTIH) */
+        .theme-toggle {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            border: none;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(139, 92, 246, 0.4);
+            transition: var(--transition);
+        }
+        .theme-toggle:hover {
+            transform: translateY(-2px) scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        /* === SECTION SPACING & HEADINGS === */
+        section {
+            padding: 55px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .section-subtitle {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.14);
+            border: 1px solid var(--accent-purple);
+            color: var(--accent-purple);
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 1.85rem;
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+            color: var(--text-primary);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 65%;
+            height: 3.5px;
+            margin: 8px auto 0;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), var(--accent-magenta), transparent);
+            border-radius: 2px;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 680px;
+            margin: 6px auto 0;
+            font-weight: 600;
+        }
+
+        /* === 1. HERO SECTION === */
+        .hero-section {
+            padding: 42px 0 35px;
+            text-align: center;
+        }
+
+        .hero-logo-center {
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3.5px solid var(--accent-magenta);
+            margin-bottom: 14px;
+            animation: pulseGlow 2.2s infinite alternate ease-in-out;
+        }
+
+        .hero-section h1 {
+            font-size: 2.7rem;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffffff 15%, var(--accent-magenta) 65%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="light"] .hero-section h1 {
+            background: linear-gradient(135deg, #3b0764 15%, #7c3aed 65%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto 18px;
+            font-weight: 600;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .badge-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 6px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+        }
+        .badge-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-purple);
+        }
+        .badge-item i { color: var(--accent-magenta); }
+
+        /* LIVE STATUS BANNER */
+        .status-banner-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 12px 20px;
+            max-width: 880px;
+            margin: 0 auto 24px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(12px);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.92rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+            animation: liveBlink 1.5s infinite ease-in-out;
+        }
+
+        .status-text span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.82rem;
+            color: #4ade80;
+        }
+        [data-theme="light"] .status-text span { color: #16a34a; }
+
+        .hero-cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            box-shadow: 0 5px 18px rgba(147, 51, 234, 0.45);
+            transition: var(--transition);
+        }
+
+        .btn-outline {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-color);
+            text-decoration: none;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover, .btn-outline:hover {
+            transform: translateY(-3px) scale(1.02);
+            border-color: var(--accent-magenta);
+            filter: brightness(1.08);
+        }
+
+        /* === TENTANG KAMI / ABOUT SECTION === */
+        .about-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 22px;
+            padding: 32px;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(12px);
+            max-width: 940px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-quote {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-magenta);
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.03rem;
+            line-height: 1.65;
+            margin-bottom: 24px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .about-subbox {
+            background: var(--bg-subbox);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px;
+            transition: var(--transition);
+        }
+        .about-subbox:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-purple);
+        }
+
+        .about-subbox h4 {
+            font-size: 1rem;
+            color: var(--accent-glow);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .about-subbox ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .about-subbox ul li {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: 600;
+        }
+        .about-subbox ul li i { color: var(--accent-purple); font-size: 0.8rem; }
+
+        .about-footer-tag {
+            margin-top: 24px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 0.96rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* === 2. PILIHAN UNIT & KEUNGGULAN (3D TILT CARDS) === */
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 32px;
+            perspective: 1000px;
+        }
+
+        .hardware-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-glow);
+            transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .hardware-card:hover {
+            border-color: var(--accent-magenta);
+            box-shadow: 0 14px 32px rgba(139, 92, 246, 0.38);
+        }
+
+        .img-container {
+            width: 100%;
+            height: 175px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+        .hardware-card:hover .img-container img { transform: scale(1.08); }
+
+        .hardware-card h3 {
+            font-size: 1.2rem;
+            color: var(--accent-glow);
+            margin-bottom: 6px;
+        }
+
+        .hardware-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 14px;
+            flex: 1;
+        }
+
+        .card-mini-btn {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(217, 70, 239, 0.18));
+            border: 1.5px solid var(--accent-purple);
+            color: var(--text-primary);
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.86rem;
+            transition: var(--transition);
+        }
+        .card-mini-btn:hover {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #fff;
+            border-color: transparent;
+            transform: scale(1.05);
+        }
+
+        /* KEUNGGULAN GRID (4 KOLOM) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .feature-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px 14px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            border-color: var(--accent-magenta);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 10px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.2));
+            border: 1px solid var(--accent-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            color: var(--accent-purple);
+            transition: transform 0.3s ease;
+        }
+        .feature-box:hover .feature-icon {
+            transform: rotate(10deg) scale(1.1);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #ffffff;
+        }
+
+        .feature-box h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.92rem;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .feature-box p {
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            line-height: 1.35;
+        }
+
+        /* === 3. CARA SEWA (3 LANGKAH MUDAH) === */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 18px;
+            padding: 24px 20px;
+            position: relative;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-magenta);
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.15rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.55);
+        }
+
+        .step-card h3 {
+            font-size: 1.05rem;
+            color: var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        /* === 4. HARGA SEWA === */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-magenta);
+        }
+
+        .price-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .price-card-header h3 { font-size: 1.25rem; color: var(--accent-glow); }
+        .price-card-header i { font-size: 1.7rem; color: var(--accent-magenta); }
+
+        .price-table { width: 100%; border-collapse: collapse; }
+        .price-table th, .price-table td { padding: 10px 8px; text-align: left; }
+        .price-table th { color: var(--text-secondary); font-size: 0.85rem; border-bottom: 1px solid var(--border-color); text-transform: uppercase; }
+        .price-table td { font-size: 1rem; font-weight: 700; border-bottom: 1px solid rgba(139, 92, 246, 0.14); }
+        .price-table tbody tr { transition: background 0.2s ease; }
+        .price-table tbody tr:hover { background: rgba(139, 92, 246, 0.08); }
+        .price-highlight { color: var(--accent-magenta); }
+        .price-cyan { color: var(--accent-cyan); font-weight: 800; }
+
+        /* === 5. KOLEKSI GAME === */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            border-color: var(--accent-magenta);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 10px 24px rgba(139, 92, 246, 0.35);
+        }
+        
+        .game-img-box {
+            width: 100%;
+            height: 135px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .game-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .game-card:hover .game-img-box img { transform: scale(1.1); }
+
+        .game-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--text-primary); }
+
+        .more-games-box {
+            background: var(--bg-card);
+            border: 2px dashed var(--accent-purple);
+            border-radius: 14px;
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        /* === 6. SYARAT & KETENTUAN + FAQ === */
+        .rules-faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .rules-card, .faq-wrapper {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(12px);
+        }
+
+        .rules-card h3, .faq-wrapper h3 {
+            font-size: 1.2rem;
+            color: var(--accent-glow);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rules-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rules-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.96rem;
+            line-height: 1.45;
+            color: var(--text-primary);
+            background: var(--bg-subbox);
+            padding: 11px 13px;
+            border-radius: 10px;
+            border-left: 3.5px solid var(--accent-purple);
+            transition: transform 0.2s ease;
+        }
+        .rules-list li:hover { transform: translateX(4px); }
+
+        .rules-list li i {
+            color: var(--accent-magenta);
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        /* FAQ ACCORDION */
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .faq-question {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: left;
+            padding: 8px 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s ease;
+        }
+        .faq-question:hover { color: var(--accent-purple); }
+
+        .faq-question i {
+            color: var(--accent-magenta);
+            transition: transform 0.3s ease;
+        }
+        .faq-item.open .faq-question i { transform: rotate(180deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+            line-height: 1.45;
+            padding: 0 4px;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+            padding-top: 6px;
+        }
+
+        /* === 7. FORM PEMESANAN === */
+        .booking-container {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 22px;
+            padding: 26px 28px;
+            box-shadow: var(--shadow-glow);
+            max-width: 920px;
+            margin: 0 auto;
+            backdrop-filter: blur(15px);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .form-group.full-width { grid-column: 1 / -1; }
+
+        .form-group label {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group input, 
+        .form-group select {
+            background: var(--input-bg);
+            border: 1.5px solid var(--border-color);
+            padding: 10px 13px;
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--accent-magenta);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.35);
+        }
+
+        .total-price-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(217, 70, 239, 0.15));
+            border: 1.5px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-price-label { font-size: 0.95rem; font-weight: 700; color: var(--text-secondary); }
+        .total-price-value { font-family: 'Orbitron', sans-serif; font-size: 1.35rem; font-weight: 900; color: var(--accent-magenta); }
+
+        .admin-select-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; color: var(--text-secondary); }
+        .admin-options { display: flex; gap: 12px; margin-bottom: 16px; }
+        .admin-radio { flex: 1; cursor: pointer; }
+        .admin-radio input { display: none; }
+
+        .admin-box {
+            background: var(--input-bg);
+            border: 1.5px solid var(--border-color);
+            padding: 10px 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            transition: var(--transition);
+        }
+
+        .admin-radio input:checked + .admin-box {
+            border-color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.22);
+            color: var(--accent-purple);
+            box-shadow: 0 0 14px rgba(139, 92, 246, 0.25);
+        }
+
+        .submit-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            color: #fff;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            transition: var(--transition);
+        }
+
+        .btn-wa {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.45);
+        }
+
+        .btn-email {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.45);
+        }
+
+        .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+        /* === 8. LOKASI & KONTAK === */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(12px);
+        }
+
+        .info-card h3 { font-size: 1.25rem; margin-bottom: 12px; color: var(--accent-glow); display: flex; align-items: center; gap: 8px; }
+        .address-box p { margin-bottom: 10px; font-size: 0.98rem; line-height: 1.5; }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #fff;
+            margin-top: 6px;
+            margin-right: 6px;
+            transition: var(--transition);
+        }
+        .btn-gmap { background: #ea4335; }
+        .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .btn-wa-channel { background: #25d366; }
+        .btn-action:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+        .contact-list { list-style: none; }
+        .contact-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-subbox);
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+        .contact-list a { color: var(--accent-magenta); text-decoration: none; font-weight: 700; }
+
+        /* === TOMBOL FLOATING WHATSAPP MELAYANG === */
+        .floating-wa-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: linear-gradient(135deg, #16a34a, #25d366);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+            animation: waPulse 2s infinite;
+            transition: transform 0.25s ease;
+        }
+
+        .floating-wa-btn i {
+            font-size: 1.5rem;
+        }
+
+        .floating-wa-btn:hover {
+            transform: translateY(-4px) scale(1.04);
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: var(--nav-bg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            padding: 20px 15px;
+            margin-top: 20px;
+        }
+
+        /* === RESPONSIVE MOBILE === */
+        @media (max-width: 960px) {
+            .navbar-inner { flex-direction: column; gap: 10px; padding: 12px; }
+            .nav-links { justify-content: center; }
+            .hero-section h1 { font-size: 2rem; }
+            .hardware-grid, .steps-grid, .pricing-grid, .rules-faq-grid, .info-grid, .form-grid, .submit-actions, .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .features-grid, .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .admin-options { flex-direction: column; }
+            .floating-wa-btn span { display: none; }
+            .floating-wa-btn { padding: 14px; border-radius: 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+    <!-- BACKGROUND FLOATING PLAYSTATION SHAPES -->
+    <div class="floating-shapes" id="floatingShapes"></div>
+
+    <!-- STICKY NAVBAR -->
+    <header>
+        <div class="navbar-inner">
+            <a href="#beranda" class="logo">
+                <img src="logo.png" alt="Hunter PlayStation Logo" class="brand-logo-img">
+                <span>HUNTER PLAYSTATION</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#beranda" class="nav-link"><i class="fa-solid fa-house"></i> Beranda</a>
+                <a href="#tentang" class="nav-link"><i class="fa-solid fa-circle-info"></i> Tentang Kami</a>
+                <a href="#unit" class="nav-link"><i class="fa-solid fa-gamepad"></i> Unit</a>
+                <a href="#harga" class="nav-link"><i class="fa-solid fa-tags"></i> Harga</a>
+                <a href="#game" class="nav-link"><i class="fa-solid fa-compact-disc"></i> Game</a>
+                <a href="#syarat-faq" class="nav-link"><i class="fa-solid fa-circle-question"></i> Syarat & FAQ</a>
+                <a href="#pemesanan" class="nav-link"><i class="fa-solid fa-cart-plus"></i> Pesan</a>
+                <a href="#kontak" class="nav-link"><i class="fa-solid fa-location-dot"></i> Kontak</a>
+            </nav>
+
+            <div class="nav-right">
+                <div class="digital-clock" id="digitalClock">00:00:00 WIB</div>
+                <button class="theme-toggle" id="themeToggle" title="Ganti Tema Ungu Gelap / Ungu Putih">
+                    <i class="fa-solid fa-sun"></i>
+                    <span id="themeLabel">Ungu Putih</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section id="beranda" class="hero-section">
+        <div class="container">
+            <img src="logo.png" alt="Hunter PlayStation" class="hero-logo-center">
+            <h1>HUNTER PLAYSTATION</h1>
+            <p class="hero-tagline">Pusat Sewa PS4, PS3 & PlayBox / PSBox Portable Terlengkap dan Termurah di Wilayah Majalengka – Cirebon.</p>
+
+            <div class="hero-badges">
+                <div class="badge-item"><i class="fa-solid fa-gamepad"></i> Stik Original</div>
+                <div class="badge-item"><i class="fa-solid fa-tv"></i> TV LED HD</div>
+                <div class="badge-item"><i class="fa-solid fa-briefcase"></i> PlayBox Portable</div>
+                <div class="badge-item"><i class="fa-solid fa-truck-fast"></i> Siap Antar ke Rumah</div>
+            </div>
+
+            <!-- LIVE STATUS BANNER -->
+            <div class="status-banner-card">
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <div class="status-text">PS4: <span>READY (AMBIL / ANTAR)</span></div>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <div class="status-text">PS3: <span>READY STOK</span></div>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <div class="status-text">PlayBox: <span>READY (PORTABLE)</span></div>
+                </div>
+            </div>
+
+            <div class="hero-cta-group">
+                <a href="#pemesanan" class="btn-primary"><i class="fa-solid fa-gamepad"></i> Booking Sekarang</a>
+                <a href="#harga" class="btn-outline"><i class="fa-solid fa-tags"></i> Lihat Daftar Harga</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG KAMI -->
+    <section id="tentang" class="reveal">
+        <div class="container">
+            <div class="about-card">
+                <div class="about-quote">🎮 HUNTER PLAYSTATION<br>YOUR ENTERTAINMENT, YOUR CHALLENGE!</div>
+                <p class="about-text">
+                    Hunter PlayStation merupakan tempat hiburan gaming yang hadir untuk memberikan pengalaman bermain game yang seru, nyaman, dan menyenangkan bagi semua kalangan. Kami menyediakan layanan penyewaan PlayStation 3 dan PlayStation 4 dengan berbagai pilihan game menarik, mulai dari sepak bola, pertarungan, petualangan, aksi, hingga game multiplayer yang bisa dimainkan bersama teman maupun keluarga. Bagi kami, bermain game bukan sekadar hiburan, tetapi juga tentang kebersamaan, persaingan, keseruan, dan menciptakan kenangan bersama.
+                </p>
+
+                <div class="about-grid">
+                    <div class="about-subbox stagger-item">
+                        <h4><i class="fa-solid fa-bullseye"></i> Visi Kami</h4>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.45;">Menjadi tempat hiburan gaming yang menyenangkan, terpercaya, dan dapat dinikmati oleh semua kalangan.</p>
+                    </div>
+
+                    <div class="about-subbox stagger-item">
+                        <h4><i class="fa-solid fa-gamepad"></i> Layanan Kami</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Penyewaan PlayStation 3</li>
+                            <li><i class="fa-solid fa-check"></i> Penyewaan PlayStation 4</li>
+                            <li><i class="fa-solid fa-check"></i> Pilihan game menarik</li>
+                            <li><i class="fa-solid fa-check"></i> Durasi sewa fleksibel</li>
+                            <li><i class="fa-solid fa-check"></i> Menu makanan & minuman</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-subbox stagger-item">
+                        <h4><i class="fa-solid fa-trophy"></i> Komitmen Kami</h4>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.45;">Kami terus berusaha memberikan pelayanan terbaik, menjaga kualitas fasilitas, serta menciptakan lingkungan bermain yang nyaman bagi setiap pelanggan.</p>
+                    </div>
+                </div>
+
+                <div class="about-footer-tag">
+                    "BELUM MENANG JANGAN PULANG, BELUM PUAS LANJUT MORE AND MORE!"<br>
+                    PLAY MORE. ENJOY MORE. BE A CHAMPION! 🎮
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. UNIT RENTAL & KEUNGGULAN -->
+    <section id="unit" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Pilihan Konsol</span>
+                <br>
+                <h2 class="section-title">Unit Gaming Tersedia</h2>
+                <p class="section-desc">Semua konsol selalu dicek kebersihan dan performanya sebelum dikirim ke tangan penyewa.</p>
+            </div>
+
+            <div class="hardware-grid">
+                <div class="hardware-card tilt-card stagger-item">
+                    <div class="img-container">
+                        <img src="ps4.jpg" alt="PlayStation 4">
+                    </div>
+                    <h3>PlayStation 4</h3>
+                    <p>Grafis tajam memukau, dilengkapi stik DualShock 4 original responsif dan deretan game terbaru.</p>
+                    <a href="#pemesanan" class="card-mini-btn" onclick="presetPackage('PS4 Only')">Sewa PS4</a>
+                </div>
+
+                <div class="hardware-card tilt-card stagger-item">
+                    <div class="img-container">
+                        <img src="ps3.jpg" alt="PlayStation 3">
+                    </div>
+                    <h3>PlayStation 3</h3>
+                    <p>Pilihan tepat buat mabar bola atau nostalgia game seru bersama teman dengan tarif super hemat.</p>
+                    <a href="#pemesanan" class="card-mini-btn" onclick="presetPackage('PS3 Only')">Sewa PS3</a>
+                </div>
+
+                <div class="hardware-card tilt-card stagger-item">
+                    <div class="img-container">
+                        <img src="psbox.jpg" alt="PlayBox Portable">
+                    </div>
+                    <h3>PlayBox / PSBox</h3>
+                    <p>Koper gaming portable praktis yang sudah terintegrasi layar monitor—tinggal colok listrik langsung main di mana saja!</p>
+                    <a href="#pemesanan" class="card-mini-btn" onclick="presetPackage('PlayBox PS4')">Sewa PlayBox</a>
+                </div>
+            </div>
+
+            <!-- 4 KEUNGGULAN -->
+            <div class="features-grid">
+                <div class="feature-box stagger-item">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4>Unit Terawat</h4>
+                    <p>Konsol dan stik selalu dibersihkan serta dites tombolnya sebelum disewakan.</p>
+                </div>
+                <div class="feature-box stagger-item">
+                    <div class="feature-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <h4>Harga Hemat</h4>
+                    <p>Tersedia paket per jam, 12 jam, hingga 24 jam dengan tarif ramah di kantong.</p>
+                </div>
+                <div class="feature-box stagger-item">
+                    <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h4>Antar Jemput</h4>
+                    <p>Layanan pengantaran langsung ke rumah untuk area Cipanas, Dukupuntang & sekitarnya.</p>
+                </div>
+                <div class="feature-box stagger-item">
+                    <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+                    <h4>Fast Respon</h4>
+                    <p>Dua admin siap melayani pemesanan dan bantuan teknis dengan ramah dan cepat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CARA SEWA (3 LANGKAH MUDAH) -->
+    <section id="cara-sewa" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Proses Cepat</span>
+                <br>
+                <h2 class="section-title">Cara Sewa di Hunter PlayStation</h2>
+                <p class="section-desc">Cukup 3 langkah mudah tanpa ribet, unit langsung siap dimainkan di rumahmu.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card stagger-item">
+                    <div class="step-number">1</div>
+                    <h3>Pilih Paket & Tanggal</h3>
+                    <p>Tentukan unit (PS4, PS3, atau PlayBox), pilih durasi sewa, serta request judul game favoritmu.</p>
+                </div>
+                <div class="step-card stagger-item">
+                    <div class="step-number">2</div>
+                    <h3>Isi Form / Chat Admin</h3>
+                    <p>Isi form pemesanan di bawah ini untuk menghitung total biaya otomatis lalu kirim ke WhatsApp Admin.</p>
+                </div>
+                <div class="step-card stagger-item">
+                    <div class="step-number">3</div>
+                    <h3>Unit Diantar / Siap Main</h3>
+                    <p>Konfirmasi pemesanan, dan unit kami siap antar ke lokasi atau bisa diambil langsung ke basecamp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. DAFTAR HARGA SEWA -->
+    <section id="harga" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Tarif Transparan</span>
+                <br>
+                <h2 class="section-title">Daftar Harga Sewa PS & PlayBox</h2>
+                <p class="section-desc">Pilih paket harian atau per jam sesuai kebutuhan mabar kamu.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- PS4 & PLAYBOX PS4 -->
+                <div class="price-card stagger-item">
+                    <div class="price-card-header">
+                        <h3>🎮 PS4 & PlayBox PS4</h3>
+                        <i class="fa-brands fa-playstation"></i>
+                    </div>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Durasi</th>
+                                <th>PS Only</th>
+                                <th>PS + TV</th>
+                                <th>PlayBox PS4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 Jam</td>
+                                <td class="price-highlight">Rp 6.000</td>
+                                <td>—</td>
+                                <td class="price-cyan">Rp 8.000</td>
+                            </tr>
+                            <tr>
+                                <td>12 Jam</td>
+                                <td class="price-highlight">Rp 60.000</td>
+                                <td class="price-highlight">Rp 65.000</td>
+                                <td class="price-cyan">Rp 90.000</td>
+                            </tr>
+                            <tr>
+                                <td>24 Jam</td>
+                                <td class="price-highlight">Rp 85.000</td>
+                                <td class="price-highlight">Rp 90.000</td>
+                                <td class="price-cyan">Rp 150.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PS3 & PLAYBOX PS3 -->
+                <div class="price-card stagger-item">
+                    <div class="price-card-header">
+                        <h3>🎮 PS3 & PlayBox PS3</h3>
+                        <i class="fa-brands fa-playstation"></i>
+                    </div>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Durasi</th>
+                                <th>PS Only</th>
+                                <th>PS + TV</th>
+                                <th>PlayBox PS3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 Jam</td>
+                                <td class="price-highlight">Rp 5.000</td>
+                                <td>—</td>
+                                <td class="price-cyan">Rp 6.000</td>
+                            </tr>
+                            <tr>
+                                <td>12 Jam</td>
+                                <td class="price-highlight">Rp 50.000</td>
+                                <td class="price-highlight">Rp 55.000</td>
+                                <td class="price-cyan">Rp 75.000</td>
+                            </tr>
+                            <tr>
+                                <td>24 Jam</td>
+                                <td class="price-highlight">Rp 75.000</td>
+                                <td class="price-highlight">Rp 80.000</td>
+                                <td class="price-cyan">Rp 130.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. KOLEKSI GAME -->
+    <section id="game" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Library Game Populer</span>
+                <br>
+                <h2 class="section-title">Koleksi Game Terlengkap</h2>
+                <p class="section-desc">Klik salah satu game untuk langsung menambahkannya ke request catatan pemesanan!</p>
+            </div>
+
+            <div class="games-grid">
+                <div class="game-card stagger-item" onclick="quickRequestGame('eFootball 2026')">
+                    <div class="game-img-box"><img src="efootball.jpg" alt="eFootball 2026"></div>
+                    <h4>eFootball 2026</h4>
+                </div>
+                <div class="game-card stagger-item" onclick="quickRequestGame('God of War')">
+                    <div class="game-img-box"><img src="gow.jpg" alt="God of War"></div>
+                    <h4>God of War</h4>
+                </div>
+                <div class="game-card stagger-item" onclick="quickRequestGame('COD: BO 6')">
+                    <div class="game-img-box"><img src="cod.jpg" alt="COD: BO 6"></div>
+                    <h4>COD: BO 6</h4>
+                </div>
+                <div class="game-card stagger-item" onclick="quickRequestGame('Tekken 7')">
+                    <div class="game-img-box"><img src="tekken.jpg" alt="Tekken 7"></div>
+                    <h4>Tekken 7</h4>
+                </div>
+                <div class="game-card stagger-item" onclick="quickRequestGame('Naruto UNS 4')">
+                    <div class="game-img-box"><img src="naruto.jpg" alt="Naruto UNS 4"></div>
+                    <h4>Naruto UNS 4</h4>
+                </div>
+                <div class="game-card stagger-item" onclick="quickRequestGame('GTA V')">
+                    <div class="game-img-box"><img src="gta5.jpg" alt="GTA V"></div>
+                    <h4>GTA V</h4>
+                </div>
+                <div class="game-card stagger-item" onclick="quickRequestGame('Resident Evil 6')">
+                    <div class="game-img-box"><img src="re6.jpg" alt="Resident Evil 6"></div>
+                    <h4>Resident Evil 6</h4>
+                </div>
+                <div class="game-card stagger-item" onclick="quickRequestGame('Mortal Kombat 11')">
+                    <div class="game-img-box"><img src="mortal.jpg" alt="Mortal Kombat 11"></div>
+                    <h4>Mortal Kombat 11</h4>
+                </div>
+            </div>
+
+            <div class="more-games-box">
+                ✨ ...Dan masih banyak puluhan judul game seru lainnya! Klik gambar game di atas untuk auto-request ke form pemesanan.
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SYARAT & KETENTUAN + FAQ -->
+    <section id="syarat-faq" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Informasi Penting</span>
+                <br>
+                <h2 class="section-title">Syarat Sewa & Tanya Jawab (FAQ)</h2>
+                <p class="section-desc">Harap baca ketentuan berikut demi kenyamanan dan keamanan bersama selama masa penyewaan.</p>
+            </div>
+
+            <div class="rules-faq-grid">
+                <!-- SYARAT & KETENTUAN -->
+                <div class="rules-card stagger-item">
+                    <h3><i class="fa-solid fa-file-contract"></i> Syarat & Ketentuan Sewa</h3>
+                    <ul class="rules-list">
+                        <li><i class="fa-solid fa-money-check-dollar"></i> <span>Pembayaran dilakukan lunas di awal saat serah terima unit (tunai atau transfer via DANA/Bank).</span></li>
+                        <li><i class="fa-solid fa-clock"></i> <span>Keterlambatan pengembalian unit lebih dari 30 menit tanpa konfirmasi akan dikenakan biaya tambahan sesuai tarif per jam.</span></li>
+                        <li><i class="fa-solid fa-screwdriver-wrench"></i> <span>Penyewa wajib menjaga unit konsol, stik, dan kabel. Kerusakan akibat kelalaian (jatuh, terkena air, dibanting) menjadi tanggung jawab penyewa.</span></li>
+                        <li><i class="fa-solid fa-ban"></i> <span>Dilarang keras membongkar segel unit, memindahtangankan, atau menggadaikan barang sewaan kepada pihak lain.</span></li>
+                    </ul>
+                </div>
+
+                <!-- FAQ ACCORDION -->
+                <div class="faq-wrapper stagger-item">
+                    <h3><i class="fa-solid fa-circle-question"></i> Pertanyaan Sering Diajukan (FAQ)</h3>
+
+                    <div class="faq-item open">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Apakah bisa diantar langsung ke rumah?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            Bisa! Kami melayani antar-jemput unit langsung ke rumah untuk area Cipanas, Dukupuntang, dan wilayah perbatasan Majalengka–Cirebon. Silakan cantumkan alamat lengkapmu di form pemesanan.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Apa perbedaan paket PS Only, PS + TV, dan PlayBox?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <strong>PS Only</strong> hanya unit konsol, stik, dan kabel (TV pakai milikmu di rumah). <strong>PS + TV</strong> sudah termasuk TV LED dari kami. Sedangkan <strong>PlayBox</strong> adalah koper gaming portable yang sudah dilengkapi layar monitor di dalamnya sehingga praktis dibawa ke mana saja.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Berapa stik yang didapat dalam satu paket sewa?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            Setiap penyewaan sudah otomatis mendapatkan <strong>2 buah stik wireless original</strong> siap mabar bersama teman atau keluarga.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Bagaimana jika ingin memperpanjang durasi sewa?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            Bisa banget! Cukup hubungi Admin FIAN AM atau Admin FIKI via WhatsApp minimal 1 jam sebelum waktu sewa habis untuk konfirmasi ketersediaan jadwal berikutnya.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FORM PEMESANAN -->
+    <section id="pemesanan" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Booking Online</span>
+                <br>
+                <h2 class="section-title">Form Pemesanan Sewa</h2>
+                <p class="section-desc">Isi data di bawah ini, total harga akan terhitung otomatis dan langsung terhubung ke Admin.</p>
+            </div>
+
+            <div class="booking-container">
+                <form id="bookingForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName"><i class="fa-solid fa-user"></i> Nama Lengkap</label>
+                            <input type="text" id="fullName" placeholder="Masukkan nama lengkap..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="addressRegion"><i class="fa-solid fa-location-dot"></i> Daerah / Alamat</label>
+                            <input type="text" id="addressRegion" placeholder="Cipanas, Dukupuntang..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="whatsappNo"><i class="fa-brands fa-whatsapp"></i> No. WhatsApp</label>
+                            <input type="tel" id="whatsappNo" placeholder="08xxxxxxxxxx" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="packageSelect"><i class="fa-solid fa-gamepad"></i> Pilih Paket (PS / PlayBox)</label>
+                            <select id="packageSelect" required>
+                                <option value="" disabled selected>-- Pilih Unit / Paket --</option>
+                                <option value="PS4 Only">PS4 Only</option>
+                                <option value="PS4 + TV">PS4 + TV</option>
+                                <option value="PlayBox PS4">PlayBox PS4 (PSBox)</option>
+                                <option value="PS3 Only">PS3 Only</option>
+                                <option value="PS3 + TV">PS3 + TV</option>
+                                <option value="PlayBox PS3">PlayBox PS3 (PSBox)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="durationSelect"><i class="fa-solid fa-hourglass-half"></i> Durasi Sewa</label>
+                            <select id="durationSelect" required>
+                                <option value="" disabled selected>-- Pilih Durasi --</option>
+                                <option value="1 Jam">1 Jam</option>
+                                <option value="12 Jam">12 Jam</option>
+                                <option value="24 Jam">24 Jam</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rentDate"><i class="fa-solid fa-calendar-days"></i> Tanggal Sewa</label>
+                            <input type="date" id="rentDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="gameNotes"><i class="fa-solid fa-comment-dots"></i> Catatan / Request Game</label>
+                        <input type="text" id="gameNotes" placeholder="Contoh: Request eFootball 2026, Tekken 7, antar jam 4 sore...">
+                    </div>
+
+                    <div class="total-price-box">
+                        <div class="total-price-label"><i class="fa-solid fa-money-bill-wave"></i> Estimasi Total Harga Sewa:</div>
+                        <div class="total-price-value" id="totalPriceDisplay">Rp 0</div>
+                    </div>
+
+                    <div class="admin-select-title"><i class="fa-solid fa-user-shield"></i> Pilih Admin Tujuan (Untuk Kirim WhatsApp):</div>
+                    <div class="admin-options">
+                        <label class="admin-radio">
+                            <input type="radio" name="targetAdmin" value="083823742523" data-admin-name="FIAN AM" checked>
+                            <div class="admin-box"><i class="fa-brands fa-whatsapp"></i> Admin 1: FIAN AM (083823742523)</div>
+                        </label>
+                        <label class="admin-radio">
+                            <input type="radio" name="targetAdmin" value="082129318975" data-admin-name="FIKI">
+                            <div class="admin-box"><i class="fa-brands fa-whatsapp"></i> Admin 2: FIKI (082129318975)</div>
+                        </label>
+                    </div>
+
+                    <div class="submit-actions">
+                        <button type="button" id="sendWaBtn" class="btn-submit btn-wa">
+                            <i class="fa-brands fa-whatsapp"></i> Kirim Pesanan via WhatsApp
+                        </button>
+                        <button type="button" id="sendEmailBtn" class="btn-submit btn-email">
+                            <i class="fa-solid fa-envelope"></i> Kirim Pesanan via Email
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. LOKASI & KONTAK -->
+    <section id="kontak" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Hubungi Kami</span>
+                <br>
+                <h2 class="section-title">Lokasi & Kontak Admin</h2>
+                <p class="section-desc">Kunjungi basecamp kami atau hubungi kontak resmi di bawah ini untuk info ketersediaan unit.</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card stagger-item">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Alamat Basecamp Rental</h3>
+                    <div class="address-box">
+                        <p><strong>Area Layanan: Majalengka – Cirebon</strong></p>
+                        <p>Blok Pagar Gunung, Desa Cipanas, Kecamatan Dukupuntang, Kabupaten Cirebon, Provinsi Jawa Barat.</p>
+                        <a href="https://maps.google.com/?q=Blok+Pagar+Gunung,+Desa+Cipanas,+Kecamatan+Dukupuntang,+Kabupaten+Cirebon" target="_blank" class="btn-action btn-gmap">
+                            <i class="fa-solid fa-arrow-pointer"></i> Buka Google Maps
+                        </a>
+                    </div>
+                </div>
+
+                <div class="info-card stagger-item">
+                    <h3><i class="fa-solid fa-headset"></i> Kontak Resmi & Sosial Media</h3>
+                    <ul class="contact-list">
+                        <li><span>Admin 1: <strong>FIAN AM</strong></span><a href="https://wa.me/6283823742523" target="_blank">083823742523</a></li>
+                        <li><span>Admin 2: <strong>FIKI</strong></span><a href="https://wa.me/6282129318975" target="_blank">082129318975</a></li>
+                        <li><span>Email Rental:</span><a href="mailto:huntersewaps@gmail.com">huntersewaps@gmail.com</a></li>
+                    </ul>
+                    <div style="margin-top: 12px;">
+                        <a href="https://www.instagram.com/admin_sewa__hunter_playstation?obrf=MTM2dHRta3B3YzNzNA==" target="_blank" class="btn-action btn-ig"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                        <a href="https://whatsapp.com/channel/0029VbDYyg34Y9lunMBEAS0z" target="_blank" class="btn-action btn-wa-channel"><i class="fa-solid fa-bullhorn"></i> Saluran WA</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOMBOL FLOATING WHATSAPP MELAYANG -->
+    <a href="https://wa.me/6283823742523?text=Halo%20Admin%20Hunter%20PlayStation%2C%20saya%20mau%20tanya%20ketersediaan%20unit%20sewa%20PS..." target="_blank" class="floating-wa-btn" title="Chat Admin via WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>Chat Admin WA</span>
+    </a>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 <strong>HUNTER PLAYSTATION</strong> — Majalengka & Cirebon. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        /* === 1. CLICK RIPPLE / GAMING SPARK EFFECT === */
+        document.addEventListener('click', function(e) {
+            const spark = document.createElement('div');
+            spark.className = 'click-spark';
+            spark.style.left = e.clientX + 'px';
+            spark.style.top = e.clientY + 'px';
+            document.body.appendChild(spark);
+            setTimeout(() => spark.remove(), 550);
+        });
+
+        /* === 2. FLOATING PLAYSTATION SYMBOLS BACKGROUND === */
+        const shapesContainer = document.getElementById('floatingShapes');
+        const psIcons = ['△', '○', '✕', '□'];
+        for (let i = 0; i < 18; i++) {
+            const span = document.createElement('span');
+            span.className = 'ps-shape';
+            span.textContent = psIcons[i % psIcons.length];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.fontSize = (Math.random() * 18 + 16) + 'px';
+            span.style.animationDuration = (Math.random() * 12 + 12) + 's';
+            span.style.animationDelay = (Math.random() * 10) + 's';
+            shapesContainer.appendChild(span);
+        }
+
+        /* === 3. 3D TILT CARD EFFECT ON HOVER === */
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -7;
+                const rotateY = ((x - centerX) / centerX) * 7;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        /* === 4. DIGITAL CLOCK === */
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('digitalClock').textContent = `${h}:${m}:${s} WIB`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        /* === 5. THEME TOGGLE (UNGU GELAP <-> UNGU PUTIH) === */
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeLabel = document.getElementById('themeLabel');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            if (newTheme === 'light') {
+                themeToggleBtn.querySelector('i').className = 'fa-solid fa-moon';
+                themeLabel.textContent = 'Ungu Gelap';
+            } else {
+                themeToggleBtn.querySelector('i').className = 'fa-solid fa-sun';
+                themeLabel.textContent = 'Ungu Putih';
+            }
+        });
+
+        /* === 6. FAQ ACCORDION === */
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            item.classList.toggle('open');
+        }
+
+        /* === 7. PRESET PACKAGE & QUICK REQUEST GAME === */
+        function presetPackage(pkgName) {
+            const pkgSelect = document.getElementById('packageSelect');
+            pkgSelect.value = pkgName;
+            calculateTotalPrice();
+        }
+
+        function quickRequestGame(gameTitle) {
+            const notesInput = document.getElementById('gameNotes');
+            const currentVal = notesInput.value.trim();
+            if (!currentVal) {
+                notesInput.value = `Request game: ${gameTitle}`;
+            } else if (!currentVal.includes(gameTitle)) {
+                notesInput.value = `${currentVal}, ${gameTitle}`;
+            }
+            document.getElementById('pemesanan').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* === 8. SCROLL PROGRESS BAR, REVEAL & ACTIVE NAVBAR === */
+        const revealElements = document.querySelectorAll('.reveal');
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const progressBar = document.getElementById('scrollProgressBar');
+
+        function handleScroll() {
+            // Progress Bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+
+            // Scroll Reveal
+            const triggerBottom = window.innerHeight * 0.88;
+            revealElements.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < triggerBottom) {
+                    el.classList.add('visible');
+                }
+            });
+
+            // Active Navbar Link
+            let current = '';
+            sections.forEach(sec => {
+                const secTop = sec.offsetTop - 135;
+                if (window.scrollY >= secTop) {
+                    current = sec.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+
+        /* === 9. PRICE CALCULATION === */
+        const priceMatrix = {
+            "PS4 Only": { "1 Jam": 6000, "12 Jam": 60000, "24 Jam": 85000 },
+            "PS4 + TV": { "1 Jam": null, "12 Jam": 65000, "24 Jam": 90000 },
+            "PlayBox PS4": { "1 Jam": 8000, "12 Jam": 90000, "24 Jam": 150000 },
+            "PS3 Only": { "1 Jam": 5000, "12 Jam": 50000, "24 Jam": 75000 },
+            "PS3 + TV": { "1 Jam": null, "12 Jam": 55000, "24 Jam": 80000 },
+            "PlayBox PS3": { "1 Jam": 6000, "12 Jam": 75000, "24 Jam": 130000 }
+        };
+
+        const packageSelect = document.getElementById('packageSelect');
+        const durationSelect = document.getElementById('durationSelect');
+        const totalPriceDisplay = document.getElementById('totalPriceDisplay');
+
+        function calculateTotalPrice() {
+            const pkg = packageSelect.value;
+            const dur = durationSelect.value;
+            const oneHourOpt = durationSelect.querySelector('option[value="1 Jam"]');
+
+            if (pkg === "PS4 + TV" || pkg === "PS3 + TV") {
+                oneHourOpt.disabled = true;
+                if (dur === "1 Jam") durationSelect.value = "";
+            } else {
+                oneHourOpt.disabled = false;
+            }
+
+            if (pkg && dur && priceMatrix[pkg][dur] !== null) {
+                const price = priceMatrix[pkg][dur];
+                const formatted = 'Rp ' + price.toLocaleString('id-ID');
+                totalPriceDisplay.textContent = formatted;
+                return formatted;
+            }
+            totalPriceDisplay.textContent = "Rp 0";
+            return null;
+        }
+
+        packageSelect.addEventListener('change', calculateTotalPrice);
+        durationSelect.addEventListener('change', calculateTotalPrice);
+
+        /* === 10. FORM DATA COLLECTOR & SUBMIT === */
+        const bookingForm = document.getElementById('bookingForm');
+
+        function getBookingData() {
+            if (!bookingForm.checkValidity()) {
+                bookingForm.reportValidity();
+                return null;
+            }
+
+            const calcPrice = calculateTotalPrice();
+            if (!calcPrice) {
+                alert("Silakan pilih kombinasi Paket dan Durasi Sewa yang valid!");
+                return null;
+            }
+
+            const adminRadio = document.querySelector('input[name="targetAdmin"]:checked');
+
+            return {
+                name: document.getElementById('fullName').value.trim(),
+                address: document.getElementById('addressRegion').value.trim(),
+                wa: document.getElementById('whatsappNo').value.trim(),
+                pkg: packageSelect.value,
+                dur: durationSelect.value,
+                date: document.getElementById('rentDate').value.split('-').reverse().join('/'),
+                notes: document.getElementById('gameNotes').value.trim() || '-',
+                price: calcPrice,
+                adminPhone: adminRadio.value,
+                adminName: adminRadio.getAttribute('data-admin-name')
+            };
+        }
+
+        document.getElementById('sendWaBtn').addEventListener('click', function() {
+            const data = getBookingData();
+            if (!data) return;
+
+            const text = 
+`🎮 *FORM PEMESANAN - HUNTER PLAYSTATION* 🎮
+--------------------------------------------------
+👤 *Nama Lengkap:* ${data.name}
+📍 *Daerah / Alamat:* ${data.address}
+📞 *No. WhatsApp:* ${data.wa}
+🕹️ *Paket:* ${data.pkg}
+⏱️ *Durasi Sewa:* ${data.dur}
+📅 *Tanggal Sewa:* ${data.date}
+💰 *Total Harga:* *${data.price}*
+📝 *Request Game / Catatan:* ${data.notes}
+--------------------------------------------------
+Halo Admin *${data.adminName}*, saya ingin memesan sewa PlayStation dengan detail di atas. Mohon diproses, terima kasih!`;
+
+            window.open(`https://wa.me/62${data.adminPhone.substring(1)}?text=${encodeURIComponent(text)}`, '_blank');
+        });
+
         document.getElementById('sendEmailBtn').addEventListener('click', function() {
             const data = getBookingData();
             if (!data) return;
