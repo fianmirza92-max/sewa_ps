@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - HUNTER PLAYSTATION</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #090412;
+            --bg-card: rgba(21, 10, 38, 0.92);
+            --bg-input: rgba(7, 3, 14, 0.85);
+            --accent-purple: #8b5cf6;
+            --accent-glow: #a855f7;
+            --accent-magenta: #d946ef;
+            --accent-cyan: #06b6d4;
+            --text-primary: #ffffff;
+            --text-secondary: #c4b5fd;
+            --border-color: rgba(139, 92, 246, 0.35);
+            --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #1f0c3d 0%, var(--bg-dark) 75%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 28px 20px 60px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        /* === LOGIN SCREEN === */
+        .login-wrapper {
+            min-height: calc(100vh - 88px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 440px;
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 22px;
+            padding: 32px 28px;
+            box-shadow: var(--shadow-glow);
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-magenta);
+            margin-bottom: 14px;
+            box-shadow: 0 0 18px rgba(217, 70, 239, 0.45);
+        }
+
+        .login-card h1 {
+            font-size: 1.45rem;
+            background: linear-gradient(135deg, #fff 20%, var(--accent-magenta) 65%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .login-card p {
+            color: var(--text-secondary);
+            font-size: 0.96rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        .login-field {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .login-field label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .pin-input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .login-field input {
+            width: 100%;
+            padding: 12px 44px 12px 14px;
+            border-radius: 12px;
+            border: 1.5px solid var(--border-color);
+            background: var(--bg-input);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            outline: none;
+        }
+
+        .login-field input:focus {
+            border-color: var(--accent-magenta);
+            box-shadow: 0 0 12px rgba(217, 70, 239, 0.35);
+        }
+
+        .toggle-pin-btn {
+            position: absolute;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+        }
+
+        .toggle-pin-btn:hover {
+            color: var(--accent-magenta);
+        }
+
+        .login-error {
+            background: rgba(239, 68, 68, 0.16);
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+        }
+
+        .back-user-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+
+        .back-user-link:hover {
+            color: var(--accent-magenta);
+        }
+
+        /* === DASHBOARD ADMIN === */
+        #adminDashboard {
+            display: none;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        .top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 18px;
+            padding: 14px 20px;
+            margin-bottom: 26px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.15rem;
+            font-weight: 900;
+        }
+
+        .brand img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-magenta);
+        }
+
+        .top-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-logout {
+            background: rgba(239, 68, 68, 0.16);
+            color: #fca5a5;
+            border: 1.5px solid rgba(239, 68, 68, 0.5);
+            padding: 9px 16px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .section-block {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 22px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .section-head {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .section-head h2 {
+            font-size: 1.2rem;
+            color: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-count {
+            background: rgba(217, 70, 239, 0.2);
+            border: 1px solid var(--accent-magenta);
+            color: #f5d0fe;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.78rem;
+        }
+
+        .btn-clear-orders {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #fca5a5;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-clear-orders:hover {
+            background: rgba(239, 68, 68, 0.28);
+        }
+
+        .orders-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 820px;
+        }
+
+        .orders-table th,
+        .orders-table td {
+            padding: 11px 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            font-size: 0.94rem;
+            vertical-align: top;
+        }
+
+        .orders-table th {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            background: rgba(7, 3, 14, 0.45);
+        }
+
+        .order-price {
+            color: var(--accent-magenta);
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.86rem;
+        }
+
+        .status-select {
+            background: var(--bg-input);
+            color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.86rem;
+        }
+
+        .btn-del-order {
+            background: transparent;
+            border: 1px solid rgba(239, 68, 68, 0.45);
+            color: #fca5a5;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .btn-del-order:hover {
+            background: rgba(239, 68, 68, 0.22);
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 28px 16px;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+
+        /* === PRICING FORM === */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: rgba(7, 3, 14, 0.45);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.05rem;
+            color: var(--accent-magenta);
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .duration-block {
+            background: rgba(7, 3, 14, 0.55);
+            border: 1px solid rgba(139, 92, 246, 0.22);
+            border-radius: 14px;
+            padding: 13px;
+            margin-bottom: 12px;
+        }
+
+        .duration-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .duration-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 9px 10px;
+            border-radius: 9px;
+            border: 1.5px solid var(--border-color);
+            background: var(--bg-input);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: var(--accent-magenta);
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .btn-save {
+            flex: 2;
+            min-width: 220px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            color: #fff;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 14px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-reset {
+            flex: 1;
+            min-width: 170px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1.5px solid var(--border-color);
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .toast {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: rgba(34, 197, 94, 0.16);
+            border: 1px solid #22c55e;
+            color: #86efac;
+            font-weight: 700;
+            display: none;
+        }
+
+        @media (max-width: 860px) {
+            .pricing-grid, .input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LAYAR LOGIN ADMIN -->
+    <div class="login-wrapper" id="loginScreen">
+        <div class="login-card">
+            <img src="logo.png" alt="Logo Hunter PlayStation" class="login-logo">
+            <h1>Admin Login</h1>
+            <p>Masuk ke panel pesanan & harga HUNTER PLAYSTATION</p>
+
+            <form id="loginForm">
+                <div class="login-field">
+                    <label for="loginUsername"><i class="fa-solid fa-user"></i> Username</label>
+                    <input type="text" id="loginUsername" placeholder="Masukkan username admin..." autocomplete="username" required>
+                </div>
+
+                <div class="login-field">
+                    <label for="loginPin"><i class="fa-solid fa-key"></i> PIN Admin</label>
+                    <div class="pin-input-wrap">
+                        <input type="password" id="loginPin" placeholder="Masukkan PIN admin..." autocomplete="current-password" required>
+                        <button type="button" class="toggle-pin-btn" id="togglePinBtn" title="Tampilkan / Sembunyikan PIN">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login-error" id="loginError">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Username atau PIN salah! Silakan coba lagi.
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fa-solid fa-right-to-bracket"></i> Masuk ke Admin Panel
+                </button>
+            </form>
+
+            <a href="web.html" class="back-user-link">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman User
+            </a>
+        </div>
+    </div>
+
+    <!-- DASHBOARD ADMIN -->
+    <div id="adminDashboard">
+        <div class="container">
+            <div class="top-bar">
+                <div class="brand">
+                    <img src="logo.png" alt="Logo Hunter PlayStation">
+                    <span>ADMIN PANEL — HUNTER PLAYSTATION</span>
+                </div>
+                <div class="top-actions">
+                    <a href="web.html" class="btn-back">
+                        <i class="fa-solid fa-eye"></i> Lihat Web User (web.html)
+                    </a>
+                    <button type="button" class="btn-logout" id="logoutBtn">
+                        <i class="fa-solid fa-lock"></i> Kunci / Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- DAFTAR PESANAN MASUK -->
+            <div class="section-block">
+                <div class="section-head">
+                    <h2>
+                        <i class="fa-solid fa-inbox"></i> Daftar Pesanan Masuk
+                        <span class="badge-count" id="orderCountBadge">0 Pesanan</span>
+                    </h2>
+                    <button type="button" class="btn-clear-orders" id="clearOrdersBtn">
+                        <i class="fa-solid fa-trash"></i> Hapus Semua Pesanan
+                    </button>
+                </div>
+
+                <div class="orders-table-wrap">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>ID & Waktu</th>
+                                <th>Penyewa</th>
+                                <th>Paket & Durasi</th>
+                                <th>Tgl Sewa</th>
+                                <th>Total</th>
+                                <th>Catatan / Admin</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody"></tbody>
+                    </table>
+                    <div class="empty-orders" id="emptyOrdersMsg">
+                        Belum ada pesanan masuk dari <code>web.html</code>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- KELOLA HARGA SEWA -->
+            <div class="section-block">
+                <div class="section-head">
+                    <h2><i class="fa-solid fa-tags"></i> Kelola Daftar Harga Sewa</h2>
+                </div>
+
+                <form id="adminPriceForm">
+                    <div class="pricing-grid">
+                        <!-- PS4 & PLAYBOX PS4 -->
+                        <div class="card">
+                            <h3>🎮 PS4 & PlayBox PS4</h3>
+
+                            <div class="duration-block">
+                                <div class="duration-label">Durasi 1 Jam</div>
+                                <div class="input-row">
+                                    <div class="field">
+                                        <label for="ps4_1h_only">PS Only (Rp)</label>
+                                        <input type="number" id="ps4_1h_only" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps4_1h_tv">PS + TV (Kosong = —)</label>
+                                        <input type="number" id="ps4_1h_tv" min="0" step="500" placeholder="—">
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps4_1h_box">PlayBox PS4 (Rp)</label>
+                                        <input type="number" id="ps4_1h_box" min="0" step="500" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="duration-block">
+                                <div class="duration-label">Durasi 12 Jam</div>
+                                <div class="input-row">
+                                    <div class="field">
+                                        <label for="ps4_12h_only">PS Only (Rp)</label>
+                                        <input type="number" id="ps4_12h_only" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps4_12h_tv">PS + TV (Rp)</label>
+                                        <input type="number" id="ps4_12h_tv" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps4_12h_box">PlayBox PS4 (Rp)</label>
+                                        <input type="number" id="ps4_12h_box" min="0" step="500" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="duration-block">
+                                <div class="duration-label">Durasi 24 Jam</div>
+                                <div class="input-row">
+                                    <div class="field">
+                                        <label for="ps4_24h_only">PS Only (Rp)</label>
+                                        <input type="number" id="ps4_24h_only" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps4_24h_tv">PS + TV (Rp)</label>
+                                        <input type="number" id="ps4_24h_tv" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps4_24h_box">PlayBox PS4 (Rp)</label>
+                                        <input type="number" id="ps4_24h_box" min="0" step="500" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PS3 & PLAYBOX PS3 -->
+                        <div class="card">
+                            <h3>🎮 PS3 & PlayBox PS3</h3>
+
+                            <div class="duration-block">
+                                <div class="duration-label">Durasi 1 Jam</div>
+                                <div class="input-row">
+                                    <div class="field">
+                                        <label for="ps3_1h_only">PS Only (Rp)</label>
+                                        <input type="number" id="ps3_1h_only" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps3_1h_tv">PS + TV (Kosong = —)</label>
+                                        <input type="number" id="ps3_1h_tv" min="0" step="500" placeholder="—">
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps3_1h_box">PlayBox PS3 (Rp)</label>
+                                        <input type="number" id="ps3_1h_box" min="0" step="500" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="duration-block">
+                                <div class="duration-label">Durasi 12 Jam</div>
+                                <div class="input-row">
+                                    <div class="field">
+                                        <label for="ps3_12h_only">PS Only (Rp)</label>
+                                        <input type="number" id="ps3_12h_only" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps3_12h_tv">PS + TV (Rp)</label>
+                                        <input type="number" id="ps3_12h_tv" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps3_12h_box">PlayBox PS3 (Rp)</label>
+                                        <input type="number" id="ps3_12h_box" min="0" step="500" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="duration-block">
+                                <div class="duration-label">Durasi 24 Jam</div>
+                                <div class="input-row">
+                                    <div class="field">
+                                        <label for="ps3_24h_only">PS Only (Rp)</label>
+                                        <input type="number" id="ps3_24h_only" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps3_24h_tv">PS + TV (Rp)</label>
+                                        <input type="number" id="ps3_24h_tv" min="0" step="500" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="ps3_24h_box">PlayBox PS3 (Rp)</label>
+                                        <input type="number" id="ps3_24h_box" min="0" step="500" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" class="btn-save">
+                            <i class="fa-solid fa-floppy-disk"></i> Simpan & Update Harga Web User
+                        </button>
+                        <button type="button" class="btn-reset" id="resetBtn">
+                            <i class="fa-solid fa-rotate-left"></i> Reset Harga Default
+                        </button>
+                    </div>
+
+                    <div class="toast" id="toastBox">
+                        <i class="fa-solid fa-circle-check"></i> Harga berhasil disimpan! Buka atau refresh <code>web.html</code> untuk melihat perubahannya.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* === 1. LOGIN & SESSION ADMIN === */
+        const ADMIN_USER = 'HUNTER_PLAYSTATION';
+        const ADMIN_PIN = 'SEWAPS24JAM';
+        const SESSION_KEY = 'hunter_ps_admin_auth_v1';
+        const ORDERS_STORAGE_KEY = 'hunter_ps_orders_v1';
+        const PRICE_STORAGE_KEY = 'hunter_ps_full_prices_v1';
+
+        const loginScreen = document.getElementById('loginScreen');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const togglePinBtn = document.getElementById('togglePinBtn');
+        const loginPinInput = document.getElementById('loginPin');
+
+        togglePinBtn.addEventListener('click', () => {
+            const isPassword = loginPinInput.type === 'password';
+            loginPinInput.type = isPassword ? 'text' : 'password';
+            togglePinBtn.querySelector('i').className = isPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+        });
+
+        function showDashboard() {
+            loginScreen.style.display = 'none';
+            adminDashboard.style.display = 'block';
+            renderOrders();
+            populateInputs(readSavedPrices());
+        }
+
+        function showLogin() {
+            adminDashboard.style.display = 'none';
+            loginScreen.style.display = 'flex';
+            loginForm.reset();
+            loginError.style.display = 'none';
+        }
+
+        if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+            showDashboard();
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userInput = document.getElementById('loginUsername').value.trim();
+            const pinInput = loginPinInput.value.trim();
+
+            if (userInput === ADMIN_USER && pinInput === ADMIN_PIN) {
+                sessionStorage.setItem(SESSION_KEY, 'true');
+                loginError.style.display = 'none';
+                showDashboard();
+            } else {
+                loginError.style.display = 'block';
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            sessionStorage.removeItem(SESSION_KEY);
+            showLogin();
+        });
+
+        /* === 2. DAFTAR PESANAN MASUK === */
+        function escapeHtml(str) {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function readOrders() {
+            try {
+                return JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY) || '[]');
+            } catch {
+                return [];
+            }
+        }
+
+        function writeOrders(orders) {
+            localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
+            renderOrders();
+        }
+
+        function renderOrders() {
+            const orders = readOrders();
+            const tbody = document.getElementById('ordersTableBody');
+            const emptyMsg = document.getElementById('emptyOrdersMsg');
+            const badge = document.getElementById('orderCountBadge');
+
+            badge.textContent = `${orders.length} Pesanan`;
+
+            if (!orders.length) {
+                tbody.innerHTML = '';
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+            const statuses = ['Menunggu Konfirmasi', 'Diproses', 'Selesai', 'Batal'];
+
+            tbody.innerHTML = orders.map((ord) => {
+                const optionsHtml = statuses.map((st) =>
+                    `<option value="${escapeHtml(st)}" ${ord.status === st ? 'selected' : ''}>${escapeHtml(st)}</option>`
+                ).join('');
+
+                return `
+                    <tr>
+                        <td>
+                            <strong>${escapeHtml(ord.id)}</strong><br>
+                            <small style="color: var(--text-secondary);">${escapeHtml(ord.createdAt)}</small><br>
+                            <small style="color: var(--accent-cyan);">${escapeHtml(ord.channel || 'Form')}</small>
+                        </td>
+                        <td>
+                            <strong>${escapeHtml(ord.name)}</strong><br>
+                            <span>${escapeHtml(ord.wa)}</span><br>
+                            <small style="color: var(--text-secondary);">${escapeHtml(ord.address)}</small>
+                        </td>
+                        <td>
+                            <strong>${escapeHtml(ord.pkg)}</strong><br>
+                            <span>${escapeHtml(ord.dur)}</span>
+                        </td>
+                        <td>${escapeHtml(ord.date)}</td>
+                        <td><span class="order-price">${escapeHtml(ord.price)}</span></td>
+                        <td>
+                            <small>Admin: <strong>${escapeHtml(ord.adminName)}</strong></small><br>
+                            <small style="color: var(--text-secondary);">${escapeHtml(ord.notes)}</small>
+                        </td>
+                        <td>
+                            <select class="status-select" onchange="updateOrderStatus('${escapeHtml(ord.id)}', this.value)">
+                                ${optionsHtml}
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button" class="btn-del-order" onclick="deleteOrder('${escapeHtml(ord.id)}')" title="Hapus pesanan">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateOrderStatus(orderId, newStatus) {
+            const orders = readOrders().map((ord) =>
+                ord.id === orderId ? { ...ord, status: newStatus } : ord
+            );
+            writeOrders(orders);
+        }
+
+        function deleteOrder(orderId) {
+            const orders = readOrders().filter((ord) => ord.id !== orderId);
+            writeOrders(orders);
+        }
+
+        document.getElementById('clearOrdersBtn').addEventListener('click', () => {
+            if (confirm('Hapus semua riwayat pesanan masuk?')) {
+                writeOrders([]);
+            }
+        });
+
+        window.addEventListener('storage', (event) => {
+            if (event.key === ORDERS_STORAGE_KEY && sessionStorage.getItem(SESSION_KEY) === 'true') {
+                renderOrders();
+            }
+        });
+
+        /* === 3. KELOLA HARGA SEWA === */
+        const DEFAULT_PRICES = {
+            ps4: {
+                '1h': { only: 6000, tv: null, box: 8000 },
+                '12h': { only: 60000, tv: 65000, box: 90000 },
+                '24h': { only: 85000, tv: 90000, box: 150000 }
+            },
+            ps3: {
+                '1h': { only: 5000, tv: null, box: 6000 },
+                '12h': { only: 50000, tv: 55000, box: 75000 },
+                '24h': { only: 75000, tv: 80000, box: 130000 }
+            }
+        };
+
+        function readSavedPrices() {
+            const raw = localStorage.getItem(PRICE_STORAGE_KEY);
+            if (!raw) return structuredClone(DEFAULT_PRICES);
+            try {
+                return JSON.parse(raw);
+            } catch {
+                return structuredClone(DEFAULT_PRICES);
+            }
+        }
+
+        function populateInputs(p) {
+            document.getElementById('ps4_1h_only').value = p.ps4['1h'].only ?? '';
+            document.getElementById('ps4_1h_tv').value = p.ps4['1h'].tv ?? '';
+            document.getElementById('ps4_1h_box').value = p.ps4['1h'].box ?? '';
+            document.getElementById('ps4_12h_only').value = p.ps4['12h'].only ?? '';
+            document.getElementById('ps4_12h_tv').value = p.ps4['12h'].tv ?? '';
+            document.getElementById('ps4_12h_box').value = p.ps4['12h'].box ?? '';
+            document.getElementById('ps4_24h_only').value = p.ps4['24h'].only ?? '';
+            document.getElementById('ps4_24h_tv').value = p.ps4['24h'].tv ?? '';
+            document.getElementById('ps4_24h_box').value = p.ps4['24h'].box ?? '';
+
+            document.getElementById('ps3_1h_only').value = p.ps3['1h'].only ?? '';
+            document.getElementById('ps3_1h_tv').value = p.ps3['1h'].tv ?? '';
+            document.getElementById('ps3_1h_box').value = p.ps3['1h'].box ?? '';
+            document.getElementById('ps3_12h_only').value = p.ps3['12h'].only ?? '';
+            document.getElementById('ps3_12h_tv').value = p.ps3['12h'].tv ?? '';
+            document.getElementById('ps3_12h_box').value = p.ps3['12h'].box ?? '';
+            document.getElementById('ps3_24h_only').value = p.ps3['24h'].only ?? '';
+            document.getElementById('ps3_24h_tv').value = p.ps3['24h'].tv ?? '';
+            document.getElementById('ps3_24h_box').value = p.ps3['24h'].box ?? '';
+        }
+
+        function optNum(id) {
+            const val = document.getElementById(id).value;
+            return val === '' ? null : Number(val);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastBox');
+            toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${msg}`;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3500);
+        }
+
+        document.getElementById('adminPriceForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const updated = {
+                ps4: {
+                    '1h': { only: Number(document.getElementById('ps4_1h_only').value), tv: optNum('ps4_1h_tv'), box: Number(document.getElementById('ps4_1h_box').value) },
+                    '12h': { only: Number(document.getElementById('ps4_12h_only').value), tv: Number(document.getElementById('ps4_12h_tv').value), box: Number(document.getElementById('ps4_12h_box').value) },
+                    '24h': { only: Number(document.getElementById('ps4_24h_only').value), tv: Number(document.getElementById('ps4_24h_tv').value), box: Number(document.getElementById('ps4_24h_box').value) }
+                },
+                ps3: {
+                    '1h': { only: Number(document.getElementById('ps3_1h_only').value), tv: optNum('ps3_1h_tv'), box: Number(document.getElementById('ps3_1h_box').value) },
+                    '12h': { only: Number(document.getElementById('ps3_12h_only').value), tv: Number(document.getElementById('ps3_12h_tv').value), box: Number(document.getElementById('ps3_12h_box').value) },
+                    '24h': { only: Number(document.getElementById('ps3_24h_only').value), tv: Number(document.getElementById('ps3_24h_tv').value), box: Number(document.getElementById('ps3_24h_box').value) }
+                }
+            };
+
+            localStorage.setItem(PRICE_STORAGE_KEY, JSON.stringify(updated));
+            showToast('Harga berhasil disimpan! Buka atau refresh <code>web.html</code> untuk melihat perubahannya.');
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            const resetData = structuredClone(DEFAULT_PRICES);
+            localStorage.setItem(PRICE_STORAGE_KEY, JSON.stringify(resetData));
+            populateInputs(resetData);
+            showToast('Harga telah di-reset ke tarif awal.');
+        });
+    </script>
+</body>
+</html>
