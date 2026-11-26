@@ -44,17 +44,8 @@
             --input-bg: #faf5ff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
         body {
             width: 100%;
@@ -68,10 +59,7 @@
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('bg.png');
             background-size: cover;
             background-position: center;
@@ -83,40 +71,15 @@
         body::after {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-overlay);
             z-index: -2;
             transition: background 0.4s ease;
         }
 
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .ps-shape {
-            position: absolute;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            color: var(--accent-purple);
-            opacity: 0.12;
-            user-select: none;
-            animation: floatUp linear infinite;
-        }
-
-        [data-theme="light"] .ps-shape {
-            opacity: 0.14;
-            color: #7c3aed;
-        }
+        .floating-shapes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; overflow: hidden; }
+        .ps-shape { position: absolute; font-family: 'Orbitron', sans-serif; font-weight: 900; color: var(--accent-purple); opacity: 0.12; user-select: none; animation: floatUp linear infinite; }
+        [data-theme="light"] .ps-shape { opacity: 0.14; color: #7c3aed; }
 
         @keyframes floatUp {
             0% { transform: translateY(105vh) rotate(0deg) scale(0.8); opacity: 0; }
@@ -126,11 +89,7 @@
         }
 
         .scroll-progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            width: 0%;
+            position: fixed; top: 0; left: 0; height: 4px; width: 0%;
             background: linear-gradient(90deg, var(--accent-purple), var(--accent-magenta), var(--accent-cyan));
             z-index: 2000;
             box-shadow: 0 0 12px var(--accent-magenta);
@@ -138,11 +97,7 @@
         }
 
         .click-spark {
-            position: fixed;
-            pointer-events: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
+            position: fixed; pointer-events: none; width: 24px; height: 24px; border-radius: 50%;
             border: 2.5px solid var(--accent-magenta);
             transform: translate(-50%, -50%) scale(0.2);
             animation: sparkExpand 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -154,11 +109,7 @@
             100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; }
         }
 
-        h2, h3, .brand-font {
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
+        h2, h3, .brand-font { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1.5px; }
 
         .hero-section h1, .section-title {
             font-family: 'Orbitron', sans-serif;
@@ -177,12 +128,7 @@
             100% { filter: drop-shadow(0 4px 20px rgba(139, 92, 246, 0.9)); transform: scale(1.01); }
         }
 
-        .container {
-            width: 100%;
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 15px rgba(217, 70, 239, 0.55); transform: translateY(0px); }
@@ -201,25 +147,11 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(35px) scale(0.97);
-            transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        .reveal { opacity: 0; transform: translateY(35px) scale(0.97); transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
 
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .reveal.visible .stagger-item {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .stagger-item { opacity: 0; transform: translateY(25px); transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.visible .stagger-item { opacity: 1; transform: translateY(0); }
         .reveal.visible .stagger-item:nth-child(1) { transition-delay: 0.06s; }
         .reveal.visible .stagger-item:nth-child(2) { transition-delay: 0.14s; }
         .reveal.visible .stagger-item:nth-child(3) { transition-delay: 0.22s; }
@@ -229,598 +161,169 @@
         .reveal.visible .stagger-item:nth-child(7) { transition-delay: 0.48s; }
         .reveal.visible .stagger-item:nth-child(8) { transition-delay: 0.54s; }
 
-        header {
-            position: sticky;
-            top: 12px;
-            z-index: 1000;
-            max-width: 1180px;
-            margin: 12px auto 0;
-            padding: 0 20px;
-        }
-
+        header { position: sticky; top: 12px; z-index: 1000; max-width: 1180px; margin: 12px auto 0; padding: 0 20px; }
         .navbar-inner {
-            background: var(--nav-bg);
-            backdrop-filter: blur(18px);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 10px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow-glow);
-            transition: var(--transition);
+            background: var(--nav-bg); backdrop-filter: blur(18px); border: 1px solid var(--border-color);
+            border-radius: 18px; padding: 10px 18px; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: var(--shadow-glow); transition: var(--transition);
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.12rem;
-            font-weight: 900;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: transform 0.25s ease;
-        }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.12rem; font-weight: 900; color: var(--text-primary); text-decoration: none; transition: transform 0.25s ease; }
         .logo:hover { transform: scale(1.03); }
+        .brand-logo-img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-magenta); box-shadow: 0 0 10px rgba(147, 51, 234, 0.5); }
 
-        .brand-logo-img {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-magenta);
-            box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-
+        .nav-links { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
         .nav-link {
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-primary);
-            padding: 6px 11px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.88rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: var(--transition);
+            background: transparent; border: 1px solid transparent; color: var(--text-primary); padding: 6px 11px;
+            border-radius: 20px; font-weight: 700; font-size: 0.88rem; text-decoration: none; display: flex; align-items: center; gap: 5px; transition: var(--transition);
         }
-
         .nav-link:hover, .nav-link.active {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta)); color: #ffffff;
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4); transform: translateY(-1px);
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .digital-clock {
-            background: var(--bg-subbox);
-            border: 1px solid var(--border-color);
-            padding: 5px 11px;
-            border-radius: 20px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.76rem;
-            font-weight: 700;
-            color: var(--accent-glow);
-        }
+        .nav-right { display: flex; align-items: center; gap: 8px; }
+        .digital-clock { background: var(--bg-subbox); border: 1px solid var(--border-color); padding: 5px 11px; border-radius: 20px; font-family: 'Orbitron', sans-serif; font-size: 0.76rem; font-weight: 700; color: var(--accent-glow); }
 
         .theme-toggle {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            border: none;
-            color: #ffffff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            box-shadow: 0 3px 10px rgba(139, 92, 246, 0.4);
-            transition: var(--transition);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta)); border: none; color: #ffffff;
+            padding: 6px 12px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+            font-size: 0.8rem; font-weight: 700; box-shadow: 0 3px 10px rgba(139, 92, 246, 0.4); transition: var(--transition);
         }
-        .theme-toggle:hover {
-            transform: translateY(-2px) scale(1.03);
-            filter: brightness(1.1);
-        }
+        .theme-toggle:hover { transform: translateY(-2px) scale(1.03); filter: brightness(1.1); }
 
         section { padding: 55px 0; }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
+        .section-header { text-align: center; margin-bottom: 32px; }
         .section-subtitle {
-            display: inline-block;
-            background: rgba(139, 92, 246, 0.14);
-            border: 1px solid var(--accent-purple);
-            color: var(--accent-purple);
-            padding: 4px 15px;
-            border-radius: 20px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            display: inline-block; background: rgba(139, 92, 246, 0.14); border: 1px solid var(--accent-purple);
+            color: var(--accent-purple); padding: 4px 15px; border-radius: 20px; font-size: 0.82rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
         }
-
-        .section-title {
-            font-size: 1.85rem;
-            margin-bottom: 8px;
-            position: relative;
-            display: inline-block;
-        }
-
+        .section-title { font-size: 1.85rem; margin-bottom: 8px; position: relative; display: inline-block; }
         .section-title::after {
-            content: '';
-            display: block;
-            width: 65%;
-            height: 3.5px;
-            margin: 8px auto 0;
-            background: linear-gradient(90deg, transparent, var(--accent-purple), var(--accent-magenta), transparent);
-            border-radius: 2px;
+            content: ''; display: block; width: 65%; height: 3.5px; margin: 8px auto 0;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), var(--accent-magenta), transparent); border-radius: 2px;
         }
+        .section-desc { color: var(--text-secondary); font-size: 1rem; max-width: 680px; margin: 6px auto 0; font-weight: 600; }
 
-        .section-desc {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            max-width: 680px;
-            margin: 6px auto 0;
-            font-weight: 600;
-        }
+        .hero-section { padding: 42px 0 35px; text-align: center; }
+        .hero-logo-center { width: 115px; height: 115px; border-radius: 50%; object-fit: cover; border: 3.5px solid var(--accent-magenta); margin-bottom: 14px; animation: pulseGlow 2.2s infinite alternate ease-in-out; }
+        .hero-section h1 { font-size: 2.7rem; margin-bottom: 8px; }
+        .hero-tagline { font-size: 1.15rem; color: var(--text-secondary); max-width: 720px; margin: 0 auto 18px; font-weight: 600; }
 
-        .hero-section {
-            padding: 42px 0 35px;
-            text-align: center;
-        }
-
-        .hero-logo-center {
-            width: 115px;
-            height: 115px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3.5px solid var(--accent-magenta);
-            margin-bottom: 14px;
-            animation: pulseGlow 2.2s infinite alternate ease-in-out;
-        }
-
-        .hero-section h1 {
-            font-size: 2.7rem;
-            margin-bottom: 8px;
-        }
-
-        .hero-tagline {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 720px;
-            margin: 0 auto 18px;
-            font-weight: 600;
-        }
-
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 22px;
-        }
-
+        .hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
         .badge-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 6px 15px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            box-shadow: var(--shadow-glow);
-            transition: var(--transition);
+            background: var(--bg-card); border: 1px solid var(--border-color); padding: 6px 15px; border-radius: 25px;
+            font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 7px; box-shadow: var(--shadow-glow); transition: var(--transition);
         }
         .badge-item:hover { transform: translateY(-3px); border-color: var(--accent-purple); }
         .badge-item i { color: var(--accent-magenta); }
 
         .status-banner-card {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 16px;
-            padding: 12px 20px;
-            max-width: 880px;
-            margin: 0 auto 24px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            box-shadow: var(--shadow-glow);
-            backdrop-filter: blur(12px);
+            background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 16px; padding: 12px 20px;
+            max-width: 880px; margin: 0 auto 24px; display: flex; justify-content: space-around; align-items: center;
+            flex-wrap: wrap; gap: 12px; box-shadow: var(--shadow-glow); backdrop-filter: blur(12px);
         }
+        .status-item { display: flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 700; }
 
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.92rem;
-            font-weight: 700;
-        }
+        .status-dot { width: 11px; height: 11px; border-radius: 50%; animation: liveBlink 1.5s infinite ease-in-out; }
+        .status-dot.green { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
+        .status-dot.yellow { background-color: #f59e0b; box-shadow: 0 0 10px #f59e0b; }
+        .status-dot.red { background-color: #ef4444; box-shadow: 0 0 10px #ef4444; }
 
-        .status-dot {
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background-color: #22c55e;
-            box-shadow: 0 0 10px #22c55e;
-            animation: liveBlink 1.5s infinite ease-in-out;
-        }
+        .status-text span { font-family: 'Orbitron', sans-serif; font-size: 0.82rem; }
+        .status-text span.green { color: #4ade80; }
+        .status-text span.yellow { color: #fbbf24; }
+        .status-text span.red { color: #f87171; }
+        [data-theme="light"] .status-text span.green { color: #16a34a; }
+        [data-theme="light"] .status-text span.yellow { color: #d97706; }
+        [data-theme="light"] .status-text span.red { color: #dc2626; }
 
-        .status-text span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.82rem;
-            color: #4ade80;
-        }
-        [data-theme="light"] .status-text span { color: #16a34a; }
-
-        .hero-cta-group {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
+        .hero-cta-group { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 26px;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            box-shadow: 0 5px 18px rgba(147, 51, 234, 0.45);
-            transition: var(--transition);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta)); color: #fff; text-decoration: none;
+            padding: 12px 26px; border-radius: 30px; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.9rem;
+            display: inline-flex; align-items: center; gap: 9px; box-shadow: 0 5px 18px rgba(147, 51, 234, 0.45); transition: var(--transition);
         }
-
         .btn-outline {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1.5px solid var(--border-color);
-            text-decoration: none;
-            padding: 12px 26px;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            transition: var(--transition);
+            background: var(--bg-card); color: var(--text-primary); border: 1.5px solid var(--border-color); text-decoration: none;
+            padding: 12px 26px; border-radius: 30px; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.9rem;
+            display: inline-flex; align-items: center; gap: 9px; transition: var(--transition);
         }
-
-        .btn-primary:hover, .btn-outline:hover {
-            transform: translateY(-3px) scale(1.02);
-            border-color: var(--accent-magenta);
-            filter: brightness(1.08);
-        }
+        .btn-primary:hover, .btn-outline:hover { transform: translateY(-3px) scale(1.02); border-color: var(--accent-magenta); filter: brightness(1.08); }
 
         .about-card {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 22px;
-            padding: 32px;
-            box-shadow: var(--shadow-glow);
-            backdrop-filter: blur(12px);
-            max-width: 940px;
-            margin: 0 auto;
-            text-align: center;
+            background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 22px; padding: 32px;
+            box-shadow: var(--shadow-glow); backdrop-filter: blur(12px); max-width: 940px; margin: 0 auto; text-align: center;
         }
-
-        .about-quote {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--accent-magenta);
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: 1px;
-        }
-
-        .about-text {
-            color: var(--text-secondary);
-            font-size: 1.03rem;
-            line-height: 1.65;
-            margin-bottom: 24px;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .about-subbox {
-            background: var(--bg-subbox);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 18px;
-            transition: var(--transition);
-        }
+        .about-quote { font-family: 'Orbitron', sans-serif; color: var(--accent-magenta); font-size: 1.2rem; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px; white-space: pre-line; }
+        .about-text { color: var(--text-secondary); font-size: 1.03rem; line-height: 1.65; margin-bottom: 24px; }
+        .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; margin-top: 20px; }
+        .about-subbox { background: var(--bg-subbox); border: 1px solid var(--border-color); border-radius: 16px; padding: 18px; transition: var(--transition); }
         .about-subbox:hover { transform: translateY(-4px); border-color: var(--accent-purple); }
-
-        .about-subbox h4 {
-            font-size: 1rem;
-            color: var(--accent-glow);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .about-subbox ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .about-subbox ul li {
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            font-weight: 600;
-        }
+        .about-subbox h4 { font-size: 1rem; color: var(--accent-glow); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .about-subbox ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+        .about-subbox ul li { font-size: 0.9rem; color: var(--text-primary); display: flex; align-items: center; gap: 7px; font-weight: 600; }
         .about-subbox ul li i { color: var(--accent-purple); font-size: 0.8rem; }
-
         .about-footer-tag {
-            margin-top: 24px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 0.96rem;
+            margin-top: 24px; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 0.96rem;
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; white-space: pre-line;
         }
 
         .video-wrapper-neon {
-            position: relative;
-            width: 100%;
-            max-width: 820px;
-            margin: 0 auto;
-            aspect-ratio: 16 / 9;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 2px solid var(--accent-magenta);
-            box-shadow: 0 0 30px rgba(217, 70, 239, 0.45);
-            background: #000;
+            position: relative; width: 100%; max-width: 820px; margin: 0 auto; aspect-ratio: 16 / 9;
+            border-radius: 20px; overflow: hidden; border: 2px solid var(--accent-magenta);
+            box-shadow: 0 0 30px rgba(217, 70, 239, 0.45); background: #000;
         }
+        .video-wrapper-neon iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        .video-wrapper-neon iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .hardware-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-            margin-bottom: 32px;
-            perspective: 1000px;
-        }
-
+        .hardware-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 32px; perspective: 1000px; }
         .hardware-card {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 18px;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            backdrop-filter: blur(12px);
-            box-shadow: var(--shadow-glow);
-            transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            transform-style: preserve-3d;
+            background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 18px; padding: 16px;
+            display: flex; flex-direction: column; align-items: center; text-align: center; backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-glow); transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease; transform-style: preserve-3d;
         }
-
-        .hardware-card:hover {
-            border-color: var(--accent-magenta);
-            box-shadow: 0 14px 32px rgba(139, 92, 246, 0.38);
-        }
-
-        .img-container {
-            width: 100%;
-            height: 175px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 14px;
-            border: 1px solid var(--border-color);
-        }
-
-        .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.45s ease;
-        }
+        .hardware-card:hover { border-color: var(--accent-magenta); box-shadow: 0 14px 32px rgba(139, 92, 246, 0.38); }
+        .img-container { width: 100%; height: 175px; border-radius: 12px; overflow: hidden; margin-bottom: 14px; border: 1px solid var(--border-color); }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s ease; }
         .hardware-card:hover .img-container img { transform: scale(1.08); }
-
-        .hardware-card h3 {
-            font-size: 1.2rem;
-            color: var(--accent-glow);
-            margin-bottom: 6px;
-        }
-
-        .hardware-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.4;
-            margin-bottom: 14px;
-            flex: 1;
-        }
-
+        .hardware-card h3 { font-size: 1.2rem; color: var(--accent-glow); margin-bottom: 6px; }
+        .hardware-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.4; margin-bottom: 14px; flex: 1; }
         .card-mini-btn {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(217, 70, 239, 0.18));
-            border: 1.5px solid var(--accent-purple);
-            color: var(--text-primary);
-            padding: 8px 18px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.86rem;
-            transition: var(--transition);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(217, 70, 239, 0.18)); border: 1.5px solid var(--accent-purple);
+            color: var(--text-primary); padding: 8px 18px; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.86rem; transition: var(--transition);
         }
-        .card-mini-btn:hover {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            color: #fff;
-            border-color: transparent;
-            transform: scale(1.05);
-        }
+        .card-mini-btn:hover { background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta)); color: #fff; border-color: transparent; transform: scale(1.05); }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .feature-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 18px 14px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-        }
-
-        .feature-box:hover {
-            border-color: var(--accent-magenta);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-glow);
-        }
-
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .feature-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 18px 14px; text-align: center; backdrop-filter: blur(10px); transition: var(--transition); }
+        .feature-box:hover { border-color: var(--accent-magenta); transform: translateY(-5px); box-shadow: var(--shadow-glow); }
         .feature-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 10px;
-            border-radius: 14px;
+            width: 48px; height: 48px; margin: 0 auto 10px; border-radius: 14px;
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.2));
-            border: 1px solid var(--accent-purple);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.35rem;
-            color: var(--accent-purple);
-            transition: transform 0.3s ease;
+            border: 1px solid var(--accent-purple); display: flex; align-items: center; justify-content: center;
+            font-size: 1.35rem; color: var(--accent-purple); transition: transform 0.3s ease;
         }
-        .feature-box:hover .feature-icon {
-            transform: rotate(10deg) scale(1.1);
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            color: #ffffff;
-        }
+        .feature-box:hover .feature-icon { transform: rotate(10deg) scale(1.1); background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta)); color: #ffffff; }
+        .feature-box h4 { font-family: 'Orbitron', sans-serif; font-size: 0.92rem; margin-bottom: 5px; color: var(--text-primary); }
+        .feature-box p { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.35; }
 
-        .feature-box h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.92rem;
-            margin-bottom: 5px;
-            color: var(--text-primary);
-        }
-
-        .feature-box p {
-            font-size: 0.86rem;
-            color: var(--text-secondary);
-            line-height: 1.35;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .step-card {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 18px;
-            padding: 24px 20px;
-            position: relative;
-            text-align: center;
-            backdrop-filter: blur(12px);
-            box-shadow: var(--shadow-glow);
-            transition: var(--transition);
-        }
-
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .step-card { background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 18px; padding: 24px 20px; position: relative; text-align: center; backdrop-filter: blur(12px); box-shadow: var(--shadow-glow); transition: var(--transition); }
         .step-card:hover { transform: translateY(-6px); border-color: var(--accent-magenta); }
-
         .step-number {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.15rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 14px;
-            box-shadow: 0 0 15px rgba(147, 51, 234, 0.55);
+            width: 44px; height: 44px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta)); color: #fff;
+            font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.15rem; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; box-shadow: 0 0 15px rgba(147, 51, 234, 0.55);
         }
-
         .step-card h3 { font-size: 1.05rem; color: var(--accent-glow); margin-bottom: 8px; }
         .step-card p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.45; }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 22px;
-        }
-
-        .price-card {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 20px;
-            padding: 22px;
-            box-shadow: var(--shadow-glow);
-            backdrop-filter: blur(12px);
-            transition: var(--transition);
-        }
-
+        .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .price-card { background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 20px; padding: 22px; box-shadow: var(--shadow-glow); backdrop-filter: blur(12px); transition: var(--transition); }
         .price-card:hover { transform: translateY(-5px); border-color: var(--accent-magenta); }
-
-        .price-card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 10px;
-        }
-
+        .price-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; }
         .price-card-header h3 { font-size: 1.25rem; color: var(--accent-glow); }
         .price-card-header i { font-size: 1.7rem; color: var(--accent-magenta); }
 
@@ -828,296 +331,85 @@
         .price-table th, .price-table td { padding: 10px 8px; text-align: left; }
         .price-table th { color: var(--text-secondary); font-size: 0.85rem; border-bottom: 1px solid var(--border-color); text-transform: uppercase; }
         .price-table td { font-size: 1rem; font-weight: 700; border-bottom: 1px solid rgba(139, 92, 246, 0.14); }
-        .price-table tbody tr { transition: background 0.2s ease; }
         .price-table tbody tr:hover { background: rgba(139, 92, 246, 0.08); }
         .price-highlight { color: var(--accent-magenta); }
         .price-cyan { color: var(--accent-cyan); font-weight: 800; }
 
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-
-        .game-card {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 16px;
-            padding: 10px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .game-card:hover {
-            border-color: var(--accent-magenta);
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 10px 24px rgba(139, 92, 246, 0.35);
-        }
-        
-        .game-img-box {
-            width: 100%;
-            height: 135px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 8px;
-        }
-
-        .game-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
+        .games-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 18px; }
+        .game-card { background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 16px; padding: 10px; text-align: center; backdrop-filter: blur(10px); transition: var(--transition); cursor: pointer; }
+        .game-card:hover { border-color: var(--accent-magenta); transform: translateY(-6px) scale(1.02); box-shadow: 0 10px 24px rgba(139, 92, 246, 0.35); }
+        .game-img-box { width: 100%; height: 135px; border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+        .game-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
         .game-card:hover .game-img-box img { transform: scale(1.1); }
-
         .game-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--text-primary); }
 
-        .more-games-box {
-            background: var(--bg-card);
-            border: 2px dashed var(--accent-purple);
-            border-radius: 14px;
-            padding: 14px 20px;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-        }
+        .more-games-box { background: var(--bg-card); border: 2px dashed var(--accent-purple); border-radius: 14px; padding: 14px 20px; text-align: center; font-size: 1rem; font-weight: 700; color: var(--text-secondary); }
 
-        .rules-faq-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.15fr;
-            gap: 24px;
-            align-items: start;
-        }
-
-        .rules-card, .faq-wrapper {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: var(--shadow-glow);
-            backdrop-filter: blur(12px);
-        }
-
-        .rules-card h3, .faq-wrapper h3 {
-            font-size: 1.2rem;
-            color: var(--accent-glow);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .rules-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .rules-faq-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; }
+        .rules-card, .faq-wrapper { background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-glow); backdrop-filter: blur(12px); }
+        .rules-card h3, .faq-wrapper h3 { font-size: 1.2rem; color: var(--accent-glow); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .rules-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
         .rules-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.96rem;
-            line-height: 1.45;
-            color: var(--text-primary);
-            background: var(--bg-subbox);
-            padding: 11px 13px;
-            border-radius: 10px;
-            border-left: 3.5px solid var(--accent-purple);
-            transition: transform 0.2s ease;
+            display: flex; align-items: flex-start; gap: 10px; font-size: 0.96rem; line-height: 1.45; color: var(--text-primary);
+            background: var(--bg-subbox); padding: 11px 13px; border-radius: 10px; border-left: 3.5px solid var(--accent-purple); transition: transform 0.2s ease;
         }
         .rules-list li:hover { transform: translateX(4px); }
+        .rules-list li i { color: var(--accent-magenta); margin-top: 3px; flex-shrink: 0; }
 
-        .rules-list li i {
-            color: var(--accent-magenta);
-            margin-top: 3px;
-            flex-shrink: 0;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-        }
+        .faq-item { border-bottom: 1px solid var(--border-color); margin-bottom: 10px; padding-bottom: 10px; }
         .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
         .faq-question {
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 700;
-            text-align: left;
-            padding: 8px 4px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            transition: color 0.2s ease;
+            width: 100%; background: transparent; border: none; color: var(--text-primary); font-size: 1rem; font-weight: 700;
+            text-align: left; padding: 8px 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; transition: color 0.2s ease;
         }
         .faq-question:hover { color: var(--accent-purple); }
-
-        .faq-question i {
-            color: var(--accent-magenta);
-            transition: transform 0.3s ease;
-        }
+        .faq-question i { color: var(--accent-magenta); transition: transform 0.3s ease; }
         .faq-item.open .faq-question i { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; color: var(--text-secondary); font-size: 0.94rem; line-height: 1.45; padding: 0 4px; }
+        .faq-item.open .faq-answer { max-height: 220px; padding-top: 6px; }
 
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease, padding 0.35s ease;
-            color: var(--text-secondary);
-            font-size: 0.94rem;
-            line-height: 1.45;
-            padding: 0 4px;
-        }
-        .faq-item.open .faq-answer {
-            max-height: 200px;
-            padding-top: 6px;
-        }
-
-        .booking-container {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 22px;
-            padding: 26px 28px;
-            box-shadow: var(--shadow-glow);
-            max-width: 920px;
-            margin: 0 auto;
-            backdrop-filter: blur(15px);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-bottom: 10px;
-        }
-
+        .booking-container { background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 22px; padding: 26px 28px; box-shadow: var(--shadow-glow); max-width: 920px; margin: 0 auto; backdrop-filter: blur(15px); }
+        .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
         .form-group.full-width { grid-column: 1 / -1; }
-
-        .form-group label {
-            font-weight: 700;
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .form-group label { font-weight: 700; font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+        .form-group input, .form-group select {
+            background: var(--input-bg); border: 1.5px solid var(--border-color); padding: 10px 13px; border-radius: 10px;
+            color: var(--text-primary); font-size: 0.95rem; outline: none; transition: var(--transition);
         }
-
-        .form-group input, 
-        .form-group select {
-            background: var(--input-bg);
-            border: 1.5px solid var(--border-color);
-            padding: 10px 13px;
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            outline: none;
-            transition: var(--transition);
-        }
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: var(--accent-magenta);
-            box-shadow: 0 0 12px rgba(139, 92, 246, 0.35);
-        }
+        .form-group input:focus, .form-group select:focus { border-color: var(--accent-magenta); box-shadow: 0 0 12px rgba(139, 92, 246, 0.35); }
 
         .total-price-box {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(217, 70, 239, 0.15));
-            border: 1.5px solid var(--accent-purple);
-            border-radius: 12px;
-            padding: 10px 16px;
-            margin-bottom: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border: 1.5px solid var(--accent-purple); border-radius: 12px; padding: 10px 16px; margin-bottom: 18px;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
         .total-price-label { font-size: 0.95rem; font-weight: 700; color: var(--text-secondary); }
         .total-price-value { font-family: 'Orbitron', sans-serif; font-size: 1.35rem; font-weight: 900; color: var(--accent-magenta); }
 
         .btn-submit-admin {
-            width: 100%;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
-            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.48);
-            color: #fff;
-            border: none;
-            padding: 14px 18px;
-            border-radius: 12px;
-            font-size: 0.98rem;
-            font-weight: 800;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: var(--transition);
+            width: 100%; background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.48); color: #fff; border: none; padding: 14px 18px; border-radius: 12px;
+            font-size: 0.98rem; font-weight: 800; font-family: 'Orbitron', sans-serif; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px; transition: var(--transition);
         }
-
         .btn-submit-admin:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-submit-admin:disabled { opacity: 0.65; cursor: wait; }
 
         .order-sent-notice {
-            margin-top: 14px;
-            padding: 12px 16px;
-            border-radius: 10px;
-            background: rgba(34, 197, 94, 0.16);
-            border: 1px solid #22c55e;
-            color: #86efac;
-            font-size: 0.95rem;
-            font-weight: 700;
-            display: none;
+            margin-top: 14px; padding: 12px 16px; border-radius: 10px; background: rgba(34, 197, 94, 0.16);
+            border: 1px solid #22c55e; color: #86efac; font-size: 0.95rem; font-weight: 700; display: none;
         }
-        [data-theme="light"] .order-sent-notice {
-            color: #166534;
-            background: rgba(34, 197, 94, 0.14);
-        }
+        [data-theme="light"] .order-sent-notice { color: #166534; background: rgba(34, 197, 94, 0.14); }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 22px;
-        }
-
-        .info-card {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-color);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: var(--shadow-glow);
-            backdrop-filter: blur(12px);
-        }
-
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .info-card { background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-glow); backdrop-filter: blur(12px); }
         .info-card h3 { font-size: 1.25rem; margin-bottom: 12px; color: var(--accent-glow); display: flex; align-items: center; gap: 8px; }
         .address-box p { margin-bottom: 10px; font-size: 0.98rem; line-height: 1.5; }
 
         .btn-action {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 9px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: #fff;
-            margin-top: 6px;
-            margin-right: 6px;
-            transition: var(--transition);
+            display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border-radius: 10px;
+            text-decoration: none; font-weight: 700; font-size: 0.9rem; color: #fff; margin-top: 6px; margin-right: 6px; transition: var(--transition);
         }
         .btn-gmap { background: #ea4335; }
         .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
@@ -1126,61 +418,28 @@
 
         .contact-list { list-style: none; }
         .contact-list li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--bg-subbox);
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            font-size: 0.95rem;
+            margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;
+            background: var(--bg-subbox); padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 0.95rem;
         }
         .contact-list a { color: var(--accent-magenta); text-decoration: none; font-weight: 700; }
 
         .floating-wa-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 999;
-            background: linear-gradient(135deg, #16a34a, #25d366);
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 0.95rem;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-            animation: waPulse 2s infinite;
-            transition: transform 0.25s ease;
+            position: fixed; bottom: 24px; right: 24px; z-index: 999;
+            background: linear-gradient(135deg, #16a34a, #25d366); color: #fff; text-decoration: none;
+            padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px;
+            font-weight: 800; font-size: 0.95rem; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5); animation: waPulse 2s infinite; transition: transform 0.25s ease;
         }
-
         .floating-wa-btn i { font-size: 1.5rem; }
         .floating-wa-btn:hover { transform: translateY(-4px) scale(1.04); }
 
-        footer {
-            background: var(--nav-bg);
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.88rem;
-            padding: 20px 15px;
-            margin-top: 20px;
-        }
+        footer { background: var(--nav-bg); border-top: 1px solid var(--border-color); text-align: center; color: var(--text-secondary); font-size: 0.88rem; padding: 20px 15px; margin-top: 20px; }
 
         @media (max-width: 960px) {
             .navbar-inner { flex-direction: column; gap: 10px; padding: 12px; }
             .nav-links { justify-content: center; }
             .hero-section h1 { font-size: 2rem; }
-            .hardware-grid, .steps-grid, .pricing-grid, .rules-faq-grid, .info-grid, .form-grid, .about-grid {
-                grid-template-columns: 1fr;
-            }
-            .features-grid, .games-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .hardware-grid, .steps-grid, .pricing-grid, .rules-faq-grid, .info-grid, .form-grid, .about-grid { grid-template-columns: 1fr; }
+            .features-grid, .games-grid { grid-template-columns: repeat(2, 1fr); }
             .floating-wa-btn span { display: none; }
             .floating-wa-btn { padding: 14px; border-radius: 50%; }
         }
@@ -1195,7 +454,7 @@
         <div class="navbar-inner">
             <a href="#beranda" class="logo">
                 <img src="logo.png" alt="Hunter PlayStation Logo" class="brand-logo-img">
-                <span>HUNTER PLAYSTATION</span>
+                <span id="navBrandText">HUNTER PLAYSTATION</span>
             </a>
 
             <nav class="nav-links">
@@ -1223,28 +482,28 @@
     <section id="beranda" class="hero-section">
         <div class="container">
             <img src="logo.png" alt="Hunter PlayStation" class="hero-logo-center">
-            <h1>HUNTER PLAYSTATION</h1>
-            <p class="hero-tagline">Pusat Sewa PS4, PS3 & PlayBox / PSBox Portable Terlengkap dan Termurah di Wilayah Majalengka – Cirebon.</p>
+            <h1 id="heroTitle">HUNTER PLAYSTATION</h1>
+            <p class="hero-tagline" id="heroTagline">Pusat Sewa PS4, PS3 & PlayBox / PSBox Portable Terlengkap dan Termurah di Wilayah Majalengka – Cirebon.</p>
 
             <div class="hero-badges">
-                <div class="badge-item"><i class="fa-solid fa-gamepad"></i> Stik Original</div>
-                <div class="badge-item"><i class="fa-solid fa-tv"></i> TV LED HD</div>
-                <div class="badge-item"><i class="fa-solid fa-briefcase"></i> PlayBox Portable</div>
-                <div class="badge-item"><i class="fa-solid fa-truck-fast"></i> Siap Antar ke Rumah</div>
+                <div class="badge-item"><i class="fa-solid fa-gamepad"></i> <span id="badge1">Stik Original</span></div>
+                <div class="badge-item"><i class="fa-solid fa-tv"></i> <span id="badge2">TV LED HD</span></div>
+                <div class="badge-item"><i class="fa-solid fa-briefcase"></i> <span id="badge3">PlayBox Portable</span></div>
+                <div class="badge-item"><i class="fa-solid fa-truck-fast"></i> <span id="badge4">Siap Antar ke Rumah</span></div>
             </div>
 
             <div class="status-banner-card">
                 <div class="status-item">
-                    <div class="status-dot"></div>
-                    <div class="status-text">PS4: <span>READY (AMBIL / ANTAR)</span></div>
+                    <div class="status-dot green" id="statusPs4Dot"></div>
+                    <div class="status-text">PS4: <span class="green" id="statusPs4Text">READY (AMBIL / ANTAR)</span></div>
                 </div>
                 <div class="status-item">
-                    <div class="status-dot"></div>
-                    <div class="status-text">PS3: <span>READY STOK</span></div>
+                    <div class="status-dot green" id="statusPs3Dot"></div>
+                    <div class="status-text">PS3: <span class="green" id="statusPs3Text">READY STOK</span></div>
                 </div>
                 <div class="status-item">
-                    <div class="status-dot"></div>
-                    <div class="status-text">PlayBox: <span>READY (PORTABLE)</span></div>
+                    <div class="status-dot green" id="statusBoxDot"></div>
+                    <div class="status-text">PlayBox: <span class="green" id="statusBoxText">READY (PORTABLE)</span></div>
                 </div>
             </div>
 
@@ -1258,38 +517,28 @@
     <section id="tentang" class="reveal">
         <div class="container">
             <div class="about-card">
-                <div class="about-quote">🎮 HUNTER PLAYSTATION<br>YOUR ENTERTAINMENT, YOUR CHALLENGE!</div>
-                <p class="about-text">
-                    Hunter PlayStation merupakan tempat hiburan gaming yang hadir untuk memberikan pengalaman bermain game yang seru, nyaman, dan menyenangkan bagi semua kalangan. Kami menyediakan layanan penyewaan PlayStation 3 dan PlayStation 4 dengan berbagai pilihan game menarik, mulai dari sepak bola, pertarungan, petualangan, aksi, hingga game multiplayer yang bisa dimainkan bersama teman maupun keluarga. Bagi kami, bermain game bukan sekadar hiburan, tetapi juga tentang kebersamaan, persaingan, keseruan, dan menciptakan kenangan bersama.
-                </p>
+                <div class="about-quote" id="aboutQuote">🎮 HUNTER PLAYSTATION
+YOUR ENTERTAINMENT, YOUR CHALLENGE!</div>
+                <p class="about-text" id="aboutDesc"></p>
 
                 <div class="about-grid">
                     <div class="about-subbox stagger-item">
                         <h4><i class="fa-solid fa-bullseye"></i> Visi Kami</h4>
-                        <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.45;">Menjadi tempat hiburan gaming yang menyenangkan, terpercaya, dan dapat dinikmati oleh semua kalangan.</p>
+                        <p id="aboutVision" style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.45;"></p>
                     </div>
 
                     <div class="about-subbox stagger-item">
                         <h4><i class="fa-solid fa-gamepad"></i> Layanan Kami</h4>
-                        <ul>
-                            <li><i class="fa-solid fa-check"></i> Penyewaan PlayStation 3</li>
-                            <li><i class="fa-solid fa-check"></i> Penyewaan PlayStation 4</li>
-                            <li><i class="fa-solid fa-check"></i> Pilihan game menarik</li>
-                            <li><i class="fa-solid fa-check"></i> Durasi sewa fleksibel</li>
-                            <li><i class="fa-solid fa-check"></i> Menu makanan & minuman</li>
-                        </ul>
+                        <ul id="aboutServicesList"></ul>
                     </div>
 
                     <div class="about-subbox stagger-item">
                         <h4><i class="fa-solid fa-trophy"></i> Komitmen Kami</h4>
-                        <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.45;">Kami terus berusaha memberikan pelayanan terbaik, menjaga kualitas fasilitas, serta menciptakan lingkungan bermain yang nyaman bagi setiap pelanggan.</p>
+                        <p id="aboutCommitment" style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.45;"></p>
                     </div>
                 </div>
 
-                <div class="about-footer-tag">
-                    "BELUM MENANG JANGAN PULANG, BELUM PUAS LANJUT MORE AND MORE!"<br>
-                    PLAY MORE. ENJOY MORE. BE A CHAMPION! 🎮
-                </div>
+                <div class="about-footer-tag" id="aboutSlogan"></div>
             </div>
         </div>
     </section>
@@ -1304,28 +553,16 @@
             </div>
 
             <div style="margin-bottom: 35px;">
-                <h3 style="text-align: center; color: var(--accent-glow); margin-bottom: 14px; font-size: 1.2rem;">🎮 Game PS 3 Recommendation</h3>
+                <h3 id="video1Title" style="text-align: center; color: var(--accent-glow); margin-bottom: 14px; font-size: 1.2rem;">🎮 Game PS 3 Recommendation</h3>
                 <div class="video-wrapper-neon stagger-item">
-                    <iframe 
-                        src="https://www.youtube.com/embed/pZYQGUZRtGc?rel=0" 
-                        title="Game PS 3 Recommendation - Hunter PlayStation" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                    <iframe id="video1Frame" src="https://www.youtube.com/embed/pZYQGUZRtGc?rel=0" title="Video Rekomendasi 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
 
             <div>
-                <h3 style="text-align: center; color: var(--accent-glow); margin-bottom: 14px; font-size: 1.2rem;">🎮 Game PS 4 Recommendation</h3>
+                <h3 id="video2Title" style="text-align: center; color: var(--accent-glow); margin-bottom: 14px; font-size: 1.2rem;">🎮 Game PS 4 Recommendation</h3>
                 <div class="video-wrapper-neon stagger-item">
-                    <iframe 
-                        src="https://www.youtube.com/embed/9vKxtujZ1vk?rel=0" 
-                        title="Top 20 Best PS4 Story Games - Hunter PlayStation" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                    <iframe id="video2Frame" src="https://www.youtube.com/embed/9vKxtujZ1vk?rel=0" title="Video Rekomendasi 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -1342,55 +579,28 @@
 
             <div class="hardware-grid">
                 <div class="hardware-card tilt-card stagger-item">
-                    <div class="img-container">
-                        <img src="ps4.jpg" alt="PlayStation 4">
-                    </div>
-                    <h3>PlayStation 4</h3>
-                    <p>Grafis tajam memukau, dilengkapi stik DualShock 4 original responsif dan deretan game terbaru.</p>
+                    <div class="img-container"><img id="unitPs4Img" src="ps4.jpg" alt="PlayStation 4"></div>
+                    <h3 id="unitPs4Title">PlayStation 4</h3>
+                    <p id="unitPs4Desc"></p>
                     <a href="#pemesanan" class="card-mini-btn" onclick="presetPackage('PS4 Only')">Sewa PS4</a>
                 </div>
 
                 <div class="hardware-card tilt-card stagger-item">
-                    <div class="img-container">
-                        <img src="ps3.jpg" alt="PlayStation 3">
-                    </div>
-                    <h3>PlayStation 3</h3>
-                    <p>Pilihan tepat buat mabar bola atau nostalgia game seru bersama teman dengan tarif super hemat.</p>
+                    <div class="img-container"><img id="unitPs3Img" src="ps3.jpg" alt="PlayStation 3"></div>
+                    <h3 id="unitPs3Title">PlayStation 3</h3>
+                    <p id="unitPs3Desc"></p>
                     <a href="#pemesanan" class="card-mini-btn" onclick="presetPackage('PS3 Only')">Sewa PS3</a>
                 </div>
 
                 <div class="hardware-card tilt-card stagger-item">
-                    <div class="img-container">
-                        <img src="psbox.jpg" alt="PlayBox Portable">
-                    </div>
-                    <h3>PlayBox / PSBox</h3>
-                    <p>Koper gaming portable praktis yang sudah terintegrasi layar monitor—tinggal colok listrik langsung main di mana saja!</p>
+                    <div class="img-container"><img id="unitBoxImg" src="psbox.jpg" alt="PlayBox Portable"></div>
+                    <h3 id="unitBoxTitle">PlayBox / PSBox</h3>
+                    <p id="unitBoxDesc"></p>
                     <a href="#pemesanan" class="card-mini-btn" onclick="presetPackage('PlayBox PS4')">Sewa PlayBox</a>
                 </div>
             </div>
 
-            <div class="features-grid">
-                <div class="feature-box stagger-item">
-                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h4>Unit Terawat</h4>
-                    <p>Konsol dan stik selalu dibersihkan serta dites tombolnya sebelum disewakan.</p>
-                </div>
-                <div class="feature-box stagger-item">
-                    <div class="feature-icon"><i class="fa-solid fa-wallet"></i></div>
-                    <h4>Harga Hemat</h4>
-                    <p>Tersedia paket per jam, 12 jam, hingga 24 jam dengan tarif ramah di kantong.</p>
-                </div>
-                <div class="feature-box stagger-item">
-                    <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
-                    <h4>Antar Jemput</h4>
-                    <p>Layanan pengantaran langsung ke rumah untuk area Cipanas, Dukupuntang & sekitarnya.</p>
-                </div>
-                <div class="feature-box stagger-item">
-                    <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
-                    <h4>Fast Respon</h4>
-                    <p>Dua admin siap melayani pemesanan dan bantuan teknis dengan ramah dan cepat.</p>
-                </div>
-            </div>
+            <div class="features-grid" id="featuresGrid"></div>
         </div>
     </section>
 
@@ -1440,32 +650,12 @@
                     </div>
                     <table class="price-table">
                         <thead>
-                            <tr>
-                                <th>Durasi</th>
-                                <th>PS Only</th>
-                                <th>PS + TV</th>
-                                <th>PlayBox PS4</th>
-                            </tr>
+                            <tr><th>Durasi</th><th>PS Only</th><th>PS + TV</th><th>PlayBox PS4</th></tr>
                         </thead>
-                        <tbody id="ps4PricingBody">
-                            <tr>
-                                <td>1 Jam</td>
-                                <td class="price-highlight" id="t-ps4-1h-only">Rp 6.000</td>
-                                <td id="t-ps4-1h-tv">—</td>
-                                <td class="price-cyan" id="t-ps4-1h-box">Rp 8.000</td>
-                            </tr>
-                            <tr>
-                                <td>12 Jam</td>
-                                <td class="price-highlight" id="t-ps4-12h-only">Rp 60.000</td>
-                                <td class="price-highlight" id="t-ps4-12h-tv">Rp 65.000</td>
-                                <td class="price-cyan" id="t-ps4-12h-box">Rp 90.000</td>
-                            </tr>
-                            <tr>
-                                <td>24 Jam</td>
-                                <td class="price-highlight" id="t-ps4-24h-only">Rp 85.000</td>
-                                <td class="price-highlight" id="t-ps4-24h-tv">Rp 90.000</td>
-                                <td class="price-cyan" id="t-ps4-24h-box">Rp 150.000</td>
-                            </tr>
+                        <tbody>
+                            <tr><td>1 Jam</td><td id="t-ps4-1h-only"></td><td id="t-ps4-1h-tv"></td><td id="t-ps4-1h-box"></td></tr>
+                            <tr><td>12 Jam</td><td id="t-ps4-12h-only"></td><td id="t-ps4-12h-tv"></td><td id="t-ps4-12h-box"></td></tr>
+                            <tr><td>24 Jam</td><td id="t-ps4-24h-only"></td><td id="t-ps4-24h-tv"></td><td id="t-ps4-24h-box"></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1477,32 +667,12 @@
                     </div>
                     <table class="price-table">
                         <thead>
-                            <tr>
-                                <th>Durasi</th>
-                                <th>PS Only</th>
-                                <th>PS + TV</th>
-                                <th>PlayBox PS3</th>
-                            </tr>
+                            <tr><th>Durasi</th><th>PS Only</th><th>PS + TV</th><th>PlayBox PS3</th></tr>
                         </thead>
-                        <tbody id="ps3PricingBody">
-                            <tr>
-                                <td>1 Jam</td>
-                                <td class="price-highlight" id="t-ps3-1h-only">Rp 5.000</td>
-                                <td id="t-ps3-1h-tv">—</td>
-                                <td class="price-cyan" id="t-ps3-1h-box">Rp 6.000</td>
-                            </tr>
-                            <tr>
-                                <td>12 Jam</td>
-                                <td class="price-highlight" id="t-ps3-12h-only">Rp 50.000</td>
-                                <td class="price-highlight" id="t-ps3-12h-tv">Rp 55.000</td>
-                                <td class="price-cyan" id="t-ps3-12h-box">Rp 75.000</td>
-                            </tr>
-                            <tr>
-                                <td>24 Jam</td>
-                                <td class="price-highlight" id="t-ps3-24h-only">Rp 75.000</td>
-                                <td class="price-highlight" id="t-ps3-24h-tv">Rp 80.000</td>
-                                <td class="price-cyan" id="t-ps3-24h-box">Rp 130.000</td>
-                            </tr>
+                        <tbody>
+                            <tr><td>1 Jam</td><td id="t-ps3-1h-only"></td><td id="t-ps3-1h-tv"></td><td id="t-ps3-1h-box"></td></tr>
+                            <tr><td>12 Jam</td><td id="t-ps3-12h-only"></td><td id="t-ps3-12h-tv"></td><td id="t-ps3-12h-box"></td></tr>
+                            <tr><td>24 Jam</td><td id="t-ps3-24h-only"></td><td id="t-ps3-24h-tv"></td><td id="t-ps3-24h-box"></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1519,44 +689,9 @@
                 <p class="section-desc">Klik salah satu game untuk langsung menambahkannya ke request catatan pemesanan!</p>
             </div>
 
-            <div class="games-grid">
-                <div class="game-card stagger-item" onclick="quickRequestGame('eFootball 2026')">
-                    <div class="game-img-box"><img src="efootball.jpg" alt="eFootball 2026"></div>
-                    <h4>eFootball 2026</h4>
-                </div>
-                <div class="game-card stagger-item" onclick="quickRequestGame('God of War')">
-                    <div class="game-img-box"><img src="gow.jpg" alt="God of War"></div>
-                    <h4>God of War</h4>
-                </div>
-                <div class="game-card stagger-item" onclick="quickRequestGame('COD: BO 6')">
-                    <div class="game-img-box"><img src="cod.jpg" alt="COD: BO 6"></div>
-                    <h4>COD: BO 6</h4>
-                </div>
-                <div class="game-card stagger-item" onclick="quickRequestGame('Tekken 7')">
-                    <div class="game-img-box"><img src="tekken.jpg" alt="Tekken 7"></div>
-                    <h4>Tekken 7</h4>
-                </div>
-                <div class="game-card stagger-item" onclick="quickRequestGame('Naruto UNS 4')">
-                    <div class="game-img-box"><img src="naruto.jpg" alt="Naruto UNS 4"></div>
-                    <h4>Naruto UNS 4</h4>
-                </div>
-                <div class="game-card stagger-item" onclick="quickRequestGame('GTA V')">
-                    <div class="game-img-box"><img src="gta5.jpg" alt="GTA V"></div>
-                    <h4>GTA V</h4>
-                </div>
-                <div class="game-card stagger-item" onclick="quickRequestGame('Resident Evil 6')">
-                    <div class="game-img-box"><img src="re6.jpg" alt="Resident Evil 6"></div>
-                    <h4>Resident Evil 6</h4>
-                </div>
-                <div class="game-card stagger-item" onclick="quickRequestGame('Mortal Kombat 11')">
-                    <div class="game-img-box"><img src="mortal.jpg" alt="Mortal Kombat 11"></div>
-                    <h4>Mortal Kombat 11</h4>
-                </div>
-            </div>
+            <div class="games-grid" id="gamesGrid"></div>
 
-            <div class="more-games-box">
-                ✨ ...Dan masih banyak puluhan judul game seru lainnya! Klik gambar game di atas untuk auto-request ke form pemesanan.
-            </div>
+            <div class="more-games-box" id="moreGamesNotice"></div>
         </div>
     </section>
 
@@ -1572,56 +707,12 @@
             <div class="rules-faq-grid">
                 <div class="rules-card stagger-item">
                     <h3><i class="fa-solid fa-file-contract"></i> Syarat & Ketentuan Sewa</h3>
-                    <ul class="rules-list">
-                        <li><i class="fa-solid fa-money-check-dollar"></i> <span>Pembayaran dilakukan lunas di awal saat serah terima unit (tunai atau transfer via DANA/Bank).</span></li>
-                        <li><i class="fa-solid fa-clock"></i> <span>Keterlambatan pengembalian unit lebih dari 30 menit tanpa konfirmasi akan dikenakan biaya tambahan sesuai tarif per jam.</span></li>
-                        <li><i class="fa-solid fa-screwdriver-wrench"></i> <span>Penyewa wajib menjaga unit konsol, stik, dan kabel. Kerusakan akibat kelalaian (jatuh, terkena air, dibanting) menjadi tanggung jawab penyewa.</span></li>
-                        <li><i class="fa-solid fa-ban"></i> <span>Dilarang keras membongkar segel unit, memindahtangankan, atau menggadaikan barang sewaan kepada pihak lain.</span></li>
-                    </ul>
+                    <ul class="rules-list" id="rulesList"></ul>
                 </div>
 
                 <div class="faq-wrapper stagger-item">
                     <h3><i class="fa-solid fa-circle-question"></i> Pertanyaan Sering Diajukan (FAQ)</h3>
-
-                    <div class="faq-item open">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>Apakah bisa diantar langsung ke rumah?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            Bisa! Kami melayani antar-jemput unit langsung ke rumah untuk area Cipanas, Dukupuntang, dan wilayah perbatasan Majalengka–Cirebon. Silakan cantumkan alamat lengkapmu di form pemesanan.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>Apa perbedaan paket PS Only, PS + TV, dan PlayBox?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <strong>PS Only</strong> hanya unit konsol, stik, dan kabel (TV pakai milikmu di rumah). <strong>PS + TV</strong> sudah termasuk TV LED dari kami. Sedangkan <strong>PlayBox</strong> adalah koper gaming portable yang sudah dilengkapi layar monitor di dalamnya sehingga praktis dibawa ke mana saja.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>Berapa stik yang didapat dalam satu paket sewa?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            Setiap penyewaan sudah otomatis mendapatkan <strong>2 buah stik wireless original</strong> siap mabar bersama teman atau keluarga.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>Bagaimana jika ingin memperpanjang durasi sewa?</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            Bisa banget! Cukup hubungi Admin FIAN AM atau Admin FIKI minimal 1 jam sebelum waktu sewa habis untuk konfirmasi ketersediaan jadwal berikutnya.
-                        </div>
-                    </div>
+                    <div id="faqListContainer"></div>
                 </div>
             </div>
         </div>
@@ -1716,9 +807,9 @@
                 <div class="info-card stagger-item">
                     <h3><i class="fa-solid fa-map-location-dot"></i> Alamat Basecamp Rental</h3>
                     <div class="address-box">
-                        <p><strong>Area Layanan: Majalengka – Cirebon</strong></p>
-                        <p>Blok Pagar Gunung, Desa Cipanas, Kecamatan Dukupuntang, Kabupaten Cirebon, Provinsi Jawa Barat.</p>
-                        <a href="https://maps.google.com/?q=Blok+Pagar+Gunung,+Desa+Cipanas,+Kecamatan+Dukupuntang,+Kabupaten+Cirebon" target="_blank" class="btn-action btn-gmap">
+                        <p><strong id="contactArea">Area Layanan: Majalengka – Cirebon</strong></p>
+                        <p id="contactAddress"></p>
+                        <a id="contactMapBtn" href="#" target="_blank" class="btn-action btn-gmap">
                             <i class="fa-solid fa-arrow-pointer"></i> Buka Google Maps
                         </a>
                     </div>
@@ -1727,29 +818,30 @@
                 <div class="info-card stagger-item">
                     <h3><i class="fa-solid fa-headset"></i> Kontak Resmi & Sosial Media</h3>
                     <ul class="contact-list">
-                        <li><span>Admin 1: <strong>FIAN AM</strong></span><a href="https://wa.me/6283823742523" target="_blank">083823742523</a></li>
-                        <li><span>Admin 2: <strong>FIKI</strong></span><a href="https://wa.me/6282129318975" target="_blank">082129318975</a></li>
-                        <li><span>Email Rental:</span><a href="mailto:huntersewaps@gmail.com">huntersewaps@gmail.com</a></li>
+                        <li><span>Admin 1: <strong id="admin1Name">FIAN AM</strong></span><a id="admin1Link" href="#" target="_blank">083823742523</a></li>
+                        <li><span>Admin 2: <strong id="admin2Name">FIKI</strong></span><a id="admin2Link" href="#" target="_blank">082129318975</a></li>
+                        <li><span>Email Rental:</span><a id="rentalEmailLink" href="mailto:huntersewaps@gmail.com">huntersewaps@gmail.com</a></li>
                     </ul>
                     <div style="margin-top: 12px;">
-                        <a href="https://www.instagram.com/admin_sewa__hunter_playstation?obrf=MTM2dHRta3B3YzNzNA==" target="_blank" class="btn-action btn-ig"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                        <a href="https://whatsapp.com/channel/0029VbDYyg34Y9lunMBEAS0z" target="_blank" class="btn-action btn-wa-channel"><i class="fa-solid fa-bullhorn"></i> Saluran WA</a>
+                        <a id="igLinkBtn" href="#" target="_blank" class="btn-action btn-ig"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                        <a id="waChannelBtn" href="#" target="_blank" class="btn-action btn-wa-channel"><i class="fa-solid fa-bullhorn"></i> Saluran WA</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <a href="https://wa.me/6283823742523?text=Halo%20Admin%20Hunter%20PlayStation%2C%20saya%20mau%20tanya%20ketersediaan%20unit%20sewa%20PS..." target="_blank" class="floating-wa-btn" title="Chat Admin via WhatsApp">
+    <a id="floatingWaBtn" href="https://wa.me/6283823742523" target="_blank" class="floating-wa-btn" title="Chat Admin via WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
         <span>Chat Admin WA</span>
     </a>
 
     <footer>
-        <p>&copy; 2026 <strong>HUNTER PLAYSTATION</strong> — Majalengka & Cirebon. All Rights Reserved.</p>
+        <p id="footerText">&copy; 2026 <strong>HUNTER PLAYSTATION</strong> — Majalengka & Cirebon. All Rights Reserved.</p>
     </footer>
 
     <script>
+        /* === EFEK VISUAL & UI === */
         document.addEventListener('click', function(e) {
             const spark = document.createElement('div');
             spark.className = 'click-spark';
@@ -1775,15 +867,10 @@
         document.querySelectorAll('.tilt-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -7;
-                const rotateY = ((x - centerX) / centerX) * 7;
+                const rotateX = (((e.clientY - rect.top) - rect.height / 2) / (rect.height / 2)) * -7;
+                const rotateY = (((e.clientX - rect.left) - rect.width / 2) / (rect.width / 2)) * 7;
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
             });
-
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
             });
@@ -1791,39 +878,27 @@
 
         function updateClock() {
             const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            const s = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('digitalClock').textContent = `${h}:${m}:${s} WIB`;
+            document.getElementById('digitalClock').textContent =
+                `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} WIB`;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
         const themeToggleBtn = document.getElementById('themeToggle');
         const themeLabel = document.getElementById('themeLabel');
-        const htmlElement = document.documentElement;
-
         themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            htmlElement.setAttribute('data-theme', newTheme);
-            if (newTheme === 'light') {
-                themeToggleBtn.querySelector('i').className = 'fa-solid fa-moon';
-                themeLabel.textContent = 'Ungu Gelap';
-            } else {
-                themeToggleBtn.querySelector('i').className = 'fa-solid fa-sun';
-                themeLabel.textContent = 'Ungu Putih';
-            }
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggleBtn.querySelector('i').className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            themeLabel.textContent = isDark ? 'Ungu Gelap' : 'Ungu Putih';
         });
 
         function toggleFaq(button) {
-            const item = button.parentElement;
-            item.classList.toggle('open');
+            button.parentElement.classList.toggle('open');
         }
 
         function presetPackage(pkgName) {
-            const pkgSelect = document.getElementById('packageSelect');
-            pkgSelect.value = pkgName;
+            document.getElementById('packageSelect').value = pkgName;
             calculateTotalPrice();
         }
 
@@ -1846,74 +921,244 @@
         function handleScroll() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            progressBar.style.width = scrolled + "%";
+            progressBar.style.width = (winScroll / height) * 100 + '%';
 
             const triggerBottom = window.innerHeight * 0.88;
             revealElements.forEach(el => {
-                const top = el.getBoundingClientRect().top;
-                if (top < triggerBottom) {
-                    el.classList.add('visible');
-                }
+                if (el.getBoundingClientRect().top < triggerBottom) el.classList.add('visible');
             });
 
             let current = '';
             sections.forEach(sec => {
-                const secTop = sec.offsetTop - 135;
-                if (window.scrollY >= secTop) {
-                    current = sec.getAttribute('id');
-                }
+                if (window.scrollY >= sec.offsetTop - 135) current = sec.getAttribute('id');
             });
-
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
             });
         }
-
         window.addEventListener('scroll', handleScroll);
         handleScroll();
 
-        const PRICE_STORAGE_KEY = 'hunter_ps_full_prices_v1';
+        /* === DATA DEFAULT & SINKRONISASI ADMIN === */
+        const SITE_CONFIG_KEY = 'hunter_ps_site_config_v2';
         const ORDERS_STORAGE_KEY = 'hunter_ps_orders_v1';
+        const CLOUD_URL_KEY = 'hunter_ps_firebase_url_v1';
 
-        const DEFAULT_PRICES = {
-            ps4: {
-                '1h': { only: 6000, tv: null, box: 8000 },
-                '12h': { only: 60000, tv: 65000, box: 90000 },
-                '24h': { only: 85000, tv: 90000, box: 150000 }
+        const DEFAULT_SITE_CONFIG = {
+            hero: {
+                brandName: 'HUNTER PLAYSTATION',
+                tagline: 'Pusat Sewa PS4, PS3 & PlayBox / PSBox Portable Terlengkap dan Termurah di Wilayah Majalengka – Cirebon.',
+                badge1: 'Stik Original',
+                badge2: 'TV LED HD',
+                badge3: 'PlayBox Portable',
+                badge4: 'Siap Antar ke Rumah'
             },
-            ps3: {
-                '1h': { only: 5000, tv: null, box: 6000 },
-                '12h': { only: 50000, tv: 55000, box: 75000 },
-                '24h': { only: 75000, tv: 80000, box: 130000 }
+            status: {
+                ps4Text: 'READY (AMBIL / ANTAR)',
+                ps4Color: 'green',
+                ps3Text: 'READY STOK',
+                ps3Color: 'green',
+                boxText: 'READY (PORTABLE)',
+                boxColor: 'green'
+            },
+            about: {
+                quote: '🎮 HUNTER PLAYSTATION\nYOUR ENTERTAINMENT, YOUR CHALLENGE!',
+                desc: 'Hunter PlayStation merupakan tempat hiburan gaming yang hadir untuk memberikan pengalaman bermain game yang seru, nyaman, dan menyenangkan bagi semua kalangan. Kami menyediakan layanan penyewaan PlayStation 3 dan PlayStation 4 dengan berbagai pilihan game menarik, mulai dari sepak bola, pertarungan, petualangan, aksi, hingga game multiplayer yang bisa dimainkan bersama teman maupun keluarga. Bagi kami, bermain game bukan sekadar hiburan, tetapi juga tentang kebersamaan, persaingan, keseruan, dan menciptakan kenangan bersama.',
+                vision: 'Menjadi tempat hiburan gaming yang menyenangkan, terpercaya, dan dapat dinikmati oleh semua kalangan.',
+                services: [
+                    'Penyewaan PlayStation 3',
+                    'Penyewaan PlayStation 4',
+                    'Pilihan game menarik',
+                    'Durasi sewa fleksibel',
+                    'Menu makanan & minuman'
+                ],
+                commitment: 'Kami terus berusaha memberikan pelayanan terbaik, menjaga kualitas fasilitas, serta menciptakan lingkungan bermain yang nyaman bagi setiap pelanggan.',
+                slogan: '"BELUM MENANG JANGAN PULANG, BELUM PUAS LANJUT MORE AND MORE!"\nPLAY MORE. ENJOY MORE. BE A CHAMPION! 🎮'
+            },
+            videos: {
+                v1Title: '🎮 Game PS 3 Recommendation',
+                v1Url: 'https://www.youtube.com/embed/pZYQGUZRtGc?rel=0',
+                v2Title: '🎮 Game PS 4 Recommendation',
+                v2Url: 'https://www.youtube.com/embed/9vKxtujZ1vk?rel=0'
+            },
+            units: {
+                ps4: { title: 'PlayStation 4', img: 'ps4.jpg', desc: 'Grafis tajam memukau, dilengkapi stik DualShock 4 original responsif dan deretan game terbaru.' },
+                ps3: { title: 'PlayStation 3', img: 'ps3.jpg', desc: 'Pilihan tepat buat mabar bola atau nostalgia game seru bersama teman dengan tarif super hemat.' },
+                box: { title: 'PlayBox / PSBox', img: 'psbox.jpg', desc: 'Koper gaming portable praktis yang sudah terintegrasi layar monitor—tinggal colok listrik langsung main di mana saja!' }
+            },
+            features: [
+                { icon: 'fa-solid fa-shield-halved', title: 'Unit Terawat', desc: 'Konsol dan stik selalu dibersihkan serta dites tombolnya sebelum disewakan.' },
+                { icon: 'fa-solid fa-wallet', title: 'Harga Hemat', desc: 'Tersedia paket per jam, 12 jam, hingga 24 jam dengan tarif ramah di kantong.' },
+                { icon: 'fa-solid fa-truck-fast', title: 'Antar Jemput', desc: 'Layanan pengantaran langsung ke rumah untuk area Cipanas, Dukupuntang & sekitarnya.' },
+                { icon: 'fa-solid fa-headset', title: 'Fast Respon', desc: 'Dua admin siap melayani pemesanan dan bantuan teknis dengan ramah dan cepat.' }
+            ],
+            prices: {
+                ps4: {
+                    '1h': { only: 6000, tv: null, box: 8000 },
+                    '12h': { only: 60000, tv: 65000, box: 90000 },
+                    '24h': { only: 85000, tv: 90000, box: 150000 }
+                },
+                ps3: {
+                    '1h': { only: 5000, tv: null, box: 6000 },
+                    '12h': { only: 50000, tv: 55000, box: 75000 },
+                    '24h': { only: 75000, tv: 80000, box: 130000 }
+                }
+            },
+            games: [
+                { title: 'eFootball 2026', img: 'efootball.jpg' },
+                { title: 'God of War', img: 'gow.jpg' },
+                { title: 'COD: BO 6', img: 'cod.jpg' },
+                { title: 'Tekken 7', img: 'tekken.jpg' },
+                { title: 'Naruto UNS 4', img: 'naruto.jpg' },
+                { title: 'GTA V', img: 'gta5.jpg' },
+                { title: 'Resident Evil 6', img: 're6.jpg' },
+                { title: 'Mortal Kombat 11', img: 'mortal.jpg' }
+            ],
+            moreGamesText: '✨ ...Dan masih banyak puluhan judul game seru lainnya! Klik gambar game di atas untuk auto-request ke form pemesanan.',
+            rules: [
+                'Pembayaran dilakukan lunas di awal saat serah terima unit (tunai atau transfer via DANA/Bank).',
+                'Keterlambatan pengembalian unit lebih dari 30 menit tanpa konfirmasi akan dikenakan biaya tambahan sesuai tarif per jam.',
+                'Penyewa wajib menjaga unit konsol, stik, dan kabel. Kerusakan akibat kelalaian (jatuh, terkena air, dibanting) menjadi tanggung jawab penyewa.',
+                'Dilarang keras membongkar segel unit, memindahtangankan, atau menggadaikan barang sewaan kepada pihak lain.'
+            ],
+            faqs: [
+                { q: 'Apakah bisa diantar langsung ke rumah?', a: 'Bisa! Kami melayani antar-jemput unit langsung ke rumah untuk area Cipanas, Dukupuntang, dan wilayah perbatasan Majalengka–Cirebon. Silakan cantumkan alamat lengkapmu di form pemesanan.' },
+                { q: 'Apa perbedaan paket PS Only, PS + TV, dan PlayBox?', a: 'PS Only hanya unit konsol, stik, dan kabel (TV pakai milikmu di rumah). PS + TV sudah termasuk TV LED dari kami. Sedangkan PlayBox adalah koper gaming portable yang sudah dilengkapi layar monitor di dalamnya sehingga praktis dibawa ke mana saja.' },
+                { q: 'Berapa stik yang didapat dalam satu paket sewa?', a: 'Setiap penyewaan sudah otomatis mendapatkan 2 buah stik wireless original siap mabar bersama teman atau keluarga.' },
+                { q: 'Bagaimana jika ingin memperpanjang durasi sewa?', a: 'Bisa banget! Cukup hubungi Admin FIAN AM atau Admin FIKI minimal 1 jam sebelum waktu sewa habis untuk konfirmasi ketersediaan jadwal berikutnya.' }
+            ],
+            contact: {
+                area: 'Area Layanan: Majalengka – Cirebon',
+                address: 'Blok Pagar Gunung, Desa Cipanas, Kecamatan Dukupuntang, Kabupaten Cirebon, Provinsi Jawa Barat.',
+                mapUrl: 'https://maps.google.com/?q=Blok+Pagar+Gunung,+Desa+Cipanas,+Kecamatan+Dukupuntang,+Kabupaten+Cirebon',
+                admin1Name: 'FIAN AM',
+                admin1Phone: '083823742523',
+                admin2Name: 'FIKI',
+                admin2Phone: '082129318975',
+                email: 'huntersewaps@gmail.com',
+                instagramUrl: 'https://www.instagram.com/admin_sewa__hunter_playstation?obrf=MTM2dHRta3B3YzNzNA==',
+                waChannelUrl: 'https://whatsapp.com/channel/0029VbDYyg34Y9lunMBEAS0z',
+                footerText: '© 2026 HUNTER PLAYSTATION — Majalengka & Cirebon. All Rights Reserved.'
             }
         };
 
-        function loadPrices() {
-            const raw = localStorage.getItem(PRICE_STORAGE_KEY);
-            if (!raw) return DEFAULT_PRICES;
-            try {
-                return JSON.parse(raw);
-            } catch {
-                return DEFAULT_PRICES;
-            }
+        function escapeHtml(str) {
+            return String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function normalizeYoutubeEmbed(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            if (trimmed.includes('/embed/')) return trimmed;
+            const shortMatch = trimmed.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+            if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}?rel=0`;
+            const watchMatch = trimmed.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+            if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}?rel=0`;
+            return trimmed;
+        }
+
+        function formatPhoneWa(phone) {
+            const digits = String(phone || '').replace(/\D/g, '');
+            if (digits.startsWith('0')) return '62' + digits.slice(1);
+            return digits;
         }
 
         function formatRp(val) {
-            if (val === null || val === undefined || val === '' || Number.isNaN(Number(val))) {
-                return '—';
-            }
+            if (val === null || val === undefined || val === '' || Number.isNaN(Number(val))) return '—';
             return 'Rp ' + Number(val).toLocaleString('id-ID');
+        }
+
+        function mergeDeep(target, source) {
+            if (!source || typeof source !== 'object') return target;
+            const output = Array.isArray(target) ? [...target] : { ...target };
+            for (const key of Object.keys(source)) {
+                if (Array.isArray(source[key])) {
+                    output[key] = source[key];
+                } else if (source[key] && typeof source[key] === 'object' && target[key]) {
+                    output[key] = mergeDeep(target[key], source[key]);
+                } else if (source[key] !== undefined) {
+                    output[key] = source[key];
+                }
+            }
+            return output;
+        }
+
+        function getLocalSiteConfig() {
+            try {
+                const raw = localStorage.getItem(SITE_CONFIG_KEY);
+                if (!raw) return structuredClone(DEFAULT_SITE_CONFIG);
+                return mergeDeep(DEFAULT_SITE_CONFIG, JSON.parse(raw));
+            } catch {
+                return structuredClone(DEFAULT_SITE_CONFIG);
+            }
         }
 
         let priceMatrix = {};
 
-        function syncPricingTableAndMatrix() {
-            const p = loadPrices();
+        function applySiteConfig(cfg) {
+            // Hero & Navbar
+            document.title = `${cfg.hero.brandName} - Sewa PS4, PS3 & PlayBox`;
+            document.getElementById('navBrandText').textContent = cfg.hero.brandName;
+            document.getElementById('heroTitle').textContent = cfg.hero.brandName;
+            document.getElementById('heroTagline').textContent = cfg.hero.tagline;
+            document.getElementById('badge1').textContent = cfg.hero.badge1;
+            document.getElementById('badge2').textContent = cfg.hero.badge2;
+            document.getElementById('badge3').textContent = cfg.hero.badge3;
+            document.getElementById('badge4').textContent = cfg.hero.badge4;
 
+            // Live Status
+            const setStatus = (dotId, textId, txt, color) => {
+                const c = ['green', 'yellow', 'red'].includes(color) ? color : 'green';
+                document.getElementById(dotId).className = `status-dot ${c}`;
+                const span = document.getElementById(textId);
+                span.className = c;
+                span.textContent = txt;
+            };
+            setStatus('statusPs4Dot', 'statusPs4Text', cfg.status.ps4Text, cfg.status.ps4Color);
+            setStatus('statusPs3Dot', 'statusPs3Text', cfg.status.ps3Text, cfg.status.ps3Color);
+            setStatus('statusBoxDot', 'statusBoxText', cfg.status.boxText, cfg.status.boxColor);
+
+            // About
+            document.getElementById('aboutQuote').textContent = cfg.about.quote;
+            document.getElementById('aboutDesc').textContent = cfg.about.desc;
+            document.getElementById('aboutVision').textContent = cfg.about.vision;
+            document.getElementById('aboutCommitment').textContent = cfg.about.commitment;
+            document.getElementById('aboutSlogan').textContent = cfg.about.slogan;
+            document.getElementById('aboutServicesList').innerHTML = (cfg.about.services || [])
+                .map(item => `<li><i class="fa-solid fa-check"></i> ${escapeHtml(item)}</li>`).join('');
+
+            // Videos
+            document.getElementById('video1Title').textContent = cfg.videos.v1Title;
+            const v1Src = normalizeYoutubeEmbed(cfg.videos.v1Url);
+            if (document.getElementById('video1Frame').src !== v1Src) document.getElementById('video1Frame').src = v1Src;
+
+            document.getElementById('video2Title').textContent = cfg.videos.v2Title;
+            const v2Src = normalizeYoutubeEmbed(cfg.videos.v2Url);
+            if (document.getElementById('video2Frame').src !== v2Src) document.getElementById('video2Frame').src = v2Src;
+
+            // Units & Features
+            document.getElementById('unitPs4Title').textContent = cfg.units.ps4.title;
+            document.getElementById('unitPs4Img').src = cfg.units.ps4.img;
+            document.getElementById('unitPs4Desc').textContent = cfg.units.ps4.desc;
+
+            document.getElementById('unitPs3Title').textContent = cfg.units.ps3.title;
+            document.getElementById('unitPs3Img').src = cfg.units.ps3.img;
+            document.getElementById('unitPs3Desc').textContent = cfg.units.ps3.desc;
+
+            document.getElementById('unitBoxTitle').textContent = cfg.units.box.title;
+            document.getElementById('unitBoxImg').src = cfg.units.box.img;
+            document.getElementById('unitBoxDesc').textContent = cfg.units.box.desc;
+
+            document.getElementById('featuresGrid').innerHTML = (cfg.features || []).map(f => `
+                <div class="feature-box stagger-item">
+                    <div class="feature-icon"><i class="${escapeHtml(f.icon || 'fa-solid fa-star')}"></i></div>
+                    <h4>${escapeHtml(f.title)}</h4>
+                    <p>${escapeHtml(f.desc)}</p>
+                </div>
+            `).join('');
+
+            // Prices
+            const p = cfg.prices;
             priceMatrix = {
                 "PS4 Only": { "1 Jam": p.ps4['1h'].only, "12 Jam": p.ps4['12h'].only, "24 Jam": p.ps4['24h'].only },
                 "PS4 + TV": { "1 Jam": p.ps4['1h'].tv, "12 Jam": p.ps4['12h'].tv, "24 Jam": p.ps4['24h'].tv },
@@ -1923,7 +1168,7 @@
                 "PlayBox PS3": { "1 Jam": p.ps3['1h'].box, "12 Jam": p.ps3['12h'].box, "24 Jam": p.ps3['24h'].box }
             };
 
-            const mappings = [
+            const priceCells = [
                 ['t-ps4-1h-only', p.ps4['1h'].only, 'price-highlight'],
                 ['t-ps4-1h-tv', p.ps4['1h'].tv, 'price-highlight'],
                 ['t-ps4-1h-box', p.ps4['1h'].box, 'price-cyan'],
@@ -1933,7 +1178,6 @@
                 ['t-ps4-24h-only', p.ps4['24h'].only, 'price-highlight'],
                 ['t-ps4-24h-tv', p.ps4['24h'].tv, 'price-highlight'],
                 ['t-ps4-24h-box', p.ps4['24h'].box, 'price-cyan'],
-
                 ['t-ps3-1h-only', p.ps3['1h'].only, 'price-highlight'],
                 ['t-ps3-1h-tv', p.ps3['1h'].tv, 'price-highlight'],
                 ['t-ps3-1h-box', p.ps3['1h'].box, 'price-cyan'],
@@ -1944,16 +1188,64 @@
                 ['t-ps3-24h-tv', p.ps3['24h'].tv, 'price-highlight'],
                 ['t-ps3-24h-box', p.ps3['24h'].box, 'price-cyan']
             ];
-
-            mappings.forEach(([id, amount, activeClass]) => {
+            priceCells.forEach(([id, val, cls]) => {
                 const cell = document.getElementById(id);
-                if (!cell) return;
-                const text = formatRp(amount);
-                cell.textContent = text;
-                cell.className = text === '—' ? '' : activeClass;
+                const txt = formatRp(val);
+                cell.textContent = txt;
+                cell.className = txt === '—' ? '' : cls;
             });
-
             calculateTotalPrice();
+
+            // Games
+            document.getElementById('gamesGrid').innerHTML = (cfg.games || []).map(g => `
+                <div class="game-card stagger-item" onclick="quickRequestGame('${escapeHtml(g.title).replace(/'/g, "\\'")}')">
+                    <div class="game-img-box"><img src="${escapeHtml(g.img)}" alt="${escapeHtml(g.title)}"></div>
+                    <h4>${escapeHtml(g.title)}</h4>
+                </div>
+            `).join('');
+            document.getElementById('moreGamesNotice').textContent = cfg.moreGamesText;
+
+            // Rules & FAQ
+            const ruleIcons = ['fa-money-check-dollar', 'fa-clock', 'fa-screwdriver-wrench', 'fa-ban'];
+            document.getElementById('rulesList').innerHTML = (cfg.rules || []).map((r, idx) => `
+                <li><i class="fa-solid ${ruleIcons[idx % ruleIcons.length]}"></i> <span>${escapeHtml(r)}</span></li>
+            `).join('');
+
+            document.getElementById('faqListContainer').innerHTML = (cfg.faqs || []).map((item, idx) => `
+                <div class="faq-item ${idx === 0 ? 'open' : ''}">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>${escapeHtml(item.q)}</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">${escapeHtml(item.a)}</div>
+                </div>
+            `).join('');
+
+            // Contact & Footer
+            document.getElementById('contactArea').textContent = cfg.contact.area;
+            document.getElementById('contactAddress').textContent = cfg.contact.address;
+            document.getElementById('contactMapBtn').href = cfg.contact.mapUrl;
+
+            document.getElementById('admin1Name').textContent = cfg.contact.admin1Name;
+            const a1Link = document.getElementById('admin1Link');
+            a1Link.textContent = cfg.contact.admin1Phone;
+            a1Link.href = `https://wa.me/${formatPhoneWa(cfg.contact.admin1Phone)}`;
+
+            document.getElementById('admin2Name').textContent = cfg.contact.admin2Name;
+            const a2Link = document.getElementById('admin2Link');
+            a2Link.textContent = cfg.contact.admin2Phone;
+            a2Link.href = `https://wa.me/${formatPhoneWa(cfg.contact.admin2Phone)}`;
+
+            const emailEl = document.getElementById('rentalEmailLink');
+            emailEl.textContent = cfg.contact.email;
+            emailEl.href = `mailto:${cfg.contact.email}`;
+
+            document.getElementById('igLinkBtn').href = cfg.contact.instagramUrl;
+            document.getElementById('waChannelBtn').href = cfg.contact.waChannelUrl;
+            document.getElementById('floatingWaBtn').href = `https://wa.me/${formatPhoneWa(cfg.contact.admin1Phone)}?text=Halo%20Admin%20Hunter%20PlayStation%2C%20saya%20mau%20tanya%20ketersediaan%20unit%20sewa%20PS...`;
+            document.getElementById('footerText').textContent = cfg.contact.footerText;
+
+            handleScroll();
         }
 
         const packageSelect = document.getElementById('packageSelect');
@@ -1974,32 +1266,57 @@
             }
 
             if (pkg && dur && priceMatrix[pkg] && priceMatrix[pkg][dur] !== null && priceMatrix[pkg][dur] !== undefined) {
-                const price = Number(priceMatrix[pkg][dur]);
-                const formatted = 'Rp ' + price.toLocaleString('id-ID');
+                const formatted = 'Rp ' + Number(priceMatrix[pkg][dur]).toLocaleString('id-ID');
                 totalPriceDisplay.textContent = formatted;
                 return formatted;
             }
-            totalPriceDisplay.textContent = "Rp 0";
+            totalPriceDisplay.textContent = 'Rp 0';
             return null;
         }
 
         packageSelect.addEventListener('change', calculateTotalPrice);
         durationSelect.addEventListener('change', calculateTotalPrice);
 
-        syncPricingTableAndMatrix();
+        // Render awal dari localStorage
+        applySiteConfig(getLocalSiteConfig());
+
+        // Jika Firebase URL tersimpan, ambil juga konfigurasi terbaru dari cloud
+        function getCloudBaseUrl() {
+            const url = (localStorage.getItem(CLOUD_URL_KEY) || '').trim().replace(/\/+$/, '');
+            return url;
+        }
+
+        async function fetchCloudSiteConfig() {
+            const baseUrl = getCloudBaseUrl();
+            if (!baseUrl) return;
+            try {
+                const res = await fetch(`${baseUrl}/siteConfig.json`);
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data) {
+                    const merged = mergeDeep(DEFAULT_SITE_CONFIG, data);
+                    localStorage.setItem(SITE_CONFIG_KEY, JSON.stringify(merged));
+                    applySiteConfig(merged);
+                }
+            } catch {
+                // Tetap gunakan data lokal jika offline
+            }
+        }
+        fetchCloudSiteConfig();
 
         window.addEventListener('storage', (event) => {
-            if (event.key === PRICE_STORAGE_KEY) {
-                syncPricingTableAndMatrix();
+            if (event.key === SITE_CONFIG_KEY) {
+                applySiteConfig(getLocalSiteConfig());
             }
         });
 
+        /* === KIRIM PESANAN KE ADMIN (LOCAL + CLOUD OPSIONAL) === */
         const bookingForm = document.getElementById('bookingForm');
         const orderSentNotice = document.getElementById('orderSentNotice');
+        const sendAdminBtn = document.getElementById('sendAdminBtn');
 
-        bookingForm.addEventListener('submit', function(e) {
+        bookingForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-
             if (!bookingForm.checkValidity()) {
                 bookingForm.reportValidity();
                 return;
@@ -2007,16 +1324,11 @@
 
             const calcPrice = calculateTotalPrice();
             if (!calcPrice) {
-                alert("Silakan pilih kombinasi Paket dan Durasi Sewa yang valid!");
+                alert('Silakan pilih kombinasi Paket dan Durasi Sewa yang valid!');
                 return;
             }
 
-            let orders = [];
-            try {
-                orders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY) || '[]');
-            } catch {
-                orders = [];
-            }
+            sendAdminBtn.disabled = true;
 
             const orderId = 'ORD-' + Date.now().toString().slice(-6);
             const newOrder = {
@@ -2031,14 +1343,34 @@
                 notes: document.getElementById('gameNotes').value.trim() || '-',
                 price: calcPrice,
                 adminName: 'Admin Hunter PlayStation',
-                channel: 'Admin Panel',
+                channel: 'Web User',
                 status: 'Menunggu Konfirmasi'
             };
 
+            let orders = [];
+            try {
+                orders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY) || '[]');
+            } catch {
+                orders = [];
+            }
             orders.unshift(newOrder);
             localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
 
-            orderSentNotice.innerHTML = `<i class="fa-solid fa-circle-check"></i> Pesanan <strong>${orderId}</strong> berhasil dikirim ke Admin! Buka <code>admin.html</code> untuk melihat dan memproses pesanan.`;
+            const baseUrl = getCloudBaseUrl();
+            if (baseUrl) {
+                try {
+                    await fetch(`${baseUrl}/orders/${orderId}.json`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newOrder)
+                    });
+                } catch {
+                    // Tetap tersimpan di localStorage jika gagal kirim cloud
+                }
+            }
+
+            sendAdminBtn.disabled = false;
+            orderSentNotice.innerHTML = `<i class="fa-solid fa-circle-check"></i> Pesanan <strong>${orderId}</strong> berhasil dikirim ke Admin!`;
             orderSentNotice.style.display = 'block';
 
             bookingForm.reset();
